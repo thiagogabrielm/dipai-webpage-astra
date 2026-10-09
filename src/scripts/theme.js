@@ -4,7 +4,8 @@
   const params = new URLSearchParams(location.search);
   const preview = params.get('preview') === '1';
   const valid = (value) => value === 'light' || value === 'dark';
-  const system = matchMedia('(prefers-color-scheme: dark)');
+  // Dark is the default; light mode is only used when a visitor chooses it.
+  const fallback = 'dark';
   let saved;
   try {
     saved = localStorage.getItem(key);
@@ -12,7 +13,7 @@
     /* Storage can be unavailable in local previews. */
   }
   let explicit = valid(params.get('theme')) ? params.get('theme') : valid(saved) ? saved : null;
-  let current = explicit || (system.matches ? 'dark' : 'light');
+  let current = explicit || fallback;
   let controls;
   const apply = (theme) => {
     current = theme;
@@ -31,7 +32,7 @@
     try {
       localStorage.removeItem(key);
     } catch {
-      /* Device theme also works when storage is unavailable. */
+      /* The default theme also works when storage is unavailable. */
     }
     params.delete('theme');
     const url = new URL(location.href);
@@ -41,10 +42,7 @@
     } catch {
       /* Some file previews restrict history. */
     }
-    apply(system.matches ? 'dark' : 'light');
-  });
-  system.addEventListener('change', (event) => {
-    if (!explicit) apply(event.matches ? 'dark' : 'light');
+    apply(fallback);
   });
   document.addEventListener(
     'DOMContentLoaded',
@@ -84,6 +82,6 @@
   window.addEventListener('storage', (event) => {
     if (preview || params.has('theme') || event.key !== key) return;
     explicit = valid(event.newValue) ? event.newValue : null;
-    apply(explicit || (system.matches ? 'dark' : 'light'));
+    apply(explicit || fallback);
   });
 })();

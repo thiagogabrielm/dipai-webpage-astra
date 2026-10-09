@@ -43,7 +43,8 @@ test('cookie settings are keyboard accessible, removable and load no trackers', 
     if (!req.url().startsWith('http://127.0.0.1:48768/') && !req.url().startsWith('data:'))
       external.push(req.url());
   });
-  await page.emulateMedia({ colorScheme: 'dark' });
+  // A light device preference must not override the dark default.
+  await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/');
   expect(await context.cookies()).toEqual([]);
   expect(await page.evaluate(() => Object.keys(localStorage))).toEqual([]);
@@ -57,7 +58,7 @@ test('cookie settings are keyboard accessible, removable and load no trackers', 
   await expect(dialog.locator('[role="status"]')).toContainText('light mode');
   await page.keyboard.press('Shift+Tab');
   expect(await dialog.evaluate((d) => d.contains(document.activeElement))).toBeTruthy();
-  await dialog.getByRole('button', { name: 'Use device theme' }).click();
+  await dialog.getByRole('button', { name: 'Use default theme' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   expect(await page.evaluate(() => localStorage.getItem('dipai-color-theme'))).toBeNull();
   await expect(dialog.locator('[role="status"]')).toContainText('No colour preference');
