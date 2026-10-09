@@ -1,32 +1,33 @@
-import { serveEnquiry } from './http-enquiries.mjs';
-/** Local Astro development uses the same enquiry implementation as production. */
-export default function enquiriesIntegration() {
+/** Legacy redirects and an explicit local-only response for hosted Netlify Forms. */
+export default function localIntegration() {
   return {
-    name: 'dipai-enquiries',
+    name: 'dipai-local-preview',
     hooks: {
       'astro:config:setup': ({ updateConfig }) =>
         updateConfig({
           vite: {
             plugins: [
               {
-                name: 'dipai-local-api',
+                name: 'dipai-local-preview',
                 configureServer(server) {
                   server.middlewares.use(async (req, res, next) => {
                     const url = new URL(req.url, 'http://localhost');
+                    if (
+                      req.method === 'POST' &&
+                      ['/', '/contact/', '/book-demo/'].includes(url.pathname)
+                    ) {
+                      res.writeHead(503, {
+                        'Content-Type': 'text/plain; charset=utf-8',
+                        'Cache-Control': 'no-store',
+                      });
+                      res.end(
+                        'Form submissions are available on the deployed Netlify site. Nothing was sent.',
+                      );
+                      return;
+                    }
                     if (['/about-us', '/about-us/', '/about-us.html'].includes(url.pathname)) {
                       res.writeHead(301, { Location: '/team/' + url.search });
                       res.end();
-                      return;
-                    }
-                    if (url.pathname === '/api/enquiries') {
-                      try {
-                        await serveEnquiry(req, res);
-                      } catch {
-                        res.statusCode = 500;
-                        res.end(
-                          JSON.stringify({ ok: false, message: 'Unable to send your message.' }),
-                        );
-                      }
                       return;
                     }
                     if (url.pathname.endsWith('.html')) {

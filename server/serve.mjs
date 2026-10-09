@@ -1,9 +1,8 @@
-// Production-build preview, including legacy redirects and the enquiry endpoint.
+// Production-build preview with legacy redirects. Netlify handles hosted form submissions.
 import { createServer } from 'node:http';
 import { readFile, realpath, stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, sep, extname } from 'node:path';
-import { serveEnquiry } from './http-enquiries.mjs';
 const root = await realpath(fileURLToPath(new URL('../dist/', import.meta.url)));
 const redirects = new Map(
   (await readFile(resolve(root, '_redirects'), 'utf8'))
@@ -28,10 +27,6 @@ const types = {
 const server = createServer(async (req, res) => {
   try {
     const url = new URL(req.url, 'http://localhost');
-    if (url.pathname === '/api/enquiries') {
-      await serveEnquiry(req, res);
-      return;
-    }
     if (!['GET', 'HEAD'].includes(req.method)) {
       res.writeHead(405, { Allow: 'GET, HEAD' });
       res.end();

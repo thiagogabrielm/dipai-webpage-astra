@@ -26,7 +26,14 @@ import CTA from '../components/CTA.astro';
     </div>
     <div class="contact-form-card">
       <h2 id="contact-form-title">Write to us</h2>
-      <form action="/api/enquiries" id="contact-form" method="post">
+      <form
+        name="contact"
+        id="contact-form"
+        method="post"
+        data-netlify="true"
+        netlify-honeypot="website"
+      >
+        <input type="hidden" name="form-name" value="contact" />
         <label aria-hidden="true" class="enquiry-trap">
           Leave this field empty
           <input autocomplete="off" name="website" tabindex="-1" />
@@ -60,13 +67,10 @@ import CTA from '../components/CTA.astro';
           Send your message directly to the Dipai team. We’ll reply by email.
         </p>
         <p aria-atomic="true" aria-live="polite" data-form-status="" hidden="" role="status"></p>
-        <button aria-describedby="contact-form-note" class="button" disabled="" type="submit">
+        <button aria-describedby="contact-form-note" class="button" type="submit">
           Send message
         </button>
       </form>
-      <noscript>
-        <p>Please enable JavaScript to send this form, or contact support@dipai.no.</p>
-      </noscript>
       <div hidden="" id="contact-result">
         <h2 tabindex="-1">Thank you for getting in touch.</h2>
         <p>Your message has been sent. The Dipai team will reply by email.</p>

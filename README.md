@@ -11,17 +11,17 @@ npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:48767/. The dev server supports the enquiry endpoint and redirects the previous `.html` URLs. Optional local environment values can be supplied with `node --env-file=.env node_modules/astro/bin/astro.mjs dev --port 48767` after `npm run predev`.
+Open http://127.0.0.1:48767/. The dev server redirects the previous `.html` URLs. Forms use Netlify Forms on the deployed site; local servers reject submissions without sending email.
 
 ```sh
 npm run build       # Responsive images, type/content checks, static build, link/asset/SEO audit
-npm run preview     # Serve dist/ plus redirects and the enquiry API on port 48767
-npm test            # Isolated enquiry-handler tests; never sends email
+npm run preview     # Serve dist/ plus redirects on port 48767
+npm test            # Isolated form transport tests; never sends email
 npm run test:browser # Desktop/mobile site checks against the production build
 npm run format:check
 ```
 
-Before the browser suite, run `npx playwright install chromium` once. To use an existing Chrome installation, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to its path. The browser suite mocks every form submission.
+Before the browser suite, run `npx playwright install chromium` once. To use an existing Chrome installation, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to its path. Form tests use mocked responses or verify rejection by the local server; they never submit to Netlify or send email.
 
 ## Where to edit
 
@@ -40,7 +40,8 @@ Before the browser suite, run `npx playwright install chromium` once. To use an 
 | Styles / progressive enhancements | `src/styles/`, `src/scripts/` |
 | Responsive news and team images | `src/assets/news/`, `src/assets/team/` |
 | Hero variants, lossless screenshots and SVGs | `public/assets/` |
-| Email delivery | `netlify/functions/enquiries.mjs`, `server/enquiries.mjs` |
+| Contact and demo forms | `src/pages/contact.astro`, `src/pages/book-demo.astro`, `src/scripts/enquiry-form.js` |
+| Email notification recipients | Netlify Forms dashboard; see `docs/DEPLOYMENT.md` |
 
 Generated files belong in `dist/`, `.astro/` and `src/generated/`; do not edit them. There is no separate HTML-page generator or duplicated legacy site to maintain.
 

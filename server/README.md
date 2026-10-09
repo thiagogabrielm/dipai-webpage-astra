@@ -1,5 +1,5 @@
-# Enquiry endpoint
+# Local preview servers
 
-`enquiries.mjs` is shared by the Netlify Function and the local Node adapter. `http-enquiries.mjs` adapts requests for the Astro dev server and production-build preview. `serve.mjs` serves `dist/`; it is a local verification tool, not required on Netlify.
+`dev-integration.mjs` supplies legacy redirects for the Astro dev server and rejects local form submissions. `serve.mjs` serves `dist/` with redirects and rejects POST requests. These are local verification tools, not required on Netlify. The deployed site uses native Netlify Forms; see [deployment instructions](../docs/DEPLOYMENT.md).
 
-Delivery is disabled until a provider and verified sender are configured. See [deployment and email configuration](../docs/DEPLOYMENT.md). The root `.env.example` documents the variables. Run `npm test` for isolated validation and delivery-adapter tests; no real messages are sent.
+Run `npm test` for isolated form transport checks. Browser tests verify success and failure handling and native submission without JavaScript. These checks do not send real messages.

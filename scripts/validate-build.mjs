@@ -56,7 +56,6 @@ for (const [route, page] of pages) {
   for (const link of page.links) {
     if (/^(?:https?:|mailto:|tel:|data:|javascript:)/.test(link)) continue;
     const url = new URL(link, 'https://local.test' + route);
-    if (url.pathname === '/api/enquiries') continue;
     const target = pages.get(url.pathname);
     if (target) {
       if (url.hash && !target.ids.has(decodeURIComponent(url.hash.slice(1))))

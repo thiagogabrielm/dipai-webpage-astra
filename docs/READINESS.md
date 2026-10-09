@@ -1,6 +1,6 @@
 # Launch readiness
 
-Production origin: **https://dipai.no**. This document covers the code audit on 9 October 2026. It is not a deployment confirmation.
+Planned production origin: **https://dipai.no**. Testing uses the project's temporary `netlify.app` address with `SITE_INDEXING=disabled` and `SITE_URL` set to that temporary origin. The custom domain remains unchanged until launch. This document covers the code audit on 9 October 2026. It is not a deployment confirmation.
 
 ## Cookies and analytics
 
@@ -29,9 +29,9 @@ Norwegian guidance covers cookies **and similar browser-storage technologies**, 
 ## SEO and AI search
 
 - Static HTML exposes article text, headings, evidence, source attribution, links and image descriptions without requiring client rendering.
-- Every public page has a unique title, description, dipai.no canonical URL, Open Graph image, and Twitter sharing metadata.
+- Every public page has a unique title, description, canonical URL based on `SITE_URL`, Open Graph image, and Twitter sharing metadata.
 - Shared JSON-LD identifies Dipai, the website, and each page. Article templates add article identity, publisher, image and breadcrumbs; news uses the supplied publication date. No invented ratings, reviews or modification dates.
-- Production `robots.txt` allows crawling, excludes the form API and identifies the sitemap. The sitemap includes the 35 public routes, excludes the 404 page and legacy aliases.
+- Production `robots.txt` allows crawling and identifies the sitemap. The sitemap includes the 35 public routes, excludes the 404 page and legacy aliases.
 - Netlify deploy previews and branch deploys receive `noindex, nofollow` metadata and an `X-Robots-Tag` header; their robots file disallows crawling. `SITE_INDEXING=disabled` provides the same build setting outside Netlify. Local development also uses noindex. These are indexing controls, not access restrictions.
 - `/about-us/` and `/about-us.html` redirect to `/team/`; navigation links use the existing Team destination. Legacy `.html` routes also redirect.
 - `scripts/validate-seo.mjs` checks generated canonical URLs, titles, social assets, structured data, sitemap coverage and production/preview indexing settings during the build.
@@ -59,13 +59,13 @@ PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/google-chrome npm run test:browser
 npm run format:check
 ```
 
-Verification results: production and Netlify preview builds pass their link, asset and SEO checks. All 24 browser regression tests passed on desktop and mobile. After including the error page, all four accessibility sweeps passed: 36 pages × two themes × two viewport sizes, with no reported axe violations. The settings-dialog check also confirms an empty initial cookie/storage inventory and no third-party browser requests. Enquiry-handler tests pass without sending mail.
+Initial audit results: production and Netlify preview builds passed their link, asset and SEO checks. All 24 browser regression tests passed on desktop and mobile. After including the error page, all four accessibility sweeps passed: 36 pages × two themes × two viewport sizes, with no reported axe violations. The settings-dialog check also confirmed an empty initial cookie/storage inventory and no third-party browser requests. Subsequent Netlify Forms transport and browser tests cover success, failure, native submission without JavaScript and local submission rejection without sending mail.
 
 Automated results are not a WCAG conformance certification. Complete a real screen-reader and keyboard review on the target browsers, plus a live-site check after Netlify configuration. W3C explains the scope of automated tools in its [evaluation tools overview](https://www.w3.org/WAI/test-evaluate/tools/).
 
 ## Remaining deployment decisions
 
 - Select/enable analytics only if needed; the website can launch with it disabled.
-- Configure and verify the existing email delivery integration before relying on demo/contact submissions.
+- Enable Netlify form detection and configure both forms' email notifications to the test inbox `thiago.g.monteiro@dipai.no`, following [deployment instructions](DEPLOYMENT.md). Verify real submissions and delivery before relying on the forms; set final notification recipients before launch.
 - Confirm the production privacy information reflects the selected hosting and mail services and actual retention practices.
 - Finish primary-domain redirects, old-URL mapping, search verification and the production accessibility/network checks described above.

@@ -29,7 +29,14 @@ import Clients from '../components/Clients.astro';
       </div>
       <div class="demo-form-card">
         <h2>Tell us about your fleet.</h2>
-        <form action="/api/enquiries" id="demo-form" method="post">
+        <form
+          name="demo"
+          id="demo-form"
+          method="post"
+          data-netlify="true"
+          netlify-honeypot="website"
+        >
+          <input type="hidden" name="form-name" value="demo" />
           <label aria-hidden="true" class="enquiry-trap">
             Leave this field empty
             <input autocomplete="off" name="website" tabindex="-1" />
@@ -77,19 +84,13 @@ import Clients from '../components/Clients.astro';
             ></textarea>
           </label>
           <p aria-atomic="true" aria-live="polite" data-form-status="" hidden="" role="status"></p>
-          <button class="button demo-wide" disabled="" type="submit">
+          <button class="button demo-wide" type="submit">
             Request a demo
           </button>
           <p class="form-note demo-wide">
             Send your request directly to Dipai. We’ll contact you by email to arrange a demo.
           </p>
         </form>
-        <noscript>
-          <p>
-            Please enable JavaScript to send your request, or email{' '}
-            <a href="mailto:contact@dipai.no">contact@dipai.no</a> directly.
-          </p>
-        </noscript>
         <div hidden="" id="demo-result">
           <h2 id="demo-result-title" tabindex="-1">
             Thank you for your interest.

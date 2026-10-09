@@ -121,29 +121,105 @@ test('forms show success only after a successful mocked response', async ({ page
     await form.locator('[name="name"]').fill('Test Person');
     await form.locator('[name="email"]').fill('test@example.com');
     if (kind === 'demo') await form.locator('[name="company"]').fill('Test Fleet');
-    await form.locator('[name="message"]').fill('Automated verification without sending email.');
-    await page.route('**/api/enquiries', (route) =>
-      route.fulfill({
-        status: 503,
-        contentType: 'application/json',
-        body: JSON.stringify({ ok: false, message: 'Email is not configured.' }),
-      }),
-    );
+    const message = 'Automated verification: fuel & maintenance.\nNo email is sent.';
+    await form.locator('[name="message"]').fill(message);
+    await expect(form).toHaveAttribute('data-netlify', 'true');
+    await expect(form).toHaveAttribute('name', kind);
+    await expect(form).toHaveAttribute('netlify-honeypot', 'website');
+    let responseStatus = 503;
+    const payloads: URLSearchParams[] = [];
+    const endpoint = new URL('/', page.url()).href;
+    await page.route(endpoint, (route) => {
+      const request = route.request();
+      if (request.method() !== 'POST') return route.continue();
+      expect(request.headers()['content-type']).toBe('application/x-www-form-urlencoded');
+      payloads.push(new URLSearchParams(request.postData() || ''));
+      return route.fulfill({
+        status: responseStatus,
+        contentType: 'text/html',
+        body: '<p>Mock response</p>',
+      });
+    });
     await form.locator('[type="submit"]').click();
     await expect(form.locator('[data-form-status]')).toBeVisible();
+    await expect(form.locator('[name="message"]')).toHaveValue(message);
+    await expect(form.locator('[type="submit"]')).toBeEnabled();
     await expect(page.locator(`#${kind}-result`)).toBeHidden();
-    await page.unroute('**/api/enquiries');
-    await page.route('**/api/enquiries', (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ ok: true }),
-      }),
-    );
+    responseStatus = 200;
     await form.locator('[type="submit"]').click();
     await expect(page.locator(`#${kind}-result`)).toBeVisible();
-    await page.unroute('**/api/enquiries');
+    await expect(page.locator(`#${kind}-result h2`)).toBeFocused();
+    expect(payloads).toHaveLength(2);
+    for (const payload of payloads) {
+      expect(payload.get('form-name')).toBe(kind);
+      expect(payload.get('email')).toBe('test@example.com');
+      expect(payload.get('message')).toBe(message);
+      expect(payload.get('website')).toBe('');
+      if (kind === 'demo') expect(payload.get('company')).toBe('Test Fleet');
+    }
+    await page.unroute(endpoint);
   }
+});
+
+test('forms support native submission without JavaScript', async ({
+  browser,
+  baseURL,
+  viewport,
+  isMobile,
+  hasTouch,
+}) => {
+  const context = await browser.newContext({
+    baseURL,
+    viewport,
+    isMobile,
+    hasTouch,
+    javaScriptEnabled: false,
+  });
+  try {
+    const page = await context.newPage();
+    for (const kind of ['contact', 'demo']) {
+      const path = kind === 'demo' ? '/book-demo/' : '/contact/';
+      let submitted: URLSearchParams | undefined;
+      await page.route(new URL(path, baseURL).href, (route) => {
+        if (route.request().method() !== 'POST') return route.continue();
+        submitted = new URLSearchParams(route.request().postData() || '');
+        return route.fulfill({
+          status: 200,
+          contentType: 'text/html',
+          body: '<h1>Submission received</h1>',
+        });
+      });
+      await page.goto(path);
+      const form = page.locator(`#${kind}-form`);
+      await form.locator('[name="name"]').fill('Test Person');
+      await form.locator('[name="email"]').fill('test@example.com');
+      await form.locator('[name="message"]').fill('Native submission without sending email.');
+      if (kind === 'demo') await form.locator('[name="company"]').fill('Test Fleet');
+      await form.locator('[type="submit"]').click();
+      await expect(page.getByRole('heading', { name: 'Submission received' })).toBeVisible();
+      expect(submitted?.get('form-name')).toBe(kind);
+      expect(submitted?.get('email')).toBe('test@example.com');
+      expect(submitted?.get('website')).toBe('');
+    }
+  } finally {
+    await context.close();
+  }
+});
+
+test('local preview refuses real form submissions instead of reporting success', async ({
+  page,
+}) => {
+  await page.goto('/contact/');
+  const form = page.locator('#contact-form');
+  await form.locator('[name="name"]').fill('Local Test');
+  await form.locator('[name="email"]').fill('test@example.com');
+  await form.locator('[name="message"]').fill('This stays on the local preview server.');
+  await form.locator('[type="submit"]').click();
+  await expect(form.locator('[data-form-status]')).toContainText('not enabled');
+  await expect(page.locator('#contact-result')).toBeHidden();
+  await expect(form.locator('[name="message"]')).toHaveValue(
+    'This stays on the local preview server.',
+  );
 });
 
 test('testimonials, FAQ links and product module navigation remain usable', async ({ page }) => {

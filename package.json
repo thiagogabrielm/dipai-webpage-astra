@@ -16,8 +16,8 @@
     "prebuild": "node scripts/prepare-media.mjs",
     "predev": "node scripts/prepare-media.mjs",
     "precheck": "node scripts/prepare-media.mjs",
-    "format": "prettier --write src server netlify tests scripts astro.config.mjs playwright.config.ts",
-    "format:check": "prettier --check src server netlify tests scripts astro.config.mjs playwright.config.ts"
+    "format": "prettier --write src server tests scripts astro.config.mjs playwright.config.ts",
+    "format:check": "prettier --check src server tests scripts astro.config.mjs playwright.config.ts"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",
