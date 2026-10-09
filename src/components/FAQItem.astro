@@ -1,0 +1,18 @@
+---
+import type faqs from '../data/faqs.json';
+interface Props {
+  item: (typeof faqs)[number];
+  band?: boolean;
+}
+const { item, band = false } = Astro.props;
+---
+
+<details id={`faq-${item.id}`} name={band ? 'landing-faq' : 'directory-faq'}>
+  <summary class:list={[{ wrap: band }]}>
+    {item.question}
+    <span class="faq-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class:list={['faq-answer', { wrap: band }]}>
+    <p>{item.answer}</p>
+  </div>
+</details>

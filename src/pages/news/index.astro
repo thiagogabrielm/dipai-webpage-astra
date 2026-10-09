@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import NewsImage from '../../components/NewsImage.astro';
+import NewsMeta from '../../components/NewsMeta.astro';
+import { newsPosts } from '../../lib/content';
+const posts = await newsPosts();
+const first = posts[0];
+const categories = ['All', ...new Set(posts.map((p) => p.category))];
+---
+
+<BaseLayout
+  title="News & perspectives"
+  description="News from Dipai: fleet partnerships, product insights, industry events and the people behind the Digital Fleet Platform."
+  active="news"
+  bodyClass="news-page"
+>
+  <header class="news-intro wrap">
+    <h1>News &amp; perspectives</h1>
+    <p>
+      Partnerships, people and progress.
+      <br />
+      The latest from Dipai and the maritime community.
+    </p>
+  </header>
+  <section class="news-archive wrap" aria-label="News articles">
+    <div class="news-toolbar">
+      <div class="news-filters" role="group" aria-label="Filter news by topic" hidden>
+        {categories.map((c) => (
+          <button type="button" data-news-filter={c} aria-pressed={c === 'All'}>
+            {c === 'All' ? 'All updates' : c}
+          </button>
+        ))}
+      </div>
+      <p class="news-count" role="status" aria-live="polite">
+        {posts.length} articles
+      </p>
+    </div>
+    {first && (
+      <a
+        class="news-featured"
+        href={`/news/${first.slug}/`}
+        data-news-item
+        data-category={first.category}
+      >
+        <div class="news-featured-copy">
+          <p class="eyebrow">
+            <span class="dot"></span> Latest update
+          </p>
+          <NewsMeta post={first} />
+          <h2>{first.title}</h2>
+          <p>{first.summary}</p>
+          <span class="text-button">
+            Read article <span aria-hidden="true">›</span>
+          </span>
+        </div>
+        <NewsImage post={first} featured />
+      </a>
+    )}
+    <div class="news-grid news-archive-grid">
+      {posts.slice(1).map((post) => (
+        <NewsCard post={post} filterable heading="h2" />
+      ))}
+    </div>
+  </section>
+  <CTA
+    title="Join the conversation."
+    label="Follow Dipai on LinkedIn"
+    href="https://www.linkedin.com/company/dipai-as/"
+    secondary
+  />
+</BaseLayout>
+<script>
+  import { mountFilters } from '../../scripts/filters.js';
+  mountFilters({
+    container: '.news-filters',
+    buttonAttribute: 'data-news-filter',
+    itemSelector: '[data-news-item]',
+    countSelector: '.news-count',
+    noun: 'article',
+  });
+</script>

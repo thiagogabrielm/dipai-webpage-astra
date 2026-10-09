@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import policy from '../data/privacy-policy.json';
+---
+
+<BaseLayout
+  title="Privacy policy"
+  description="About the processing of personal data at Dipai AS."
+  bodyClass="privacy-page"
+>
+  <header class="wrap privacy-intro">
+    <h1>Privacy policy</h1>
+    <p>About the processing of personal data at Dipai AS.</p>
+  </header>
+  <div class="wrap privacy-layout">
+    <aside>
+      <nav class="privacy-contents" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        {policy.sections.map((s) => (
+          <a href={`#${s.id}`}>{s.title}</a>
+        ))}
+        <a href="#cookies">8. Cookies and browser storage</a>
+      </nav>
+    </aside>
+    <article class="privacy-copy">
+      <div class="privacy-controller" set:html={policy.intro} />
+      {policy.sections.map((s) => (
+        <section id={s.id} aria-labelledby={`${s.id}-title`}>
+          <h2 id={`${s.id}-title`}>{s.title}</h2>
+          <Fragment set:html={s.html} />
+        </section>
+      ))}
+      <section id="cookies" aria-labelledby="cookies-title">
+        <h2 id="cookies-title">8. Cookies and browser storage</h2>
+        <p>
+          This website does not load analytics or advertising tools and does not set tracking
+          cookies. Fonts and images are served with the website, without third-party font or
+          embedded social media services.
+        </p>
+        <p>
+          If you choose light or dark mode, the website saves that choice in your browser’s local
+          storage under <code>dipai-color-theme</code>. It is used only to remember your colour
+          preference and stays until you clear it. It is not sent to our servers.
+        </p>
+        <p>
+          Open{' '}
+          <a href="#cookies" data-cookie-settings>
+            Cookie settings
+          </a>{' '}
+          and select “Use device theme” to remove the saved preference, or clear it through your
+          browser’s site-data settings. Without a saved preference, the site follows your device
+          theme.
+        </p>
+        <p>
+          Links to other websites open services with their own privacy and cookie policies.
+          Information you submit through our contact and demo forms is handled as described above.
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>

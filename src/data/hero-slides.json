@@ -1,0 +1,46 @@
+[
+  {
+    "id": "offshore",
+    "tab": "Offshore Vessels",
+    "label": "Three DGs at low load during transit",
+    "value": "40%",
+    "qualifier": "Consider shutting down one generator",
+    "image": "/assets/hero/offshore-2560.webp",
+    "alt": "Overhead view of a navy and yellow offshore vessel underway, with bow foam and a wake trailing through blue ocean water",
+    "x": "0.689",
+    "y": "0.480"
+  },
+  {
+    "id": "cruise",
+    "tab": "Cruise Ships",
+    "label": "Loss in hydrodynamic performance",
+    "value": "7%",
+    "qualifier": "Consider hull cleaning",
+    "image": "/assets/hero/cruise-2560.webp",
+    "alt": "Overhead view of a cruise ship sailing toward the upper right through blue ocean water",
+    "x": "0.745",
+    "y": "0.382"
+  },
+  {
+    "id": "wellboat",
+    "tab": "Wellboats",
+    "label": "DG1 health status",
+    "value": "78%",
+    "qualifier": "Scavenge pressure increasing; exhaust temperature decreasing",
+    "image": "/assets/hero/wellboat-2560.webp",
+    "alt": "Aerial view of a wellboat carrying live fish, sailing toward the upper right with bow foam and a long wake trailing through blue ocean water",
+    "x": "0.691",
+    "y": "0.503"
+  },
+  {
+    "id": "bulk",
+    "tab": "Bulk Carriers",
+    "label": "Performance improvement",
+    "value": "4%",
+    "qualifier": "After propeller cleaning",
+    "image": "/assets/hero/bulk-2560.webp",
+    "alt": "Overhead view of a bulk carrier sailing toward the upper right through blue ocean water",
+    "x": "0.730",
+    "y": "0.390"
+  }
+]

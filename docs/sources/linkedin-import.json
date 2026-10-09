@@ -1,0 +1,203 @@
+{
+  "retrieved_at": "2026-09-29",
+  "source": "https://www.linkedin.com/company/dipai-as/",
+  "scope": "Eight original Dipai posts exposed by the public company feed. Reposts excluded. Not a full account archive.",
+  "posts": [
+    {
+      "@context": "http://schema.org",
+      "@type": "SocialMediaPosting",
+      "author": {
+        "@type": "Organization",
+        "name": "Dipai",
+        "url": "https://no.linkedin.com/company/dipai-as"
+      },
+      "datePublished": "2026-09-22T07:28:55.047Z",
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/LikeAction",
+        "userInteractionCount": 62
+      },
+      "mainEntityOfPage": "https://www.linkedin.com/posts/dipai-as_osjconferencebrazil-activity-7508064773280903171-WS83",
+      "text": "Dipai CEO André Listou Ellefsen, PhD to speak at OSJ Americas\n\nOn October 13–14, we’ll be attending OSJ Americas in Rio de Janeiro, where we’ll share insights from real-world use cases, with a particular focus on how we create value by integrating domain knowledge, AI, and LLMs into our platform.\n\nThe Americas is an important market for Dipai and currently represents more than 25% of the fleet covered by our platform. Energy companies and shipowners across the region are forward-thinking and technology-savvy, and we’re pleased to support them on their digital journey.\n\nAndré Ellefsen will be attending together with Håkon Longva Haram and Edvard Dyb. Feel free to reach out if you’d like to connect with the team in Rio.\n\n#OSJConferenceBrazil\n\nRiviera Maritime Media Ltd, The Offshore Support Journal Community",
+      "url": "https://www.linkedin.com/posts/dipai-as_osjconferencebrazil-activity-7508064773280903171-WS83",
+      "images": [
+        {
+          "src": "assets/news/7508064773280903171-1.jpg",
+          "source_url": "https://media.licdn.com/dms/image/v2/D4E22AQHc9-WO88MJ7Q/feedshare-image-high-res/B4EaDIBIFYIEAU-/0/1790062133907?e=2147483647&v=beta&t=YRkYCAHE0TWol2o5wqWA0d8TtO7qbMQtoJSbkIobc8U"
+        }
+      ]
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "SocialMediaPosting",
+      "author": {
+        "@type": "Organization",
+        "name": "Dipai",
+        "url": "https://no.linkedin.com/company/dipai-as"
+      },
+      "datePublished": "2026-09-17T07:00:19.784Z",
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/LikeAction",
+        "userInteractionCount": 145
+      },
+      "mainEntityOfPage": "https://www.linkedin.com/posts/dipai-as_dipai-welcomes-island-offshore-in-fleet-agreement-activity-7506245639618461696-kxfX",
+      "text": "Dipai welcomes Island Offshore in fleet agreement 🤝 \n\nWe’re proud to announce that Island Offshore has selected Dipai to support its entire fleet with our full suite of analytics modules and end-to-end delivery of MRV and IMO DCS.\n\nThe transition from initial trial to having the full fleet implemented in just a couple of months gives us pride in knowing that the customer is already experiencing the value of our services. We appreciate their trust and look forward to a continued close collaboration!\n\nTorbjørn Ingeborgvik, Project Manager Digitalization at Island Offshore, says:\n\n\"Dipai has proven to be a competent and solution-oriented partner. The implementation has progressed quickly, their support has been responsive, and we are already seeing value from the insights they provide. We have high expectations for the value this collaboration can create going forward.\"",
+      "url": "https://www.linkedin.com/posts/dipai-as_dipai-welcomes-island-offshore-in-fleet-agreement-activity-7506245639618461696-kxfX",
+      "images": [
+        {
+          "src": "assets/news/7506245639618461696-1.jpg",
+          "source_url": "https://media.licdn.com/dms/image/v2/D4E22AQGindtgJOnexg/feedshare-shrink_800/B4EaCuKoklHQAk-/0/1789628418746?e=2147483647&v=beta&t=qwUOCRXcImbOsZCGzrGKCKoSKHYF6Wd5d_tQ1pF5Ox0"
+        }
+      ]
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "SocialMediaPosting",
+      "author": {
+        "@type": "Organization",
+        "name": "Dipai",
+        "url": "https://no.linkedin.com/company/dipai-as"
+      },
+      "datePublished": "2026-09-03T07:33:39.401Z",
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/LikeAction",
+        "userInteractionCount": 84
+      },
+      "mainEntityOfPage": "https://www.linkedin.com/posts/dipai-as_dipai-welcomes-north-sea-shipping-were-activity-7501180596577095682-GoTy",
+      "text": "Dipai Welcomes North Sea Shipping\n\nWe’re proud to share that North Sea Shipping has selected Dipai for its full fleet of advanced subsea vessels.\n\nDipai will support the fleet with vessel data collection and our full suite of analytics modules.\n\nSveinung Økland, Operation Manager at North Sea Shipping says: \n\n“We are pleased to partner with Dipai and look forward to a strong and productive collaboration. Access to high-quality vessel data and advanced analytics will support our ambition to continuously improve operational performance, efficiency, and decision-making across our fleet.”",
+      "url": "https://www.linkedin.com/posts/dipai-as_dipai-welcomes-north-sea-shipping-were-activity-7501180596577095682-GoTy",
+      "images": [
+        {
+          "src": "assets/news/7501180596577095682-1.jpg",
+          "source_url": "https://media.licdn.com/dms/image/v2/D4E22AQEZ6SMdMbyOlw/feedshare-shrink_800/B4EaBmMAR_KYAg-/0/1788420818373?e=2147483647&v=beta&t=eekWCaMAvWnOkEbCrEqYex0DkS10yHuQkleVEPTxH70"
+        }
+      ]
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "SocialMediaPosting",
+      "author": {
+        "@type": "Organization",
+        "name": "Dipai",
+        "url": "https://no.linkedin.com/company/dipai-as"
+      },
+      "datePublished": "2026-08-27T08:30:14.955Z",
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/LikeAction",
+        "userInteractionCount": 129
+      },
+      "mainEntityOfPage": "https://www.linkedin.com/posts/dipai-as_%C3%B8stensj%C3%B8-rederi-selects-dipai-were-proud-activity-7498658123545485312-r1f3",
+      "text": "Østensjø Rederi Selects Dipai\n \nWe’re proud to share that Østensjø Rederi has selected Dipai Digital Fleet Platform for their offshore fleet and selected tugs.\n \nØstensjø Rederi onboarded their first vessel into Dipai Digital Fleet Platform in April 2026, and it is a pleasure to see that they have already experienced the value of the platform and decided to continue and expand the collaboration.\n\n Stian S. Waage, COO at Østensjø Rederi, says:\n \n “Our experience working with Dipai has been positive, and we quickly recognised the value of the platform. By providing access to operational data, the platform enables a data-driven approach to analyse our vessels operations, help to identify trends, improve energy efficiency, and support continuous improvement across our fleet. As a common source of operational insight, Dipai supports our digital transformation and will assist to identify further actions under our sustainability plan.”",
+      "url": "https://www.linkedin.com/posts/dipai-as_%C3%B8stensj%C3%B8-rederi-selects-dipai-were-proud-activity-7498658123545485312-r1f3",
+      "images": [
+        {
+          "src": "assets/news/7498658123545485312-1.jpg",
+          "source_url": "https://media.licdn.com/dms/image/v2/D4E22AQE4TwH8OIjOJA/feedshare-shrink_800/B4EaBCV0svIgAg-/0/1787819413119?e=2147483647&v=beta&t=AnMG7ICTekN_l1Q600LD6EW8k_-C43-mbSSs6Zkwxc0"
+        }
+      ]
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "SocialMediaPosting",
+      "author": {
+        "@type": "Organization",
+        "name": "Dipai",
+        "url": "https://no.linkedin.com/company/dipai-as"
+      },
+      "datePublished": "2026-07-09T09:44:52.096Z",
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/LikeAction",
+        "userInteractionCount": 45
+      },
+      "mainEntityOfPage": "https://www.linkedin.com/posts/dipai-as_ai-providers-apply-expertise-to-optimise-activity-7480919896978071553-ZtMZ",
+      "text": "Our CEO, André Listou Ellefsen, PhD is featured in today's Offshore Support Journal article, by Riviera Maritime Media Ltd, sharing Dipai's perspective on how AI is creating measurable value for offshore vessel operators: https://lnkd.in/e7NPnNep \n \n\"The AI and machine learning Dipai developed enables owners to use fewer engines or gensets when appropriate, reducing wear and tear and extending maintenance intervals. It also helps them detect anomalies in the operation of machinery, enhancing condition-based maintenance regimes.\"\n\n#AI #Offshore #OSV #Digitalization #ConditionBasedMaintenance #DataAnalytics",
+      "url": "https://www.linkedin.com/posts/dipai-as_ai-providers-apply-expertise-to-optimise-activity-7480919896978071553-ZtMZ",
+      "images": [
+        {
+          "src": "assets/news/7480919896978071553-1.png",
+          "source_url": "https://media.licdn.com/dms/image/sync/v2/D4E27AQEHcGbN2sCKRA/articleshare-shrink_800/B4EZ9FtoJUH8AY-/0/1783581017571?e=2147483647&v=beta&t=Kb-W_SMdoVBFPBt3qA-AHV7DBYX6dRDLsiLWBiJVJ4c"
+        }
+      ]
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "SocialMediaPosting",
+      "author": {
+        "@type": "Organization",
+        "name": "Dipai",
+        "url": "https://no.linkedin.com/company/dipai-as"
+      },
+      "datePublished": "2026-06-19T11:39:04.422Z",
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/LikeAction",
+        "userInteractionCount": 58
+      },
+      "mainEntityOfPage": "https://www.linkedin.com/posts/dipai-as_digitalization-brazil-innovation-activity-7473700880005963776-2Uq3",
+      "text": "Last week, we had the pleasure of attending the Maritime Decarbonization Alliance Workshop in Brazil for the second time.\n\nA big thank you to Innovation Norway Brazil for organizing this important event, and to OSM Thome Brazil for hosting us.\n\nMaritime decarbonization remains a critical topic high on the agenda for offshore operators in Brazil. During the workshop, we shared Dipai's perspective on how operational insights can accelerate the industry's decarbonization journey and support more informed decision-making.\n\nThe rest of the week was filled with valuable meetings with customers and forward-looking vessel operators, discussing both current challenges and future opportunities for the Brazilian offshore sector.\n\nDipai's ambition to be a significant contributor to the decarbonization of Brazil's OSV industry remains stronger than ever, and we're excited to continue these conversations when we return for the The Offshore Support Journal Community Conference in Rio in October.\n\nAndré Listou Ellefsen, PhD, Øystein Nordli, Håkon Longva Haram, André Trintini, MSc, MBA, PMP\n\n#Digitalization #Brazil #Innovation #MaritimeDecarbonization",
+      "url": "https://www.linkedin.com/posts/dipai-as_digitalization-brazil-innovation-activity-7473700880005963776-2Uq3",
+      "images": [
+        {
+          "src": "assets/news/7473700880005963776-1.jpg",
+          "source_url": "https://media.licdn.com/dms/image/v2/D4E22AQFhjDH7qarWQg/feedshare-shrink_800/B4EZ7frWBaIwAc-/0/1781869142678?e=2147483647&v=beta&t=4o8mNOpfhH00qe-dj2YTmGLI8vARYoUHXWwcUvTmPoQ"
+        },
+        {
+          "src": "assets/news/7473700880005963776-2.jpg",
+          "source_url": "https://media.licdn.com/dms/image/v2/D4E22AQFEcNpKI_jKew/feedshare-shrink_1280/B4EZ7frV7SIwAM-/0/1781869142058?e=2147483647&v=beta&t=vVRCIFOM4I7aAnibyWmIkmqZ58si8IKhdwQQ5WZfudQ"
+        }
+      ]
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "SocialMediaPosting",
+      "author": {
+        "@type": "Organization",
+        "name": "Dipai",
+        "url": "https://no.linkedin.com/company/dipai-as"
+      },
+      "datePublished": "2026-03-03T11:02:17.205Z",
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/LikeAction",
+        "userInteractionCount": 132
+      },
+      "mainEntityOfPage": "https://www.linkedin.com/posts/dipai-as_maritime-dataanalytics-ai-activity-7434553732786348033-aHbE",
+      "text": "We’re excited to welcome Håkon Longva Haram as our new Customer and Product Success Manager at Dipai.\n \nHåkon brings extensive maritime and digital experience, with a career spanning from Ship Electrician to System Development Engineer, Team Lead for Development, and most recently Product Manager for digital solutions.\n \nAt Dipai, Customer and Product Success go hand in hand. We’re thrilled to have a dedicated resource on board who will further strengthen our offering and ensure even greater value for our customers.\n \nWelcome to the team, Håkon! 🚀\n\n#Maritime #DataAnalytics #AI #DigitalFleet",
+      "url": "https://www.linkedin.com/posts/dipai-as_maritime-dataanalytics-ai-activity-7434553732786348033-aHbE",
+      "images": [
+        {
+          "src": "assets/news/7434553732786348033-1.jpg",
+          "source_url": "https://media.licdn.com/dms/image/v2/D4E22AQF-YLBRhyHHIQ/feedshare-image-high-res/B4EZyzXOH8JEAU-/0/1772535736384?e=2147483647&v=beta&t=JlHeWb9z1BnMiJVMlzawAZ7mcRYfMnzeJln9bPU4QbA"
+        }
+      ]
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "SocialMediaPosting",
+      "author": {
+        "@type": "Organization",
+        "name": "Dipai",
+        "url": "https://no.linkedin.com/company/dipai-as"
+      },
+      "datePublished": "2026-02-04T10:33:57.540Z",
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/LikeAction",
+        "userInteractionCount": 197
+      },
+      "mainEntityOfPage": "https://www.linkedin.com/posts/dipai-as_annualosjconference-activity-7424762131490865153-Bh86",
+      "text": "Yesterday, Dipai received the Innovation Award from The Offshore Support Journal Community in front of 400 industry professionals in London.\n \nIt is such an honor to receive this award, and we would like to thank all our customers and partners, and everyone who voted for us.\n \nIt was fantastic to have almost the full team together for this special evening: Birger Skogeng Pedersen, Thiago Gabriel Monteiro, Sivert Dagenborg, Bjørnar Vikhagen, Edvard Dyb, Øyvind Wathne Aasmyr, André Listou Ellefsen, PhD, and Øystein Nordli.\n \nA big thanks also to Riviera Maritime Media Ltd for hosting a great conference and exhibition.\n\n#AnnualOSJConference",
+      "url": "https://www.linkedin.com/posts/dipai-as_annualosjconference-activity-7424762131490865153-Bh86",
+      "images": [
+        {
+          "src": "assets/news/7424762131490865153-1.jpg",
+          "source_url": "https://media.licdn.com/dms/image/v2/D4E22AQGzV3GaRCpYFg/feedshare-shrink_800/B4EZwoNzpWJgAg-/0/1770201236242?e=2147483647&v=beta&t=LbAh9bO7QcfAFwwM7QbktZz-0ypCAC0_julTYJ2WoTE"
+        }
+      ]
+    }
+  ]
+}

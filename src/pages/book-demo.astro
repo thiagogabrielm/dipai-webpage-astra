@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Clients from '../components/Clients.astro';
+---
+
+<BaseLayout
+  title="Book a demo"
+  description="Explore how Dipai can help your fleet turn vessel data into clearer insights. Tell us about your fleet and request a demo."
+  bodyClass="demo-page"
+  active="book-demo"
+>
+  <section aria-labelledby="demo-title" class="demo-intro-section">
+    <div class="wrap demo-layout">
+      <div class="demo-copy">
+        <h1 id="demo-title">
+          A clearer picture
+          <br />
+          starts here.
+        </h1>
+        <p>
+          Discover how Dipai turns vessel data into insights for a more efficient fleet and a
+          greener future.
+        </p>
+        <ul class="demo-benefits">
+          <li>Explore the modules that fit your operations.</li>
+          <li>See how connected data supports better decisions.</li>
+          <li>Discuss your vessel data, integration and next steps.</li>
+        </ul>
+      </div>
+      <div class="demo-form-card">
+        <h2>Tell us about your fleet.</h2>
+        <form action="/api/enquiries" id="demo-form" method="post">
+          <label aria-hidden="true" class="enquiry-trap">
+            Leave this field empty
+            <input autocomplete="off" name="website" tabindex="-1" />
+          </label>
+          <label>
+            Your name
+            <input autocomplete="name" maxlength="120" name="name" placeholder="Name" required="" />
+          </label>
+          <label>
+            Work email
+            <input
+              autocomplete="email"
+              maxlength="254"
+              name="email"
+              placeholder="you@company.com"
+              required=""
+              type="email"
+            />
+          </label>
+          <label class="demo-wide">
+            Company
+            <input
+              autocomplete="organization"
+              maxlength="160"
+              name="company"
+              placeholder="Company name"
+              required=""
+            />
+          </label>
+          <label class="demo-wide">
+            What would you like to explore?
+            <select name="interest">
+              <option>Operations &amp; fuel efficiency</option>
+              <option>Maintenance decisions</option>
+              <option>Emissions &amp; SEEMP reporting</option>
+              <option>The full platform</option>
+            </select>
+          </label>
+          <label class="demo-wide">
+            Anything we should know? <span>(optional)</span>
+            <textarea
+              maxlength="2000"
+              name="message"
+              placeholder="Your vessel types, current challenges or what you would like to explore."
+            ></textarea>
+          </label>
+          <p aria-atomic="true" aria-live="polite" data-form-status="" hidden="" role="status"></p>
+          <button class="button demo-wide" disabled="" type="submit">
+            Request a demo
+          </button>
+          <p class="form-note demo-wide">
+            Send your request directly to Dipai. We’ll contact you by email to arrange a demo.
+          </p>
+        </form>
+        <noscript>
+          <p>
+            Please enable JavaScript to send your request, or email{' '}
+            <a href="mailto:contact@dipai.no">contact@dipai.no</a> directly.
+          </p>
+        </noscript>
+        <div hidden="" id="demo-result">
+          <h2 id="demo-result-title" tabindex="-1">
+            Thank you for your interest.
+          </h2>
+          <p>
+            Your demo request has been sent. The Dipai team will contact you by email to arrange a
+            time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="demo-trust-title" class="demo-trust closing-cta neural-cta">
+    <div class="wrap demo-trust-layout closing-content">
+      <h2 id="demo-trust-title">Trusted by companies navigating towards a greener future.</h2>
+      <Clients />
+    </div>
+  </section>
+</BaseLayout>
+<script>
+  import { mountEnquiryForm } from '../scripts/enquiry-form.js';
+  mountEnquiryForm('demo');
+</script>

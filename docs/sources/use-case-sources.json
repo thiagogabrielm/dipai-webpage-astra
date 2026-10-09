@@ -1,0 +1,59 @@
+{
+  "source_file": "Utdypende presentasjon om Dipai.pptx",
+  "sha256": "00c5989ac99fba4cb9c0e6063c7332cbc4b722c73e4c3d51071c41dc5e86f463",
+  "imported_on": "2026-09-29",
+  "scope": "Six use cases, slides 31–39. User requested local website articles and thumbnails. Source deck is not published.",
+  "cases": [
+    {
+      "slug": "operational-mode-detection",
+      "slides": [
+        31
+      ]
+    },
+    {
+      "slug": "engine-configuration",
+      "slides": [
+        32,
+        33,
+        34
+      ]
+    },
+    {
+      "slug": "vessel-eco-speed",
+      "slides": [
+        35
+      ]
+    },
+    {
+      "slug": "hydrodynamic-performance",
+      "slides": [
+        36,
+        37
+      ]
+    },
+    {
+      "slug": "engine-condition-monitoring",
+      "slides": [
+        38
+      ]
+    },
+    {
+      "slug": "data-driven-seemp",
+      "slides": [
+        39
+      ]
+    }
+  ],
+  "assets": {
+    "operational-modes.png": "ppt/media/image18.png",
+    "engine-configuration.png": "ppt/media/image67.png",
+    "ocean-transit-route.png": "ppt/media/image68.png",
+    "ocean-transit-engines.png": "ppt/media/image70.png",
+    "eco-speed.png": "ppt/media/image72.png",
+    "hydrodynamic-trend.png": "ppt/media/image74.png",
+    "hydrodynamic-comparison.png": "ppt/media/image80.png",
+    "engine-condition.png": "ppt/media/image36.png",
+    "seemp-performance.png": "ppt/media/image83.png",
+    "seemp-planning.png": "ppt/media/image84.png"
+  }
+}

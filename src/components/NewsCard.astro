@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import NewsMeta from './NewsMeta.astro';
+import NewsImage from './NewsImage.astro';
+interface Props {
+  post: CollectionEntry<'news'>['data'];
+  heading?: 'h2' | 'h3';
+  filterable?: boolean;
+  carouselOnly?: boolean;
+}
+const { post, heading: Heading = 'h3', filterable = false, carouselOnly = false } = Astro.props;
+---
+
+<a
+  class="news-card"
+  href={`/news/${post.slug}/`}
+  data-news-item={filterable ? true : undefined}
+  data-category={filterable ? post.category : undefined}
+  data-carousel-only={carouselOnly ? true : undefined}
+  hidden={carouselOnly}
+>
+  <NewsImage post={post} />
+  <div class="news-body">
+    <NewsMeta post={post} />
+    <Heading>{post.title}</Heading>
+    <p>{post.summary}</p>
+    <span class="text-button">
+      Read article <span aria-hidden="true">›</span>
+    </span>
+  </div>
+</a>

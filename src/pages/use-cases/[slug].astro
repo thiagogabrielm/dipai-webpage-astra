@@ -1,0 +1,112 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import { imageSize } from '../../lib/media';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import UseCaseCard from '../../components/UseCaseCard.astro';
+import { useCases, articleSchema } from '../../lib/content';
+export async function getStaticPaths() {
+  return (await useCases()).map((item) => ({ params: { slug: item.slug }, props: { item } }));
+}
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { item } = Astro.props;
+const others = (await useCases()).filter((c) => c.slug !== item.slug);
+const related = [
+  ...others.filter((c) => c.category === item.category),
+  ...others.filter((c) => c.category !== item.category),
+].slice(0, 3);
+---
+
+<BaseLayout
+  title={item.title}
+  description={item.summary}
+  active="use-cases"
+  bodyClass="use-cases-page"
+  image={
+    item.figures[0]
+      ? {
+          src: `/assets/use-cases/${item.figures[0].src}`,
+          alt: item.figures[0].alt,
+          ...imageSize(`/assets/use-cases/${item.figures[0].src}`),
+        }
+      : undefined
+  }
+  schema={articleSchema(item.title, item.summary, { about: item.category })}
+>
+  <article class="use-case-article wrap">
+    <header class="use-case-article-heading">
+      <a class="text-button article-back" href="/use-cases/">
+        ← All use cases
+      </a>
+      <p class="use-case-category">{item.category}</p>
+      <h1>{item.title}</h1>
+      <p class="use-case-lead">{item.summary}</p>
+    </header>
+    {item.metrics && (
+      <dl class="use-case-metrics">
+        {item.metrics.map((m) => (
+          <div>
+            <dt>{m.label}</dt>
+            <dd>{m.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
+    <div class="use-case-story">
+      <div class="use-case-copy">
+        <p class="use-case-opening">{item.intro}</p>
+        {item.sections.map((s) => (
+          <section class="use-case-copy-section">
+            <h2>{s.heading}</h2>
+            {s.paragraphs.map((text) => (
+              <p>{text}</p>
+            ))}
+          </section>
+        ))}
+        <aside class="use-case-outcome" aria-label="Case takeaway">
+          <span>What the case shows</span>
+          <p>{item.outcome}</p>
+        </aside>
+        <p class="use-case-basis">{item.evidence_note}</p>
+      </div>
+      <div class="use-case-evidence">
+        {item.figures.map((f) => (
+          <figure class="use-case-figure">
+            <a
+              href={`/assets/use-cases/${f.src}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open full-size image: ${f.alt}`}
+            >
+              <img
+                {...imageSize(`/assets/use-cases/${f.src}`)}
+                src={`/assets/use-cases/${f.src}`}
+                alt={f.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <figcaption>{f.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </article>
+  <section class="use-case-related wrap" aria-labelledby="related-heading">
+    <div class="section-heading">
+      <h2 id="related-heading">Explore more use cases</h2>
+      <a class="text-button" href="/use-cases/">
+        View all use cases ›
+      </a>
+    </div>
+    <div class="use-case-grid">
+      {related.map((item) => (
+        <UseCaseCard item={item} />
+      ))}
+    </div>
+  </section>
+  <CTA
+    title="Bring these insights to your fleet."
+    description="Talk to us about your vessels and operational priorities."
+  />
+</BaseLayout>

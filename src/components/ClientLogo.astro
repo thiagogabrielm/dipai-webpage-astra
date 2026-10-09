@@ -1,0 +1,27 @@
+---
+import type clients from '../data/clients.json';
+interface Props {
+  client: (typeof clients)[number];
+  linked?: boolean;
+}
+const { client, linked = true } = Astro.props;
+const Tag = linked ? 'a' : 'span';
+---
+
+<Tag
+  class:list={['client-logo', { 'client-logo-cropped': client.cropped }]}
+  style={`--width: ${client.width}; --height: ${client.height}`}
+  href={linked ? client.url : undefined}
+  target={linked ? '_blank' : undefined}
+  rel={linked ? 'noopener noreferrer' : undefined}
+  aria-label={linked ? `${client.name} website (opens in a new tab)` : undefined}
+>
+  <img
+    src={`/assets/${client.logo}`}
+    alt={client.name}
+    width={client.width}
+    height={client.height}
+    loading="lazy"
+    decoding="async"
+  />
+</Tag>

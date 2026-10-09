@@ -1,0 +1,97 @@
+---
+interface Props {
+  active?: string;
+}
+const { active } = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a aria-label="Dipai home" class="brand" href="/">
+      <img
+        alt="dipai"
+        decoding="async"
+        height="45"
+        loading="eager"
+        src="/assets/dipai-logo-light.svg"
+        width="110"
+      />
+      <span aria-hidden="true" class="brand-fallback">
+        dipai<span>.</span>
+      </span>
+    </a>
+    <button aria-controls="main-nav" aria-expanded="false" class="mobile-menu">
+      Menu <span>☰</span>
+    </button>
+    <nav aria-label="Main navigation" id="main-nav">
+      <div class="nav-links">
+        <a
+          href="/products/"
+          class:list={[{ 'nav-current': active === 'products' }]}
+          aria-current={path === '/products/' ? 'page' : undefined}
+        >
+          Products
+        </a>
+        <a
+          href="/use-cases/"
+          class:list={[{ 'nav-current': active === 'use-cases' }]}
+          aria-current={path === '/use-cases/' ? 'page' : undefined}
+        >
+          Use cases
+        </a>
+        <a
+          href="/news/"
+          class:list={[{ 'nav-current': active === 'news' }]}
+          aria-current={path === '/news/' ? 'page' : undefined}
+        >
+          News
+        </a>
+        <a
+          href="/contact/"
+          class:list={[{ 'nav-current': active === 'contact' }]}
+          aria-current={path === '/contact/' ? 'page' : undefined}
+        >
+          Contact
+        </a>
+        <details class="nav-dropdown">
+          <summary class:list={[{ 'nav-current': active === 'team' }]}>
+            Company <span>⌄</span>
+          </summary>
+          <div>
+            <a href="/team/">
+              About us
+            </a>
+            <a
+              href="/team/"
+              class:list={[{ 'nav-current': active === 'team' }]}
+              aria-current={path === '/team/' ? 'page' : undefined}
+            >
+              Team
+            </a>
+          </div>
+        </details>
+        <a
+          href="/faq/"
+          class:list={[{ 'nav-current': active === 'faq' }]}
+          aria-current={path === '/faq/' ? 'page' : undefined}
+        >
+          FAQs
+        </a>
+      </div>
+      <div class="nav-actions">
+        <a
+          class="button login-link"
+          href="https://portal.dipai.no"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Log in <span aria-hidden="true">›</span>
+        </a>
+        <a class="button demo-button" href="/book-demo/">
+          Book a demo
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import { optimizedMedia } from '../lib/optimized-media';
+interface Props {
+  src: string;
+  alt: string;
+  sizes: string;
+  widths?: number[];
+  eager?: boolean;
+}
+const { src, alt, sizes, widths = [400, 800, 1200, 1800], eager = false } = Astro.props;
+const image = optimizedMedia(src);
+const candidates = [...new Set([...widths.filter((w) => w < image.width), image.width])];
+---
+
+<Image
+  src={image}
+  alt={alt}
+  widths={candidates}
+  sizes={sizes}
+  format="webp"
+  quality={85}
+  loading={eager ? 'eager' : 'lazy'}
+  decoding="async"
+/>

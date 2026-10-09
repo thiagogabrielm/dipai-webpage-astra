@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "fleet-overview",
+    "name": "Fleet overview",
+    "title": "Your whole fleet. In one view.",
+    "description": "Bring your vessels together in a shared operational picture. Move from a fleet-wide overview to the vessel and measurements you want to explore.",
+    "bullets": [
+      "Find the vessel you need to review.",
+      "Give crew and shore teams a shared starting point."
+    ],
+    "sensor": false,
+    "icon": "products/icons/fleet_overview.svg",
+    "image": {
+      "src": "/assets/products/vessel-status.webp",
+      "alt": "Existing vessel-status view showing a vessel map and operational measurements.",
+      "width": 1800,
+      "height": 1013
+    }
+  },
+  {
+    "slug": "vessel-status",
+    "name": "Vessel Status",
+    "title": "Know what is happening onboard.",
+    "description": "Follow operational mode, fuel consumption, power production and consumption, weather and vessel position in one real-time view.",
+    "bullets": [
+      "Monitor the vessel in its operational context.",
+      "Play back historical voyages to review what happened."
+    ],
+    "sensor": true,
+    "icon": "products/icons/vessel_status.svg",
+    "image": {
+      "src": "/assets/products/vessel-status-current-v2.webp",
+      "alt": "Vessel Status interface with vessel position, weather map and live operational measurements.",
+      "width": 1325,
+      "height": 1124
+    }
+  },
+  {
+    "slug": "operations",
+    "name": "Operations",
+    "title": "Understand every operation. Improve the next.",
+    "description": "Dipai’s mode detection algorithm logs vessel operations and brings their performance into context. Review individual operations and benchmark fuel efficiency against a dynamic baseline.",
+    "bullets": [
+      "Evaluate performance operation by operation.",
+      "Build a dynamic fuel baseline after one to two quarters of historical data."
+    ],
+    "sensor": false,
+    "icon": "products/icons/operations.svg",
+    "image": {
+      "src": "/assets/products/operations-current.webp",
+      "alt": "Operations interface showing fuel-baseline deviations by operating mode, operation records, performance timelines and a vessel route map.",
+      "width": 1287,
+      "height": 1236
+    }
+  },
+  {
+    "slug": "consumption",
+    "name": "Consumption",
+    "title": "Turn fuel data into better practices.",
+    "description": "Establish and follow up on fuel-consumption best practices for each operational mode. Track the equipment in use and see how performance develops over time.",
+    "bullets": [
+      "Trend fuel use, including tonnes per day and fuel efficiency.",
+      "Bring consumption KPIs together in Dipai reports."
+    ],
+    "sensor": false,
+    "icon": "products/icons/consumption.svg",
+    "image": {
+      "src": "/assets/products/consumption-current.webp",
+      "alt": "Consumption interface showing fuel and emissions metrics, consumption by operational mode, weather impact and vessel routes.",
+      "width": 1291,
+      "height": 1069
+    }
+  },
+  {
+    "slug": "seemp",
+    "name": "SEEMP",
+    "title": "Build your next plan on real performance.",
+    "description": "Review last year’s performance with historical data and analytics, then set realistic targets for the year ahead in your Ship Energy Efficiency Management Plan.",
+    "bullets": [
+      "Choose from around 10–20 default actions per vessel.",
+      "Create custom actions and follow performance against your plan."
+    ],
+    "sensor": false,
+    "icon": "products/icons/seemp.svg",
+    "image": {
+      "src": "/assets/products/seemp-current.webp",
+      "alt": "SEEMP action plan showing operational targets for DP, port and transit, performance trends and team discussions.",
+      "width": 1488,
+      "height": 1065
+    }
+  },
+  {
+    "slug": "maintenance",
+    "name": "Condition-based Maintenance",
+    "title": "See the signs. Plan with confidence.",
+    "description": "Combine machinery load profiles, key engine condition parameters and onboard engine performance tests to identify wear and performance deviations early.",
+    "bullets": [
+      "Understand how machinery is being used.",
+      "Support informed, proactive maintenance decisions."
+    ],
+    "sensor": true,
+    "icon": "products/icons/cbm.svg",
+    "image": {
+      "src": "/assets/products/maintenance-current.webp",
+      "alt": "Condition-based maintenance dashboard showing engine loads, running hours, fuel-consumption trends and overhaul intervals.",
+      "width": 1303,
+      "height": 1238
+    }
+  },
+  {
+    "slug": "efficiency",
+    "name": "Efficiency",
+    "title": "See what made a difference.",
+    "description": "Compare vessel efficiency before and after hull or propeller cleaning, new coatings or machinery changes. Assess events using comparable operating conditions.",
+    "bullets": [
+      "Filter by operating mode, draft, geolocation and weather.",
+      "Separate the effect of an intervention from changes in operating conditions."
+    ],
+    "sensor": true,
+    "icon": "products/icons/efficiency.svg",
+    "image": {
+      "src": "/assets/products/efficiency-current.webp",
+      "alt": "Efficiency interface comparing propulsion power and vessel speed, with hydrodynamic performance trends across quarters.",
+      "width": 1183,
+      "height": 690
+    }
+  },
+  {
+    "slug": "historical-data",
+    "name": "Historical Data",
+    "title": "Follow the signal back in time.",
+    "description": "Build your own detailed analysis by trending the sensor measurements you choose. Operational-mode colours add context to the measurements.",
+    "bullets": [
+      "Explore historical measurements in a shared timeline.",
+      "Interpret changes alongside the vessel’s operational modes."
+    ],
+    "sensor": true,
+    "icon": "products/icons/historical_data.svg",
+    "image": {
+      "src": "/assets/products/historical-data-current.webp",
+      "alt": "Historical Data interface showing power trends over time with background colours indicating operational modes.",
+      "width": 1136,
+      "height": 649
+    }
+  },
+  {
+    "slug": "data-access",
+    "name": "Data Download & API",
+    "title": "Your data. Ready for your next use.",
+    "description": "Give designated users direct access to sensor-data downloads, or use Dipai’s REST API for a continuous stream of data into your own tools.",
+    "bullets": [
+      "Download sensor data directly from the platform.",
+      "Connect data to your wider analysis and reporting workflows."
+    ],
+    "sensor": true,
+    "icon": "products/icons/donwload_data.svg",
+    "image": {
+      "src": "/assets/products/data-access-current-v2.webp",
+      "alt": "Data download interface with selected sensors, date range and a tabular data preview.",
+      "width": 1140,
+      "height": 824
+    }
+  },
+  {
+    "slug": "vesselgpt",
+    "name": "VesselGPT",
+    "title": "Ask more of your vessel data.",
+    "description": "Planned LLM integration brings a conversational layer to platform modules. Ask for context and interpretation of the data, and discuss customised graphs and notifications.",
+    "bullets": [
+      "Explore what the data means in the context of a module.",
+      "Discuss the questions and views that matter to your operation."
+    ],
+    "sensor": true,
+    "icon": null,
+    "image": {
+      "src": "/assets/products/vesselgpt-current-v2.webp",
+      "alt": "VesselGPT conversation alongside a vessel consumption dashboard, with analysis of fuel use, operating modes and weather impact.",
+      "width": 1316,
+      "height": 1293
+    }
+  }
+]

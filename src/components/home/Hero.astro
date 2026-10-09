@@ -1,0 +1,108 @@
+---
+import slides from '../../data/hero-slides.json';
+import { heroSrcSet } from '../../lib/media';
+---
+
+<section aria-labelledby="hero-title" class="hero hero-fullscreen hero-vessels" data-vessel-hero="">
+  <img
+    class="hero-background"
+    src={slides[0].image}
+    srcset={heroSrcSet(slides[0].image)}
+    sizes="100vw"
+    alt={slides[0].alt}
+    fetchpriority="high"
+    width="2560"
+    height="1440"
+  />
+  <div class="hero-grid wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">
+        <span class="dot"></span> Dipai Digital Fleet Platform
+      </p>
+      <h1 id="hero-title">
+        Navigate towards a <em>greener future</em> with data-driven insights<sup>®</sup>
+      </h1>
+      <p class="hero-description">
+        Developed with industry leaders. Built to turn your vessel data into actionable insights
+        that reduce costs, lower emissions, and drive better decisions.
+      </p>
+      <div class="actions">
+        <a class="button demo-button" href="/book-demo/">
+          Book a demo
+        </a>
+        <a class="button button-how-it-works" href="#how-it-works-journey">
+          See how it works
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="vessel-stage">
+    <svg aria-hidden="true" class="vessel-connector">
+      <path pathLength="1"></path>
+    </svg>
+    <span aria-hidden="true" class="vessel-signal"></span>
+    <div class="vessel-callout-slot">
+      {slides.map((slide, i) => (
+        <div
+          class="vessel-kpi"
+          id={`vessel-${slide.id}`}
+          role="tabpanel"
+          aria-labelledby={`vessel-tab-${slide.id}`}
+          tabindex="0"
+          data-vessel-panel
+          data-image={slide.image}
+          data-image-set={heroSrcSet(slide.image)}
+          data-anchor-x={slide.x}
+          data-anchor-y={slide.y}
+          data-image-alt={slide.alt}
+          hidden={i !== 0}
+        >
+          <p class="vessel-sr-only">
+            {slide.label}: {slide.value}. {slide.qualifier}.
+          </p>
+          <div class="vessel-kpi-copy" aria-hidden="true">
+            <p class="vessel-kpi-label" data-type>
+              {slide.label}
+            </p>
+            <p class="vessel-kpi-value" data-type>
+              {slide.value}
+            </p>
+            <p class="vessel-kpi-qualifier" data-type>
+              {slide.qualifier}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="vessel-ribbon wrap" hidden="">
+    <div class="vessel-tabs" role="tablist" aria-label="Vessel types">
+      {slides.map((slide, i) => (
+        <button
+          id={`vessel-tab-${slide.id}`}
+          class="vessel-tab"
+          role="tab"
+          aria-selected={i === 0}
+          aria-controls={`vessel-${slide.id}`}
+          tabindex={i === 0 ? 0 : -1}
+        >
+          <span>{slide.tab}</span>
+          <span class="vessel-tab-track" aria-hidden="true">
+            <i></i>
+          </span>
+        </button>
+      ))}
+    </div>
+    <button
+      aria-label="Pause vessel rotation"
+      class="vessel-playback"
+      title="Pause vessel rotation"
+      type="button"
+    >
+      <svg aria-hidden="true" viewBox="0 0 20 20">
+        <path d="M7 5v10M13 5v10" data-pause-icon=""></path>
+        <path d="m7 4 9 6-9 6Z" data-play-icon="" {...{ hidden: true }}></path>
+      </svg>
+    </button>
+  </div>
+</section>

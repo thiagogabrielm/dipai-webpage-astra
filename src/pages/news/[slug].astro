@@ -1,0 +1,110 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import { optimizedMedia } from '../../lib/optimized-media';
+import { getImage } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import NewsMeta from '../../components/NewsMeta.astro';
+import { newsPosts, displayDate, articleSchema } from '../../lib/content';
+export async function getStaticPaths() {
+  return (await newsPosts()).map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { post } = Astro.props;
+const sourceImage = post.images[0] && optimizedMedia(post.images[0].src);
+const shareImage =
+  sourceImage &&
+  (await getImage({
+    src: sourceImage,
+    width: Math.min(1200, sourceImage.width),
+    format: 'jpeg',
+    quality: 85,
+  }));
+const others = (await newsPosts()).filter((p) => p.slug !== post.slug);
+const related = [
+  ...others.filter((p) => p.category === post.category),
+  ...others.filter((p) => p.category !== post.category),
+].slice(0, 3);
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.summary}
+  active="news"
+  bodyClass="news-page"
+  image={
+    shareImage
+      ? {
+          src: shareImage.src,
+          alt: post.images[0].alt,
+          width: Number(shareImage.attributes.width),
+          height: Number(shareImage.attributes.height),
+        }
+      : undefined
+  }
+  schema={articleSchema(post.title, post.summary, {
+    '@type': 'NewsArticle',
+    datePublished: post.date,
+    isBasedOn: post.source_url,
+  })}
+>
+  <article class="news-article wrap">
+    <header class="article-heading">
+      <a class="text-button article-back" href="/news/">
+        ← All news
+      </a>
+      <NewsMeta post={post} />
+      <h1>{post.title}</h1>
+      <p class="article-lead">{post.summary}</p>
+    </header>
+    <div class:list={['article-layout', { 'article-layout-text': !post.images.length }]}>
+      <div class="article-content">
+        {post.paragraphs.map((text) => (
+          <p>{text}</p>
+        ))}
+        <div class="article-source">
+          <span>Originally published by Dipai on {displayDate(post.date)}.</span>
+          <a class="text-button" href={post.source_url} target="_blank" rel="noopener noreferrer">
+            View original LinkedIn post ›
+          </a>
+        </div>
+      </div>
+      {post.images.length > 0 && (
+        <div
+          class="article-media"
+          data-article-carousel={post.images.length > 1 ? true : undefined}
+        >
+          {post.images.map((img, index) => (
+            <figure class="article-image">
+              <ResponsiveImage
+                src={'/' + img.src}
+                alt={img.alt}
+                eager={index === 0}
+                sizes="(max-width: 900px) 90vw, (max-width: 1400px) 46vw, 620px"
+              />
+              <figcaption>{img.caption || 'Image from Dipai’s original LinkedIn post.'}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+    </div>
+  </article>
+  <section class="news-related wrap" data-footer-network-section aria-labelledby="related-heading">
+    <div class="section-heading">
+      <h2 id="related-heading">More from Dipai</h2>
+      <a class="text-button" href="/news/">
+        View all news ›
+      </a>
+    </div>
+    <div class="news-grid">
+      {related.map((post) => (
+        <NewsCard post={post} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+<script>
+  import '../../scripts/article-carousel.js';
+  import '../../scripts/section-carousels.js';
+</script>

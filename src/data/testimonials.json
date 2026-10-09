@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Tom-Erik Jensen",
+    "role": "Technology & Capex Manager · DOF",
+    "quote": "\n          DOF highly values its partnership with DIPAI, recognizing their strong service-minded and\n          quality-focused culture, as well as their flexibility and commitment to continuous\n          improvement. DIPAI consistently adapts to evolving needs and proactively enhances both\n          existing solutions and future requirements.\n        ",
+    "company": "DOF",
+    "logo": "/assets/dof-official.svg",
+    "logoClass": "quote-logo",
+    "artClass": ""
+  },
+  {
+    "name": "Svein Erik Isaksen",
+    "role": "Sustainability Advisor · Solstad",
+    "quote": "\n          Dipai delivers high-quality insights and follow-up. The team is solution-oriented, quick\n          to respond, and highly professional. It gives us great confidence to work with a partner\n          that truly understands the maritime industry.\n        ",
+    "company": "Solstad",
+    "logo": "/assets/solstad-official.webp",
+    "logoClass": "quote-logo quote-logo-wide",
+    "artClass": ""
+  },
+  {
+    "name": "Stian S. Waage",
+    "role": "COO · Østensjø Rederi",
+    "quote": "\n          Our experience working with Dipai has been positive, and we quickly recognised the value\n          of the platform. By providing access to operational data, the platform enables a\n          data-driven approach to analyse our vessels operations, help to identify trends, improve\n          energy efficiency, and support continuous improvement across our fleet. As a common source\n          of operational insight, Dipai supports our digital transformation and will assist to\n          identify further actions under our sustainability plan.\n        ",
+    "company": "Østensjø Rederi",
+    "logo": "/assets/ostensjo.svg",
+    "logoClass": "quote-logo quote-logo-wide quote-logo-ostensjo",
+    "artClass": "focus-quote-ostensjo"
+  },
+  {
+    "name": "Sveinung Økland",
+    "role": "Operation Manager · North Sea Shipping",
+    "quote": "\n          We are pleased to partner with Dipai and look forward to a strong and productive\n          collaboration. Access to high-quality vessel data and advanced analytics will support our\n          ambition to continuously improve operational performance, efficiency, and decision-making\n          across our fleet.\n        ",
+    "company": "North Sea Shipping",
+    "logo": "/assets/north-sea-tight.svg",
+    "logoClass": "quote-logo quote-logo-wide",
+    "artClass": ""
+  },
+  {
+    "name": "Torbjørn Ingeborgvik",
+    "role": "Project Manager Digitalization · Island Offshore",
+    "quote": "\n          Dipai has proven to be a competent and solution-oriented partner. The implementation has\n          progressed quickly, their support has been responsive, and we are already seeing value\n          from the insights they provide. We have high expectations for the value this collaboration\n          can create going forward.\n        ",
+    "company": "Island Offshore",
+    "logo": "/assets/island-offshore.webp",
+    "logoClass": "quote-logo quote-logo-light",
+    "artClass": ""
+  }
+]

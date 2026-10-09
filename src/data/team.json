@@ -1,0 +1,115 @@
+{
+  "source_url": "https://dipai.no/about-us/",
+  "retrieved_on": "2026-09-29",
+  "introduction": "We bring together software engineering, data science and maritime expertise to turn vessel data into practical decisions. Meet the people building Dipai and supporting more efficient, sustainable operations.",
+  "group_image": {
+    "file": "dipai-team.png",
+    "source_url": "https://dipai.no/wp-content/uploads/2024/09/dipai-2024-web.png"
+  },
+  "team": [
+    {
+      "name": "Dr. André Listou Ellefsen",
+      "linkedin": "https://www.linkedin.com/in/andr%C3%A9-listou-ellefsen-phd-735399a3/",
+      "role": "CEO",
+      "image": "andre-ellefsen.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2022/04/Andre.png",
+      "email": "andre.ellefsen@dipai.no",
+      "phone": "+47 902 09 249",
+      "phone_link": "+4790209249"
+    },
+    {
+      "name": "Øystein Nordli",
+      "linkedin": "https://www.linkedin.com/in/oeysteinnordli/",
+      "role": "CFO",
+      "image": "oystein-nordli.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2022/04/oystein.png",
+      "email": "oystein.nordli@dipai.no",
+      "phone": "+47 918 18 877",
+      "phone_link": "+4791818877"
+    },
+    {
+      "name": "Håkon Longva Haram",
+      "role": "Product & Customer Success Manager",
+      "image": "hakon-haram.webp",
+      "image_source": "User-supplied 037_Dipai_Team_Photos_2026.jpg",
+      "email": "hakon.haram@dipai.no",
+      "linkedin": "https://www.linkedin.com/in/haakonharam/"
+    },
+    {
+      "name": "Dr. Thiago G. Monteiro",
+      "linkedin": "https://www.linkedin.com/in/thiago-gabriel-monteiro-abba6b107/",
+      "role": "Senior Software Engineer",
+      "image": "thiago-monteiro.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2022/04/thiago.png"
+    },
+    {
+      "name": "Birger S. Pedersen",
+      "linkedin": "https://www.linkedin.com/in/birger-skogeng-pedersen-12a69467/",
+      "role": "Senior Software Engineer",
+      "image": "birger-pedersen.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2022/04/Birger.png"
+    },
+    {
+      "name": "Edvard Dyb",
+      "linkedin": "https://www.linkedin.com/in/edvard-dyb-380096132/",
+      "role": "Senior Software Engineer",
+      "image": "edvard-dyb.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2024/01/edvard-web.jpg"
+    },
+    {
+      "name": "Dr. Franck Chauvel",
+      "linkedin": "https://www.linkedin.com/in/fchauvel/",
+      "role": "Senior Software Engineer",
+      "image": "franck-chauvel.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2024/01/franck-web.jpg"
+    },
+    {
+      "name": "Bjørnar Vikhagen",
+      "linkedin": "https://www.linkedin.com/in/bj%C3%B8rnar-vikhagen-b34654192/",
+      "role": "Software Engineer",
+      "image": "bjornar-vikhagen.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2024/09/bjornar-web.png"
+    },
+    {
+      "name": "Dr. Sivert Dagenborg",
+      "linkedin": "https://www.linkedin.com/in/sivert-dagenborg-853769357/",
+      "role": "Scientific Software Engineer",
+      "image": "sivert-dagenborg.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2025/09/1744102493972.jpg"
+    }
+  ],
+  "board": [
+    {
+      "name": "Øyvind W. Aasmyr",
+      "linkedin": "https://www.linkedin.com/in/%C3%B8yvind-wathne-aasmyr-84a11913/",
+      "role": "Chairman of the board",
+      "image": "oyvind-aasmyr.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2023/01/oyvind.png",
+      "bio": "Vast experience from investment banking. Sector expertise within energy and offshore, aquaculture and maritime industries."
+    },
+    {
+      "name": "Aleksander Stensby",
+      "linkedin": "https://www.linkedin.com/in/aleksanderstensby/",
+      "role": "Board member",
+      "image": "aleksander-stensby.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2024/08/aleksander-300x300-1.png",
+      "bio": "Extensive experience from business development and the maritime industry as a serial entrepreneur, tech lead, CDO in Torvald Klaveness, and CEO in Klaveness Digital."
+    },
+    {
+      "name": "Asbjørn Skaro",
+      "linkedin": "https://www.linkedin.com/in/asbj%C3%B8rn-skaro-1725853/",
+      "role": "Board member",
+      "image": "asbjorn-skaro.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2022/04/asjborn.png",
+      "bio": "Former VP Rolls-Royce and Kongsberg Maritime. Extensive experience in business development in the maritime industry."
+    },
+    {
+      "name": "Rune Hasund",
+      "linkedin": "https://www.linkedin.com/in/hasund/",
+      "role": "Board member",
+      "image": "rune-hasund.webp",
+      "image_source": "https://dipai.no/wp-content/uploads/2022/04/rune.png",
+      "bio": "CFO at Nogva engine factory. Broad experience in financial management and general management roles through 20 years."
+    }
+  ]
+}

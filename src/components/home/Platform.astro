@@ -1,0 +1,99 @@
+---
+import products from '../../data/platform.js';
+---
+
+<section class="products section" data-product-border-orbit="" id="platform">
+  <div class="wrap theme-section-content">
+    <div class="section-heading">
+      <h2>An independent, purpose-built platform</h2>
+      <p>With the flexibility to choose the capabilities your fleet needs.</p>
+    </div>
+    <div class="product-layout">
+      <div class="product-panel-actions">
+        <a class="button demo-button" href="/book-demo/">
+          Book a demo
+        </a>
+      </div>
+      <div aria-label="Platform capabilities" class="product-tabs" role="tablist">
+        <button
+          aria-controls="product-panel"
+          aria-selected="true"
+          data-product="0"
+          id="product-tab-0"
+          role="tab"
+        >
+          <strong>Evaluate &amp; improve operations</strong>
+        </button>
+        <button
+          aria-controls="product-panel"
+          aria-selected="false"
+          data-product="1"
+          id="product-tab-1"
+          role="tab"
+        >
+          <strong>Reduce fuel &amp; emissions</strong>
+        </button>
+        <button
+          aria-controls="product-panel"
+          aria-selected="false"
+          data-product="2"
+          id="product-tab-2"
+          role="tab"
+        >
+          <strong>Make maintenance smarter</strong>
+        </button>
+        <button
+          aria-controls="product-panel"
+          aria-selected="false"
+          data-product="3"
+          id="product-tab-3"
+          role="tab"
+        >
+          <strong>Simplify SEEMP &amp; reporting</strong>
+        </button>
+      </div>
+      <div
+        aria-labelledby="product-tab-0"
+        class="product-panel"
+        id="product-panel"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div class="product-panel-top">
+          <span id="product-category">{products[0].category}</span>
+        </div>
+        <h3 id="product-title">{products[0].title}</h3>
+        <p id="product-description">{products[0].description}</p>
+        <div class="product-graphic">
+          <div class="product-chart-label">
+            <span id="product-chart-label">{products[0].chart}</span>
+          </div>
+          <svg aria-label="Illustrative performance trend" role="img" viewBox="0 0 520 125">
+            <path d="M0 30H520M0 70H520M0 110H520" stroke="#34475e20"></path>
+            <path
+              d="M0 100L40 93L80 98L120 68L160 78L200 60L240 65L280 42L320 47L360 31L400 35L440 22L480 20L520 10V125H0Z"
+              fill="#cdddea"
+              id="product-area"
+            ></path>
+            <path
+              d="M0 100L40 93L80 98L120 68L160 78L200 60L240 65L280 42L320 47L360 31L400 35L440 22L480 20L520 10"
+              fill="none"
+              id="product-line"
+              stroke="#34475e"
+              stroke-width="2"
+            ></path>
+            <circle cx="520" cy="10" fill="#ffd600" r="5"></circle>
+          </svg>
+          <div class="mode-labels">
+            <span>
+              <i></i> Dynamic baseline
+            </span>
+            <span>
+              <i></i> Vessel performance
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

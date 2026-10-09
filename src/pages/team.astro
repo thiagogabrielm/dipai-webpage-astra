@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TeamMember from '../components/TeamMember.astro';
+import team from '../data/team.json';
+import CTA from '../components/CTA.astro';
+---
+
+<BaseLayout
+  title="Company / Team"
+  description="Meet the people behind Dipai: our software engineering team, leadership and board."
+  bodyClass="team-page"
+  active="team"
+>
+  <section aria-labelledby="team-page-title" class="team-intro wrap">
+    <div class="team-intro-copy">
+      <div>
+        <h1 id="team-page-title">
+          The people
+          <br />
+          behind Dipai.
+        </h1>
+      </div>
+      <div class="team-intro-description">
+        <p>{team.introduction}</p>
+        <div class="team-jump-links">
+          <a class="text-button" href="#team">
+            Meet the team <span aria-hidden="true">↓</span>
+          </a>
+          <a class="text-button" href="#board">
+            Our board <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="team-heading" class="team-section wrap" id="team">
+    <div class="team-section-heading">
+      <h2 id="team-heading">Meet the team</h2>
+      <p>
+        The people turning vessel data <br />
+        into useful insights.
+      </p>
+    </div>
+    <ul class="team-grid" role="list">
+      {team.team.map((member) => (
+        <TeamMember member={member} />
+      ))}
+    </ul>
+  </section>
+  <section aria-labelledby="board-heading" class="team-board-section" id="board">
+    <div class="wrap">
+      <div class="team-section-heading">
+        <h2 id="board-heading">Our board</h2>
+        <p>
+          Experience across maritime technology, <br />
+          business development and finance.
+        </p>
+      </div>
+      <ul class="team-grid team-board-grid" role="list">
+        {team.board.map((member) => (
+          <TeamMember member={member} board />
+        ))}
+      </ul>
+    </div>
+  </section>
+  <CTA
+    title="Let’s talk about your fleet."
+    description="Connect with the team to explore what Dipai could bring to your operations."
+    href="mailto:contact@dipai.no"
+    label="Contact the team"
+    secondary={true}
+  />
+</BaseLayout>
+<script>
+  import '../scripts/section-carousels.js';
+</script>

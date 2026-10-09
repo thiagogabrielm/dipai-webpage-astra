@@ -1,0 +1,101 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieSettings from '../components/CookieSettings.astro';
+import { allowIndexing, structuredData } from '../lib/seo';
+import theme from '../scripts/theme.js?raw';
+import '../styles/site.css';
+interface Props {
+  title: string;
+  description: string;
+  active?: string;
+  bodyClass?: string;
+  schema?: Record<string, unknown>;
+  image?: { src: string; alt: string; width: number; height: number };
+  noindex?: boolean;
+}
+const {
+  title,
+  description,
+  active,
+  bodyClass = '',
+  schema,
+  noindex = false,
+  image = {
+    src: '/assets/social-card.png',
+    alt: 'Dipai — Vessel data. Actionable insights.',
+    width: 1200,
+    height: 630,
+  },
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image.src, Astro.site).href;
+const fullTitle = Astro.url.pathname === '/' ? title : `${title} — Dipai`;
+const graph = structuredData({
+  site: Astro.site!,
+  canonical,
+  title,
+  description,
+  image: imageUrl,
+  article: schema,
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script is:inline set:html={theme} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1c2b39" />
+    <title>{fullTitle}</title>
+    <meta
+      name="robots"
+      content={
+        !allowIndexing || noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'
+      }
+    />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" />
+    <meta property="og:type" content={schema ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Dipai" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={image.alt} />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={image.alt} />
+    {schema?.datePublished && (
+      <meta property="article:published_time" content={String(schema.datePublished)} />
+    )}
+    {!noindex && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(graph).replace(/</g, '\\u003c')}
+      />
+    )}
+    <slot name="head" />
+  </head>
+  <body class:list={[bodyClass, 'network-footer-page']} data-card-border-mode="proximity">
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <Header active={active} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <CookieSettings />
+    <script>
+      import '../scripts/site.js';
+    </script>
+  </body>
+</html>

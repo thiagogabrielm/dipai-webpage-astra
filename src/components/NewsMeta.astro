@@ -1,0 +1,12 @@
+---
+import { displayDate } from '../lib/content';
+interface Props {
+  post: { category: string; date: string };
+}
+const { post } = Astro.props;
+---
+
+<div class="news-meta">
+  <span>{post.category}</span>
+  <time datetime={post.date}>{displayDate(post.date)}</time>
+</div>

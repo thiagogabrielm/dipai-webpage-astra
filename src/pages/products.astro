@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductExplorer from '../components/ProductExplorer.astro';
+---
+
+<BaseLayout
+  title="Products | Digital Fleet Platform"
+  description="Explore Dipai’s Digital Fleet Platform: vessel status, operations, consumption, maintenance, SEEMP, efficiency and data access."
+  bodyClass="products-page"
+  active="products"
+>
+  <section class="products-hero">
+    <div class="wrap products-hero-grid">
+      <div class="products-hero-copy">
+        <p class="eyebrow">
+          <span class="dot"></span>Digital Fleet Platform
+        </p>
+        <h1>
+          Your fleet.
+          <br />
+          One clear picture.
+        </h1>
+        <p>
+          Bring vessel data, AI and advanced analytics together. Turn operational insight into
+          better decisions on fuel, emissions and maintenance.
+        </p>
+        <div class="actions">
+          <a class="button demo-button" href="/book-demo/">
+            Book a demo
+          </a>
+          <a class="text-button" href="#platform">
+            Explore the modules <span aria-hidden="true">›</span>
+          </a>
+        </div>
+      </div>
+      <figure class="products-hero-visual">
+        <div class="products-screen-label">
+          <span class="dot"></span>From onboard signals to fleet-wide insight
+        </div>
+        <img
+          alt="Existing vessel-status view showing a vessel map and operational measurements."
+          decoding="async"
+          fetchpriority="high"
+          height="1013"
+          loading="eager"
+          src="/assets/products/vessel-status.webp"
+          width="1800"
+        />
+        <figcaption>Connected insight for crew and shore teams.</figcaption>
+      </figure>
+    </div>
+  </section>
+  <ProductExplorer />
+  <section class="products-foundation dark section">
+    <div class="wrap">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">
+            <span class="dot"></span>A shared data foundation
+          </p>
+          <h2>
+            Start with your fleet.
+            <br />
+            Build from its data.
+          </h2>
+        </div>
+        <p>
+          Bring vessels onboard together, even when their data maturity differs. Deepen the analysis
+          as more data becomes available.
+        </p>
+      </div>
+      <div class="products-data-grid">
+        <article>
+          <span class="data-type">Connected vessels</span>
+          <h3>High-frequency insight.</h3>
+          <p>
+            Sensor integration supports the full platform, combining data from engines, thrusters,
+            auxiliary equipment and navigation systems for detailed analysis.
+          </p>
+        </article>
+        <article>
+          <span class="data-type">Report-based vessels</span>
+          <h3>A fleet-wide starting point.</h3>
+          <p>
+            Manual reports, weather and third-party AIS data support a higher-level operational
+            view. Add sensor integration as your fleet’s digital capabilities develop.
+          </p>
+        </article>
+      </div>
+      <div class="products-data-note">
+        <span class="dot"></span>
+        <p>
+          You retain ownership of your data. Dipai supports vessel-to-cloud and secure
+          cloud-to-cloud integration, with data sharing to your cloud or chosen third parties on
+          request.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="cta-title" class="products-next closing-cta neural-cta">
+    <div class="wrap closing-content products-next-grid">
+      <div>
+        <h2 id="cta-title">
+          Let’s find the right fit
+          <br />
+          for your fleet.
+        </h2>
+        <p>
+          Explore the modules, data connections and operational questions that matter to your team.
+        </p>
+        <div class="actions">
+          <a class="button demo-button" href="/book-demo/">
+            Book a demo
+          </a>
+          <a class="text-button" href="/use-cases/">
+            Explore use cases <span aria-hidden="true">›</span>
+          </a>
+        </div>
+      </div>
+      <div class="products-next-links">
+        <a class="text-button" href="/faq/">
+          Your platform questions, answered <span aria-hidden="true">›</span>
+        </a>
+        <p>Data integration, getting started and working with Dipai.</p>
+        <a class="text-button" href="/contact/">
+          Talk to our team <span aria-hidden="true">›</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<script>
+  import '../scripts/products-page.js';
+</script>

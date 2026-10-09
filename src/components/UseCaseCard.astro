@@ -1,0 +1,73 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  item: CollectionEntry<'useCases'>['data'];
+  heading?: 'h2' | 'h3';
+  filterable?: boolean;
+  carouselOnly?: boolean;
+}
+const { item, heading: Heading = 'h3', filterable = false, carouselOnly = false } = Astro.props;
+const v = item.card_visual;
+---
+
+<a
+  class="case-card use-case-card"
+  href={`/use-cases/${item.slug}/`}
+  data-use-case={filterable ? true : undefined}
+  data-category={filterable ? item.category : undefined}
+  data-carousel-only={carouselOnly ? true : undefined}
+  hidden={carouselOnly}
+>
+  <div
+    class:list={[
+      'use-case-visual',
+      `use-case-visual--${v.kind}`,
+      `use-case-visual--${v.tone}`,
+      { 'use-case-visual--signal': v.signal },
+    ]}
+  >
+    <p class="use-case-visual-label">{v.label}</p>
+    {v.kind === 'metric' ? (
+      <p class="use-case-number">
+        {v.prefix && <span class="use-case-number-prefix">{v.prefix}</span>}
+        {v.value}
+        <span class="use-case-number-unit">{v.unit}</span>
+      </p>
+    ) : (
+      <p class="use-case-visual-words">
+        <span>
+          {v.words[0]}
+          {v.kind === 'context' && (
+            <span class="use-case-context-arrow" aria-hidden="true">
+              →
+            </span>
+          )}
+        </span>
+        <span>{v.words[1]}</span>
+      </p>
+    )}
+    <div class="use-case-visual-footer">
+      {v.kind === 'metric' ? (
+        <p class="use-case-visual-support">
+          <strong>{v.support_value}</strong>
+          <span>{v.support_label}</span>
+        </p>
+      ) : (
+        <div class="use-case-visual-tags">
+          {v.tags.map((tag) => (
+            <span>{tag}</span>
+          ))}
+        </div>
+      )}
+      <p class="use-case-visual-basis">{v.basis}</p>
+    </div>
+  </div>
+  <div class="use-case-card-copy">
+    <span class="use-case-category">{item.category}</span>
+    <Heading>{item.title}</Heading>
+    <p>{item.summary}</p>
+    <span class="text-button">
+      Read the use case <span aria-hidden="true">›</span>
+    </span>
+  </div>
+</a>

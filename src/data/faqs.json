@@ -1,0 +1,93 @@
+[
+  {
+    "group": "getting-started",
+    "id": "audience",
+    "question": "Who is the platform built for?",
+    "answer": "Dipai is built for vessel crews and onshore teams, giving them a shared view of operations, fuel efficiency, emissions and machinery condition.",
+    "featured": true
+  },
+  {
+    "group": "getting-started",
+    "id": "modules",
+    "question": "Can we start with a single module?",
+    "answer": "Yes. The platform is modular, so you can choose the capabilities that fit your fleet’s needs and available data, then expand over time.",
+    "featured": true
+  },
+  {
+    "group": "getting-started",
+    "id": "sensors",
+    "question": "Do all our vessels need sensor integration?",
+    "answer": "No. Vessels can start with manual reports, weather and AIS data. Sensor integration enables more detailed analysis and additional platform capabilities.",
+    "featured": true
+  },
+  {
+    "group": "getting-started",
+    "id": "integration",
+    "question": "How does Dipai connect to our vessel data?",
+    "answer": "Dipai can connect to an existing data collection provider through an API or install its data collection software on your onboard server.",
+    "featured": true
+  },
+  {
+    "group": "data-and-access",
+    "id": "manual-entry",
+    "question": "Will crews need to enter the same information twice?",
+    "answer": "Existing reporting integrations, such as UniSea, can let Dipai reuse information already recorded by the crew, avoiding duplicate entry in the Dipai platform.",
+    "featured": false
+  },
+  {
+    "group": "data-and-access",
+    "id": "ownership",
+    "question": "Who owns our vessel data?",
+    "answer": "You retain full ownership. Dipai supports sharing your data with your own cloud environment or selected third parties.",
+    "featured": false
+  },
+  {
+    "group": "data-and-access",
+    "id": "connectivity",
+    "question": "What happens if the vessel loses connectivity?",
+    "answer": "With Dipai’s onboard data collection software, data can be buffered locally and transmitted when connectivity returns.",
+    "featured": false
+  },
+  {
+    "group": "data-and-access",
+    "id": "equipment-control",
+    "question": "Does Dipai control equipment onboard?",
+    "answer": "No. The onboard integration collects data for analysis; it does not send control commands back to the vessel’s automation or power management systems.",
+    "featured": false
+  },
+  {
+    "group": "insights-and-reporting",
+    "id": "fuel",
+    "question": "How does Dipai help reduce fuel consumption?",
+    "answer": "Dipai analyses operating modes, engine configurations, sailing speed and vessel performance to identify opportunities for more efficient operations.",
+    "featured": false
+  },
+  {
+    "group": "insights-and-reporting",
+    "id": "benchmarking",
+    "question": "How much historical data is needed for benchmarking?",
+    "answer": "Dynamic fuel-efficiency benchmarking typically requires one to two quarters of historical data.",
+    "featured": false
+  },
+  {
+    "group": "insights-and-reporting",
+    "id": "maintenance",
+    "question": "How does Dipai support maintenance decisions?",
+    "answer": "Dipai analyses machinery loads, condition measurements and engine performance tests to identify deviations and support earlier investigation.",
+    "featured": false
+  },
+  {
+    "group": "insights-and-reporting",
+    "id": "cleaning",
+    "question": "Can Dipai measure the impact of hull or propeller cleaning?",
+    "answer": "Yes. The platform compares performance before and after maintenance, accounting for factors such as operating mode, draft and weather.",
+    "featured": false
+  },
+  {
+    "group": "insights-and-reporting",
+    "id": "reporting",
+    "question": "How does Dipai support SEEMP and emissions reporting?",
+    "answer": "Dipai uses historical performance to support SEEMP targets and follow-up. It also prepares data and documentation for EU/UK MRV and IMO DCS reporting.",
+    "featured": false
+  }
+]

@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQItem from '../components/FAQItem.astro';
+import faqs from '../data/faqs.json';
+import CTA from '../components/CTA.astro';
+---
+
+<BaseLayout
+  title="Frequently asked questions"
+  description="Answers about Dipai’s platform, vessel data integration, ownership, operational insights and reporting."
+  bodyClass="support-page faq-page"
+  active="faq"
+>
+  <header class="support-intro wrap">
+    <h1>Your questions answered.</h1>
+    <p>Getting started, connecting your data and making the most of Dipai.</p>
+  </header>
+  <div class="faq-page-layout faq--contained wrap">
+    <aside class="faq-topics">
+      <p class="support-label">On this page</p>
+      <div class="faq-topic-links">
+        <a href="#getting-started">Getting started</a>
+        <a href="#data-and-access">Data &amp; integration</a>
+        <a href="#insights-and-reporting">Insights &amp; reporting</a>
+      </div>
+    </aside>
+    <div>
+      <section aria-labelledby="getting-started-heading" class="faq-topic" id="getting-started">
+        <h2 id="getting-started-heading">Getting started</h2>
+        <div class="faq-list">
+          {faqs
+            .filter((f) => f.group === 'getting-started')
+            .map((item) => (
+              <FAQItem item={item} />
+            ))}
+        </div>
+      </section>
+      <section aria-labelledby="data-and-access-heading" class="faq-topic" id="data-and-access">
+        <h2 id="data-and-access-heading">Data &amp; integration</h2>
+        <div class="faq-list">
+          {faqs
+            .filter((f) => f.group === 'data-and-access')
+            .map((item) => (
+              <FAQItem item={item} />
+            ))}
+        </div>
+      </section>
+      <section
+        aria-labelledby="insights-and-reporting-heading"
+        class="faq-topic"
+        id="insights-and-reporting"
+      >
+        <h2 id="insights-and-reporting-heading">Insights &amp; reporting</h2>
+        <div class="faq-list">
+          {faqs
+            .filter((f) => f.group === 'insights-and-reporting')
+            .map((item) => (
+              <FAQItem item={item} />
+            ))}
+        </div>
+      </section>
+    </div>
+  </div>
+  <CTA
+    title="Still have a question?"
+    description="We’re here to help."
+    href="/contact/"
+    label="Contact us"
+    secondary={false}
+  />
+</BaseLayout>
+<script>
+  import '../scripts/support.js';
+</script>

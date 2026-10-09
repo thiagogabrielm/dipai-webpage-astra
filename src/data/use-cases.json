@@ -1,0 +1,390 @@
+[
+  {
+    "slug": "operational-mode-detection",
+    "title": "Give every vessel signal its operational context",
+    "category": "Operations",
+    "source_slides": [31],
+    "summary": "Automatically identify transit, dynamic positioning, standby and port activity to build a useful foundation for fuel analysis.",
+    "cover": "operational-modes.webp",
+    "cover_alt": "Dipai vessel operation timeline showing operating modes, duration, fuel use and baseline deviation.",
+    "highlight": "Automatic mode detection",
+    "highlight_label": "A consistent foundation for vessel analysis",
+    "intro": "A fuel reading becomes more useful when it can be connected to what the vessel was doing. Operational mode detection brings that context into the data foundation, so crews and onshore teams can review performance by activity.",
+    "sections": [
+      {
+        "heading": "Start with the operation",
+        "paragraphs": [
+          "Vessel activity changes throughout a voyage. Transit, dynamic positioning, standby and port stays place different demands on the vessel. Reviewing those periods together can hide the operational context behind fuel consumption."
+        ]
+      },
+      {
+        "heading": "Turn sensor data into an operational timeline",
+        "paragraphs": [
+          "Dipai trains a model on vessel sensor data to detect operating modes automatically. The resulting timeline connects each activity to its start and end time, duration and fuel use.",
+          "Fuel reporting uses flowmeters and engine load curves. In the example, the timeline also shows fuel-baseline deviation for individual periods, making it easier to identify which activities warrant a closer look."
+        ]
+      },
+      {
+        "heading": "Build analysis on a consistent foundation",
+        "paragraphs": [
+          "The value is a contextualised data foundation for analytics and insights. It gives the crew and onshore team a shared view of the vessel’s activities before moving on to questions about engine configuration, speed or maintenance."
+        ]
+      }
+    ],
+    "figures": [
+      {
+        "src": "operational-modes.webp",
+        "alt": "Operating mode timeline with transit, DP, standby and port entries.",
+        "caption": "Operational timeline linking vessel activity, duration, fuel consumption and deviation from the baseline."
+      }
+    ],
+    "outcome": "An automatic, contextualised view of vessel activity that supports fuel reporting and further analysis.",
+    "evidence_note": "Application focus: operational context and an accurate foundation for fuel reporting and analysis.",
+    "number": 1,
+    "card_visual": {
+      "kind": "context",
+      "tone": "blue",
+      "label": "Automatic mode detection",
+      "words": ["Signal", "Context"],
+      "tags": ["Transit", "DP", "Standby", "Port"],
+      "basis": "Connect vessel activity to every reading."
+    }
+  },
+  {
+    "slug": "engine-configuration",
+    "title": "Use the engine configuration the voyage needs",
+    "category": "Fuel efficiency",
+    "source_slides": [32, 33, 34],
+    "summary": "How an offshore support vessel adjusted its generator use during a 4,588-nautical-mile transit from Norway to Trinidad and Tobago.",
+    "cover": "ocean-transit-engines.webp",
+    "cover_alt": "Vessel timeline comparing propulsion power, vessel speed and generator load during the ocean transit.",
+    "highlight": "≈63.7 t",
+    "highlight_label": "Estimated MDO saving against continuous two-generator operation",
+    "intro": "On an approximately 19-day ocean transit, the sustainability department worked with the captain to adjust the number of running diesel generators. Dipai’s analysis connected engine configuration to the power the operation required.",
+    "metrics": [
+      {
+        "value": "4,588 nm",
+        "label": "Norway to Trinidad and Tobago"
+      },
+      {
+        "value": "≈63.7 t",
+        "label": "Estimated MDO saving"
+      },
+      {
+        "value": "≈204.1 t",
+        "label": "Estimated CO₂ saving"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Match generator use to demand",
+        "paragraphs": [
+          "Running additional generators at a low load can create an opportunity to improve fuel efficiency. Dipai’s engine optimisation model uses machine learning to indicate a more favourable configuration for the operation.",
+          "A separate training example in the presentation compares three generators at about 40% load with two at about 60%. For that operating point, the indicated fuel-saving potential is around 61.4 litres per hour."
+        ]
+      },
+      {
+        "heading": "Apply the insight during the voyage",
+        "paragraphs": [
+          "For the Norway–Trinidad and Tobago transit, the captain and sustainability department adjusted generator use together. The vessel ran on one diesel generator for 38% of the time and on two for the remaining 62%.",
+          "The voyage consumed 351.7 tonnes of marine diesel oil (MDO). The comparison includes the speed, propulsion demand and environmental conditions recorded for the different configurations."
+        ]
+      },
+      {
+        "heading": "Assess the result against a stated baseline",
+        "paragraphs": [
+          "Compared with running two diesel generators for the entire transit, the presentation estimates savings of approximately 63.7 tonnes of MDO, 204.1 tonnes of CO₂ and 305 generator running hours.",
+          "These are estimates for this voyage against that defined alternative. They show how crews and onshore teams can use operational data to make engine-configuration decisions and assess their effect."
+        ]
+      }
+    ],
+    "figures": [
+      {
+        "src": "ocean-transit-engines.webp",
+        "alt": "Vessel speed, propulsion power and generator load plotted over the ocean transit.",
+        "caption": "The voyage timeline puts generator use alongside propulsion power and vessel speed."
+      },
+      {
+        "src": "ocean-transit-route.webp",
+        "alt": "Route from Norway across the Atlantic to Trinidad and Tobago.",
+        "caption": "The approximately 19-day, 4,588-nautical-mile transit from Norway to Trinidad and Tobago."
+      },
+      {
+        "src": "engine-configuration.webp",
+        "alt": "Separate model-training example comparing engine loads and fuel rates.",
+        "caption": "Separate training example: the model indicates approximately 61.4 L/h of saving potential by moving from three generators to two."
+      }
+    ],
+    "outcome": "≈305 fewer generator running hours, alongside the estimated fuel and CO₂ savings.",
+    "evidence_note": "Voyage estimates compare the observed one-/two-generator mix with running two generators throughout. The 61.4 L/h training example is a separate operating case.",
+    "number": 2,
+    "card_visual": {
+      "kind": "metric",
+      "tone": "navy",
+      "label": "Estimated MDO saving",
+      "prefix": "≈",
+      "value": "63.7",
+      "unit": "t",
+      "support_value": "≈204.1 t",
+      "support_label": "CO₂ saved",
+      "basis": "Compared with continuous two-generator operation."
+    }
+  },
+  {
+    "slug": "vessel-eco-speed",
+    "title": "Adjust eco speed to the operation ahead",
+    "category": "Fuel efficiency",
+    "source_slides": [35],
+    "summary": "A change from 12.5 to 8.7 knots reduced fuel consumption per nautical mile by about 28% and shortened waiting before operations.",
+    "cover": "eco-speed.webp",
+    "cover_alt": "Dipai fuel-consumption-versus-speed chart comparing quarterly performance curves.",
+    "highlight": "≈28%",
+    "highlight_label": "Less fuel per nautical mile in the Q4 2025 case",
+    "intro": "The vessel was sailing at a charter-required 12.5 knots, consuming unnecessary fuel and then spending a long time waiting before operations. Speed analysis provided a basis for discussing a different sailing speed with the client.",
+    "metrics": [
+      {
+        "value": "12.5 → 8.7 kn",
+        "label": "Change in sailing speed"
+      },
+      {
+        "value": "≈28%",
+        "label": "Lower fuel use per nautical mile"
+      },
+      {
+        "value": "≈20–24 h",
+        "label": "Less waiting per operation"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Look beyond transit speed alone",
+        "paragraphs": [
+          "An arrival earlier than the operation requires can mean extra fuel use followed by a longer wait. In this case, the existing charter speed requirement was considered alongside the time spent waiting before work began."
+        ]
+      },
+      {
+        "heading": "Use vessel performance to support the discussion",
+        "paragraphs": [
+          "Dipai’s Speed Optimization Model identifies an optimal eco speed each quarter. The analysis relates fuel consumption per nautical mile to sailing speed, providing a data-driven basis for a recommendation to the client.",
+          "The operating decision in this case was to reduce sailing speed from 12.5 to 8.7 knots. The quarterly performance curves provide context for assessing that decision; the selected speed and each quarter’s modelled optimum are shown separately."
+        ]
+      },
+      {
+        "heading": "Reduce fuel use and pre-operation waiting",
+        "paragraphs": [
+          "For Q4 2025, the presentation reports an approximately 28% reduction in fuel consumption per nautical mile and about 20–24 fewer waiting hours per operation.",
+          "The case connects speed selection to the operation that follows the voyage, allowing vessel performance and the client’s requirements to be considered together."
+        ]
+      }
+    ],
+    "figures": [
+      {
+        "src": "eco-speed.webp",
+        "alt": "Fuel consumption per nautical mile plotted against speed for Q2, Q3 and Q4 2025, with 8.7 knots selected.",
+        "caption": "Quarterly fuel-consumption curves with the chosen speed of 8.7 knots. The selected speed is distinct from the modelled optimum for each quarter."
+      }
+    ],
+    "outcome": "Lower fuel use per nautical mile and less time waiting before the next operation.",
+    "evidence_note": "Results reported for Q4 2025, following the change in sailing speed from 12.5 to 8.7 knots.",
+    "number": 3,
+    "card_visual": {
+      "kind": "metric",
+      "tone": "blue",
+      "label": "Less fuel per nautical mile",
+      "prefix": "≈",
+      "value": "28",
+      "unit": "%",
+      "support_value": "≈20–24 h",
+      "support_label": "less waiting per operation",
+      "basis": "Q4 2025 · Sailing speed adjusted from 12.5 to 8.7 kn."
+    }
+  },
+  {
+    "slug": "hydrodynamic-performance",
+    "title": "Measure the effect of hull and propeller maintenance",
+    "category": "Vessel performance",
+    "source_slides": [36, 37],
+    "summary": "Compare like-for-like propulsion performance before and after maintenance, with a reported 36.9% reduction in power required at 10.1 knots.",
+    "cover": "hydrodynamic-comparison.webp",
+    "cover_alt": "Filtered before-and-after propulsion-power curves showing a 36.9% reduction at 10.1 knots.",
+    "highlight": "36.9%",
+    "highlight_label": "Less propulsion power required at 10.1 knots",
+    "intro": "Changes in speed, operating mode and weather can obscure the effect of maintenance. Dipai uses high-frequency vessel data and regression models to compare hydrodynamic performance under comparable conditions.",
+    "metrics": [
+      {
+        "value": "36.9%",
+        "label": "Reduction in required propulsion power"
+      },
+      {
+        "value": "10.1 kn",
+        "label": "Selected comparison speed"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Put performance trends in context",
+        "paragraphs": [
+          "Historical monthly or quarterly performance trends can show how the vessel changes over time. Overlaying maintenance and operational events helps crews and technical teams connect a change in performance to the events around it.",
+          "The longer-term aim is to estimate an appropriate hull and propeller fouling-removal interval for each vessel."
+        ]
+      },
+      {
+        "heading": "Compare equivalent operating conditions",
+        "paragraphs": [
+          "The before-and-after analysis uses high-frequency sensor data with regression models. Filtering helps keep the comparison consistent across operating modes, draft, region and weather.",
+          "The example shown uses selected transit modes, the South Pacific Ocean region and moderate weather. At the selected speed of 10.1 knots, the fitted propulsion-power requirement changes from 2,177.9 kW before the event to 1,373.4 kW after it."
+        ]
+      },
+      {
+        "heading": "Quantify the change in power demand",
+        "paragraphs": [
+          "The filtered comparison reports a 36.9% reduction in propulsion power required to maintain 10.1 knots. The result measures power demand at that defined operating point.",
+          "Together, the trend view and event comparison give technical teams evidence for reviewing maintenance impact and planning future hull and propeller work."
+        ]
+      }
+    ],
+    "figures": [
+      {
+        "src": "hydrodynamic-comparison.webp",
+        "alt": "Before-and-after comparison: 2,177.9 kW versus 1,373.4 kW at 10.1 knots.",
+        "caption": "The filtered comparison behind the reported 36.9% reduction in required propulsion power at 10.1 knots."
+      },
+      {
+        "src": "hydrodynamic-trend.webp",
+        "alt": "Historical hydrodynamic performance trend with a dry-dock event overlaid.",
+        "caption": "A separate trend view overlays a dry-dock event on the quarterly performance history; its selected speed is 9.3 knots."
+      }
+    ],
+    "outcome": "A quantified view of maintenance impact using a consistent operating-point comparison.",
+    "evidence_note": "The 36.9% figure concerns propulsion power at 10.1 knots under the selected filters. The historical trend view uses a different selected speed.",
+    "number": 4,
+    "card_visual": {
+      "kind": "metric",
+      "tone": "blue",
+      "label": "Less propulsion power required",
+      "value": "36.9",
+      "unit": "%",
+      "support_value": "10.1 kn",
+      "support_label": "comparison speed",
+      "basis": "Measured before and after hull and propeller maintenance."
+    }
+  },
+  {
+    "slug": "engine-condition-monitoring",
+    "title": "Recognise engine deterioration before a shutdown",
+    "category": "Maintenance",
+    "source_slides": [38],
+    "summary": "Rising specific fuel oil consumption preceded a crank-bearing failure, showing the value of investigating early deviation alerts.",
+    "cover": "engine-condition.webp",
+    "cover_alt": "Engine condition dashboard showing monthly SFOC deviation and engine load before a shutdown.",
+    "highlight": "8.7% → 33.5%",
+    "highlight_label": "Reported SFOC increase from April to August 2025",
+    "intro": "A progressive rise in specific fuel oil consumption (SFOC) indicated engine degradation months before a failure. This retrospective case shows how condition trends can give a technical team an earlier reason to investigate.",
+    "sections": [
+      {
+        "heading": "Track condition against the baseline",
+        "paragraphs": [
+          "Dipai monitors critical condition parameters to identify emerging engine faults. SFOC deviation is tracked against monthly baselines, with automated alerts drawing attention to changes in engine performance.",
+          "In the presented case, the reported SFOC increase rose from 8.7% in April 2025 to 13.8% in May, 16.8% in June, 27.4% in July and 33.5% in August."
+        ]
+      },
+      {
+        "heading": "Connect the trend to the operational event",
+        "paragraphs": [
+          "In September 2025, crank bearing number 5 failed. The engine was fully shut down until the crankshaft could be replaced.",
+          "The progressive change in fuel performance was therefore visible before the failure. Reviewing the history alongside load and operating context gives technical teams a clearer picture of the deterioration."
+        ]
+      },
+      {
+        "heading": "Use an alert as a prompt to investigate",
+        "paragraphs": [
+          "The presentation identifies early deviation alerts as an opportunity to intervene before out-of-service downtime. In this retrospective case, the warning trend was visible for several months before the September failure.",
+          "The use case is the opportunity to bring investigation and maintenance decisions forward when condition trends move away from the baseline."
+        ]
+      }
+    ],
+    "figures": [
+      {
+        "src": "engine-condition.webp",
+        "alt": "DG1 SFOC and load trends leading up to an out-of-use period in September 2025.",
+        "caption": "Condition data shows deterioration before the shutdown. The dashboard plots SFOC deviation using its own sign convention; the article follows the increase magnitudes reported in the case narrative."
+      }
+    ],
+    "outcome": "An earlier opportunity to investigate progressive engine deterioration.",
+    "evidence_note": "Retrospective case: April–August 2025 deterioration followed by an engine shutdown in September. The case illustrates an earlier opportunity to intervene.",
+    "number": 5,
+    "card_visual": {
+      "kind": "metric",
+      "tone": "navy",
+      "signal": true,
+      "label": "SFOC increase by August",
+      "value": "33.5",
+      "unit": "%",
+      "support_value": "8.7%",
+      "support_label": "increase already reported in April",
+      "basis": "2025 · Deterioration ahead of a September shutdown."
+    }
+  },
+  {
+    "slug": "data-driven-seemp",
+    "title": "Connect the energy-efficiency plan to daily vessel performance",
+    "category": "Energy management",
+    "source_slides": [39],
+    "summary": "Use a Plan–Do–Check–Act cycle to turn vessel data into targets, practical measures and an ongoing review of performance.",
+    "cover": "seemp-performance.webp",
+    "cover_alt": "Dipai SEEMP performance view with targets, trends, actions and crew training.",
+    "highlight": "Plan. Do. Check. Act.",
+    "highlight_label": "A data-driven cycle for continuous improvement",
+    "intro": "An energy-efficiency plan becomes more useful when its measures can be connected to operating data. Dipai’s SEEMP workflow links planning, implementation, performance checks and follow-up in one continuous cycle.",
+    "sections": [
+      {
+        "heading": "Plan using the vessel’s data",
+        "paragraphs": [
+          "Review historical performance and set measurable targets. The planning view connects the chosen performance target to previous trends, the measures to implement and the person responsible.",
+          "The example includes engine SFOC deviation and engine-load practices, showing how a general efficiency objective can be translated into a specific operating target."
+        ]
+      },
+      {
+        "heading": "Do: put the measures into practice",
+        "paragraphs": [
+          "The workflow connects targets to practical actions. The example includes crew training and descriptions of how the performance target will be reached, with an implementation deadline and assigned responsibility."
+        ]
+      },
+      {
+        "heading": "Check actual performance",
+        "paragraphs": [
+          "The performance view compares targets with the vessel’s measured trends. It brings the previous year, the target and the current result into the same view, helping the team see where follow-up is needed."
+        ]
+      },
+      {
+        "heading": "Act on the findings",
+        "paragraphs": [
+          "The Plan–Do–Check–Act cycle returns the findings to the next round of decisions. Measures and targets can be reviewed in light of what the vessel data shows, connecting the energy-efficiency plan with an ongoing improvement process."
+        ]
+      }
+    ],
+    "figures": [
+      {
+        "src": "seemp-planning.webp",
+        "alt": "SEEMP planning screen with a performance target, historical trend and fields for measures and responsibility.",
+        "caption": "Plan: use the historical trend to define a target, the measures to implement and responsibility."
+      },
+      {
+        "src": "seemp-performance.webp",
+        "alt": "SEEMP performance screen showing measured trends, crew training and follow-up against a target.",
+        "caption": "Check and act: review measured performance alongside the target and the measures in place."
+      }
+    ],
+    "outcome": "A shared process for setting targets, following implementation and reviewing measured performance.",
+    "evidence_note": "Application focus: connecting the Plan–Do–Check–Act cycle to measurable vessel targets, responsibilities and performance trends.",
+    "number": 6,
+    "card_visual": {
+      "kind": "cycle",
+      "tone": "blue",
+      "label": "Continuous energy improvement",
+      "words": ["Plan. Do.", "Check. Act."],
+      "tags": ["Set targets", "Take action", "Review"],
+      "basis": "One shared energy-efficiency plan."
+    }
+  }
+]

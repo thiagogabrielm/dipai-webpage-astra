@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ResponsiveImage from './ResponsiveImage.astro';
+interface Props {
+  post: CollectionEntry<'news'>['data'];
+  featured?: boolean;
+}
+const { post, featured = false } = Astro.props;
+const img = post.images[0];
+---
+
+{img ? (
+  <div class:list={['news-image', { 'news-image-contain': post.contain }]}>
+    <ResponsiveImage
+      src={'/' + img.src}
+      alt={img.alt}
+      eager={featured}
+      sizes={
+        featured
+          ? '(max-width: 900px) 90vw, (max-width: 1400px) 52vw, 700px'
+          : '(max-width: 600px) 90vw, (max-width: 900px) 44vw, (max-width: 1400px) 30vw, 410px'
+      }
+    />
+  </div>
+) : (
+  <div class="news-image news-image-editorial" aria-hidden="true">
+    <img src="/assets/dipai-logo-light.svg" alt="" loading="lazy" width="150" height="62" />
+    <span>{post.category}</span>
+    <strong>{post.date.slice(0, 4)}</strong>
+  </div>
+)}

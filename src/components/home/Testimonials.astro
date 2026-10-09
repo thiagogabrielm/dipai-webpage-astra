@@ -1,0 +1,121 @@
+---
+import quotes from '../../data/testimonials.json';
+---
+
+<section
+  aria-labelledby="focus-quotes-heading"
+  class="testimonials quote-showcase section"
+  id="testimonials-focus"
+>
+  <div class="wrap testimonial-heading quote-showcase-heading">
+    <h2 id="focus-quotes-heading">
+      Don't just take our word for it.
+      <br />
+      Hear from our customers.
+    </h2>
+  </div>
+  <div
+    aria-label="Customer stories"
+    aria-roledescription="carousel"
+    class="focus-quote-viewport"
+    role="region"
+    tabindex="0"
+  >
+    {quotes.map((q, i) => (
+      <article
+        aria-label={`${i + 1} of ${quotes.length}: ${q.name}, ${q.company}`}
+        aria-roledescription="slide"
+        class:list={['focus-quote-card', { 'is-current': i === 0 }]}
+        data-quote-index={i}
+      >
+        <div class="quote-card-top focus-quote-top">
+          <img
+            alt={q.company}
+            class={q.logoClass}
+            decoding="async"
+            height="60"
+            loading="lazy"
+            src={q.logo}
+            width="160"
+          />
+          <span aria-hidden="true" class="quote-glyph">
+            “
+          </span>
+        </div>
+        <div aria-hidden="true" class="focus-quote-art">
+          <img alt="" class={q.artClass} decoding="async" loading="lazy" src={q.logo} />
+        </div>
+        <div class="focus-quote-body">
+          <blockquote>{q.quote}</blockquote>
+          <div class="focus-quote-person">
+            <strong>{q.name}</strong>
+            <p>{q.role}</p>
+          </div>
+        </div>
+        <button
+          aria-label={`Read quote from ${q.name}`}
+          class="focus-quote-select"
+          hidden={i === 0}
+          type="button"
+        ></button>
+      </article>
+    ))}
+  </div>
+  <div
+    aria-label="Customer quotes carousel controls"
+    class="section-carousel-controls"
+    role="group"
+  >
+    <button class="motion-control" data-quote-pause type="button" aria-pressed="false" hidden>
+      Pause quotes
+    </button>
+    <button
+      aria-label="Previous customer quote"
+      class="section-carousel-arrow"
+      data-quote-prev=""
+      type="button"
+    >
+      <svg aria-hidden="true" height="22" viewBox="0 0 24 24" width="22">
+        <path
+          d="M19 12H5m6-6-6 6 6 6"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.7"
+        ></path>
+      </svg>
+    </button>
+    <div class="section-carousel-positions">
+      <div aria-label="Choose a customer quote" class="section-carousel-dots">
+        {quotes.map((_, i) => (
+          <button
+            aria-current={i === 0}
+            aria-label={`Customer quote ${i + 1}`}
+            class="section-carousel-dot"
+            data-quote-dot={i}
+            type="button"
+          ></button>
+        ))}
+      </div>
+    </div>
+    <button
+      aria-label="Next customer quote"
+      class="section-carousel-arrow"
+      data-quote-next=""
+      type="button"
+    >
+      <svg aria-hidden="true" height="22" viewBox="0 0 24 24" width="22">
+        <path
+          d="M5 12h14m-6-6 6 6-6 6"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.7"
+        ></path>
+      </svg>
+    </button>
+  </div>
+  <p aria-atomic="true" aria-live="polite" class="focus-quote-status"></p>
+</section>

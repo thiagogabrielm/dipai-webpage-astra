@@ -1,0 +1,63 @@
+---
+import ResponsiveImage from './ResponsiveImage.astro';
+interface Props {
+  member: {
+    name: string;
+    role: string;
+    image: string;
+    email?: string;
+    phone?: string;
+    linkedin?: string;
+    bio?: string;
+  };
+  board?: boolean;
+}
+const { member, board = false } = Astro.props;
+---
+
+<li class:list={['team-person', 'team-frame', { 'team-person--board': board }]}>
+  <div class="team-person-photo">
+    {board ? (
+      <div class="team-board-portrait">
+        <ResponsiveImage
+          src={`/assets/team/${member.image}`}
+          alt={member.name}
+          sizes="(max-width: 600px) 60vw, (max-width: 900px) 32vw, 240px"
+          widths={[240, 480, 720]}
+        />
+      </div>
+    ) : (
+      <ResponsiveImage
+        src={`/assets/team/${member.image}`}
+        alt={member.name}
+        sizes="(max-width: 600px) 90vw, (max-width: 900px) 44vw, (max-width: 1400px) 22vw, 300px"
+        widths={[300, 600, 900]}
+      />
+    )}
+  </div>
+  <div class="team-person-copy">
+    <h3>{member.name}</h3>
+    <p class="team-person-role">{member.role}</p>
+    {member.email && (
+      <div class="team-person-contact">
+        <a href={`mailto:${member.email}`}>
+          {member.email}
+          <span aria-hidden="true">›</span>
+        </a>
+        {member.phone && <a href={`tel:${member.phone.replaceAll(' ', '')}`}>{member.phone}</a>}
+      </div>
+    )}
+    {member.bio && <p class="team-person-bio">{member.bio}</p>}
+    {member.linkedin && (
+      <a
+        class="text-button team-person-linkedin"
+        href={member.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${member.name} on LinkedIn`}
+      >
+        LinkedIn <span aria-hidden="true">›</span>
+      </a>
+    )}
+  </div>
+</li>

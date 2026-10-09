@@ -1,0 +1,15 @@
+<!-- created by AI -->
+<svg xmlns="http://www.w3.org/2000/svg">
+  <!-- Tint monochrome partner logos to exact Dipai navy while preserving their alpha. -->
+  <filter id="navy" color-interpolation-filters="sRGB">
+    <feFlood flood-color="#1c2b39" result="navy"/>
+    <feComposite in="navy" in2="SourceGraphic" operator="in"/>
+  </filter>
+  <!-- Remove white ink before tinting the outlined Østensjø flag, retaining its symbol. -->
+  <filter id="navy-ink" color-interpolation-filters="sRGB">
+    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.2126 -0.7152 -0.0722 0 1" result="ink"/>
+    <feComposite in="ink" in2="SourceGraphic" operator="in" result="ink-alpha"/>
+    <feFlood flood-color="#1c2b39"/>
+    <feComposite in2="ink-alpha" operator="in"/>
+  </filter>
+</svg>

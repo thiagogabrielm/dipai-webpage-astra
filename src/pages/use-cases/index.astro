@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import UseCaseCard from '../../components/UseCaseCard.astro';
+import { useCases } from '../../lib/content';
+const cases = await useCases();
+const categories = ['All', ...new Set(cases.map((c) => c.category))];
+---
+
+<BaseLayout
+  title="Use cases"
+  description="Explore Dipai use cases for vessel operations, fuel efficiency, hydrodynamic performance, engine condition and data-driven SEEMP."
+  active="use-cases"
+  bodyClass="use-cases-page"
+>
+  <header class="use-case-intro wrap">
+    <h1>
+      From vessel data
+      <br />
+      to better decisions.
+    </h1>
+    <p>
+      Explore how operational data can support fuel efficiency, vessel performance and maintenance.
+    </p>
+  </header>
+  <section class="use-case-library wrap" aria-label="Explore use cases">
+    <div class="use-case-toolbar">
+      <div class="use-case-filters" role="group" aria-label="Filter use cases by topic" hidden>
+        {categories.map((c) => (
+          <button type="button" data-use-filter={c} aria-pressed={c === 'All'}>
+            {c === 'All' ? 'All use cases' : c}
+          </button>
+        ))}
+      </div>
+      <p class="use-case-count" role="status" aria-live="polite">
+        {cases.length} use cases
+      </p>
+    </div>
+    <div class="use-case-grid">
+      {cases.map((item) => (
+        <UseCaseCard item={item} heading="h2" filterable />
+      ))}
+    </div>
+  </section>
+  <CTA
+    title="What could your vessel data reveal?"
+    description="Explore the opportunities for your fleet with the Dipai team."
+  />
+</BaseLayout>
+<script>
+  import { mountFilters } from '../../scripts/filters.js';
+  mountFilters({
+    container: '.use-case-filters',
+    buttonAttribute: 'data-use-filter',
+    itemSelector: '[data-use-case]',
+    countSelector: '.use-case-count',
+    noun: 'use case',
+  });
+</script>

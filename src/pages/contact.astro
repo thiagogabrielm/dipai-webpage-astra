@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact the Dipai team at support@dipai.no with questions about the platform or your vessel data."
+  bodyClass="support-page contact-page"
+  active="contact"
+>
+  <header class="support-intro wrap">
+    <h1>Let’s talk.</h1>
+    <p>Do you have questions about Dipai, your vessel data or the platform? Get in touch.</p>
+  </header>
+  <section aria-labelledby="contact-form-title" class="contact-layout wrap">
+    <div class="contact-copy">
+      <h2>How can we help?</h2>
+      <p>
+        Tell us what you need and give us a little context so we can point you in the right
+        direction.
+      </p>
+      <a class="contact-email" href="mailto:support@dipai.no">
+        support@dipai.no
+      </a>
+    </div>
+    <div class="contact-form-card">
+      <h2 id="contact-form-title">Write to us</h2>
+      <form action="/api/enquiries" id="contact-form" method="post">
+        <label aria-hidden="true" class="enquiry-trap">
+          Leave this field empty
+          <input autocomplete="off" name="website" tabindex="-1" />
+        </label>
+        <label for="contact-name">
+          Name
+          <input autocomplete="name" id="contact-name" maxlength="100" name="name" required="" />
+        </label>
+        <label for="contact-email">
+          Email
+          <input
+            autocomplete="email"
+            id="contact-email"
+            maxlength="254"
+            name="email"
+            required=""
+            type="email"
+          />
+        </label>
+        <label for="contact-message">
+          Message
+          <textarea
+            id="contact-message"
+            maxlength="4000"
+            name="message"
+            required=""
+            rows="6"
+          ></textarea>
+        </label>
+        <p class="contact-form-note" id="contact-form-note">
+          Send your message directly to the Dipai team. We’ll reply by email.
+        </p>
+        <p aria-atomic="true" aria-live="polite" data-form-status="" hidden="" role="status"></p>
+        <button aria-describedby="contact-form-note" class="button" disabled="" type="submit">
+          Send message
+        </button>
+      </form>
+      <noscript>
+        <p>Please enable JavaScript to send this form, or contact support@dipai.no.</p>
+      </noscript>
+      <div hidden="" id="contact-result">
+        <h2 tabindex="-1">Thank you for getting in touch.</h2>
+        <p>Your message has been sent. The Dipai team will reply by email.</p>
+      </div>
+    </div>
+  </section>
+  <CTA
+    title="Looking for a quick answer?"
+    description=""
+    href="/faq/"
+    label="Explore our FAQs"
+    secondary={false}
+  />
+</BaseLayout>
+<script>
+  import { mountEnquiryForm } from '../scripts/enquiry-form.js';
+  mountEnquiryForm('contact');
+</script>

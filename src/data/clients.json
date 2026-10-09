@@ -1,0 +1,61 @@
+[
+  { "name": "DOF", "url": "https://www.dof.com/", "logo": "dof.webp", "width": 367, "height": 180 },
+  {
+    "name": "Sølvtrans",
+    "url": "https://www.solvtrans.no/",
+    "logo": "solvtrans.webp",
+    "width": 257,
+    "height": 159
+  },
+  {
+    "name": "Solstad Offshore",
+    "url": "https://www.solstad.com/",
+    "logo": "solstad.webp",
+    "width": 440,
+    "height": 128
+  },
+  {
+    "name": "VARD",
+    "url": "https://www.vard.com/",
+    "logo": "vard.svg",
+    "width": 136,
+    "height": 30
+  },
+  {
+    "name": "Bower",
+    "url": "https://www.bower.no/",
+    "logo": "bower.svg",
+    "width": 185,
+    "height": 24
+  },
+  {
+    "name": "Innovation Norway",
+    "url": "https://en.innovasjonnorge.no/",
+    "logo": "innovation-norway.svg",
+    "width": 512,
+    "height": 193,
+    "ribbon": false
+  },
+  {
+    "name": "Østensjø Rederi",
+    "url": "https://ostensjo.no/",
+    "logo": "ostensjo.svg",
+    "width": 216,
+    "height": 40
+  },
+  {
+    "name": "North Sea Shipping",
+    "url": "https://www.northsea.no/",
+    "logo": "north-sea-official.webp",
+    "width": 529,
+    "height": 138,
+    "cropped": true
+  },
+  {
+    "name": "Island Offshore",
+    "url": "https://www.islandoffshore.com/",
+    "logo": "island-offshore.webp",
+    "width": 500,
+    "height": 306
+  }
+]

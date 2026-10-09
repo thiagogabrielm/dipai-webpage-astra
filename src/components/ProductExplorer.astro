@@ -1,0 +1,57 @@
+---
+import modules from '../data/modules.json';
+import ModuleIcon from './ModuleIcon.astro';
+---
+
+<section class="products-explorer wrap" id="platform" aria-label="Platform capabilities">
+  <div class="products-pin">
+    <div class="products-explorer-layout">
+      <div class="module-sidebar-track">
+        <nav class="module-sidebar" aria-label="Fleet Platform modules">
+          {modules.map((m) => (
+            <a class="module-nav-link" href={`#module-${m.slug}`} id={`tab-${m.slug}`}>
+              <ModuleIcon icon={m.icon} />
+              <span>{m.name}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
+      <div class="module-panels">
+        {modules.map((m, i) => (
+          <article
+            class="module-panel"
+            id={`module-${m.slug}`}
+            aria-labelledby={`heading-${m.slug}`}
+          >
+            <div class="module-copy">
+              <div class="module-meta">
+                <span class="module-name-pill">
+                  <ModuleIcon icon={m.icon} />
+                  {m.name}
+                </span>
+                {m.sensor && <span class="module-availability">Sensor integration required</span>}
+              </div>
+              <h2 id={`heading-${m.slug}`}>{m.title}</h2>
+              <p>{m.description}</p>
+              <ul>
+                {m.bullets.map((text) => (
+                  <li>{text}</li>
+                ))}
+              </ul>
+            </div>
+            <figure class="module-figure">
+              <img
+                src={m.image.src}
+                alt={m.image.alt}
+                width={m.image.width}
+                height={m.image.height}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </figure>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  href?: string;
+  label?: string;
+  secondary?: boolean;
+  id?: string;
+}
+const {
+  title,
+  description,
+  href = '/book-demo/',
+  label = 'Book a demo',
+  secondary = false,
+  id,
+} = Astro.props;
+const external = href.startsWith('https:');
+---
+
+<section id={id} class="closing-cta neural-cta" aria-labelledby="cta-title">
+  <div class="wrap closing-content">
+    <h2 id="cta-title">{title}</h2>
+    {description && <p>{description}</p>}
+    <div class="actions">
+      <a
+        class:list={[
+          'button',
+          { 'button-outline': secondary, 'demo-button': href === '/book-demo/' },
+        ]}
+        href={href}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
+      >
+        {label}
+        {secondary && <span aria-hidden="true"> ›</span>}
+      </a>
+      <slot />
+    </div>
+  </div>
+</section>

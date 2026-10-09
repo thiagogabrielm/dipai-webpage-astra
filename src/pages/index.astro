@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import Platform from '../components/home/Platform.astro';
+import DataJourney from '../components/home/DataJourney.astro';
+import Testimonials from '../components/home/Testimonials.astro';
+import Fleet from '../components/home/Fleet.astro';
+import Clients from '../components/Clients.astro';
+import CTA from '../components/CTA.astro';
+import NewsCard from '../components/NewsCard.astro';
+import UseCaseCard from '../components/UseCaseCard.astro';
+import FAQItem from '../components/FAQItem.astro';
+import faqs from '../data/faqs.json';
+import { newsPosts, useCases } from '../lib/content';
+const posts = (await newsPosts()).slice(0, 4);
+const cases = await useCases();
+const featured = [
+  'engine-configuration',
+  'vessel-eco-speed',
+  'engine-condition-monitoring',
+  'hydrodynamic-performance',
+];
+const featuredCases = featured
+  .map((slug) => cases.find((c) => c.slug === slug))
+  .filter((c): c is NonNullable<typeof c> => !!c);
+---
+
+<BaseLayout
+  title="Dipai — Vessel data and maritime insights"
+  description="Connect vessel data to better decisions. Dipai brings operations, fuel, emissions and maintenance into one Digital Fleet Platform."
+>
+  <Hero />
+  <Clients ribbon />
+  <Platform />
+  <div id="how-it-works" aria-hidden="true"></div>
+  <DataJourney />
+  <Testimonials />
+  <Fleet />
+  <section
+    id="stories"
+    class="stories section use-case-home"
+    data-card-borders
+    aria-labelledby="use-case-heading"
+  >
+    <div class="wrap">
+      <div class="section-heading">
+        <h2 id="use-case-heading">Insights that lead to meaningful impact</h2>
+        <a class="text-button all-case-studies" href="/use-cases/">
+          Explore all use cases <span aria-hidden="true">›</span>
+        </a>
+      </div>
+      <div class="use-case-grid">
+        {featuredCases.map((item, i) => (
+          <UseCaseCard item={item} carouselOnly={i === 3} />
+        ))}
+      </div>
+    </div>
+  </section>
+  <section
+    id="news"
+    class="news section wrap"
+    aria-labelledby="news-heading"
+    data-news-border-trial
+  >
+    <div class="section-heading">
+      <div>
+        <h2 id="news-heading">News &amp; perspectives</h2>
+      </div>
+      <a class="text-button" href="/news/">
+        View all news <span aria-hidden="true">›</span>
+      </a>
+    </div>
+    <div class="news-grid">
+      {posts.map((post, i) => (
+        <NewsCard post={post} carouselOnly={i === 3} />
+      ))}
+    </div>
+  </section>
+  <section id="faq" class="faq faq--bands section" aria-labelledby="faq-heading">
+    <div class="faq-intro wrap">
+      <h2 id="faq-heading">Frequently asked questions</h2>
+      <p>Still have questions? We are here to answer them.</p>
+      <div class="faq-actions">
+        <a class="button button-outline" href="/contact/">
+          Contact us
+        </a>
+        <a class="text-button all-faqs faq-top-link" href="/faq/">
+          Explore all FAQs <span aria-hidden="true">›</span>
+        </a>
+      </div>
+    </div>
+    <div class="faq-list">
+      {faqs
+        .filter((f) => f.featured)
+        .map((item) => (
+          <FAQItem item={item} band />
+        ))}
+    </div>
+  </section>
+  <CTA
+    id="contact"
+    title="It starts with a conversation."
+    description="Tell us about your fleet and its needs. We'll show you how Dipai can help you get more from your vessel data."
+  >
+    <a class="button button-outline" href="#how-it-works-journey">
+      See how it works
+    </a>
+  </CTA>
+</BaseLayout>
+<script>
+  import '../scripts/home.js';
+  import '../scripts/data-journey.js';
+  import '../scripts/hero-vessels.js';
+  import '../scripts/product-tab-selector.js';
+  import '../scripts/section-carousels.js';
+  import '../scripts/quote-showcase.js';
+  import '../scripts/globe-halo.js';
+  import '../scripts/globe-reveal.js';
+</script>

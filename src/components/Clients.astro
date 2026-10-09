@@ -1,0 +1,55 @@
+---
+import clients from '../data/clients.json';
+import ClientLogo from './ClientLogo.astro';
+interface Props {
+  ribbon?: boolean;
+}
+const { ribbon = false } = Astro.props;
+---
+
+{ribbon ? (
+  <section id="partners" class="partners" aria-label="Customers and partners">
+    <div class="wrap partner-row">
+      <p>
+        Trusted by
+        <br /> industry leaders
+      </p>
+      <div class="logo-window">
+        <div class="logo-track">
+          <div class="logo-set">
+            {clients
+              .filter((c) => c.ribbon !== false)
+              .map((client) => (
+                <ClientLogo client={client} />
+              ))}
+          </div>
+        </div>
+      </div>
+      <button
+        class="motion-control ribbon-pause"
+        data-ribbon-pause
+        type="button"
+        aria-pressed="false"
+        hidden
+      >
+        Pause logos
+      </button>
+    </div>
+  </section>
+) : (
+  <ul class="demo-client-grid" role="list">
+    {clients.map((client) => (
+      <li>
+        <a
+          class="client-link"
+          href={client.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${client.name} website (opens in a new tab)`}
+        >
+          <ClientLogo client={client} linked={false} />
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
