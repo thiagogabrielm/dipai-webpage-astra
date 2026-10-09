@@ -484,31 +484,6 @@
     "contain": false
   },
   {
-    "slug": "mainstay-collaboration",
-    "title": "Dipai and Mainstay begin an AI collaboration",
-    "category": "Partnerships",
-    "summary": "The companies announced a collaboration to apply Dipai’s software to Mainstay equipment.",
-    "paragraphs": [
-      "Dipai announced its collaboration with Mainstay and welcomed the opportunity to create value together.",
-      "The announcement shared Mainstay’s plans to use Dipai’s AI software on its Manta, Weda and high-pressure pump equipment, with the aim of reducing downtime and lifecycle costs."
-    ],
-    "source_url": "https://www.linkedin.com/posts/dipai-as_we-are-looking-forward-to-collaborating-and-activity-6962760427852189696-PB1y",
-    "images": [
-      {
-        "src": "assets/news/6962760427852189696-1.webp",
-        "alt": "Dipai and Mainstay company logos.",
-        "source_url": "https://media.licdn.com/dms/image/v2/C4E22AQEyDSbMHoY67A/feedshare-shrink_800/feedshare-shrink_800/0/1660050499409?e=2147483647&v=beta&t=V6dm7cQ-aqAUPPGivRCLV7zDcqulE0nbbSFeXQ8QhpA",
-        "kind": "photo",
-        "caption": "Image from Dipai’s original LinkedIn post."
-      }
-    ],
-    "source_author": "Dipai",
-    "retrieved_at": "2026-10-07",
-    "date_basis": "UTC timestamp decoded from LinkedIn activity ID; cross-checked against the original import's dated IDs.",
-    "date": "2022-08-09",
-    "contain": true
-  },
-  {
     "slug": "nor-shipping-2022",
     "title": "Meeting the maritime community at Nor-Shipping 2022",
     "category": "Events",
