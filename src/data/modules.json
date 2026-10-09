@@ -11,10 +11,28 @@
     "sensor": false,
     "icon": "products/icons/fleet_overview.svg",
     "image": {
-      "src": "/assets/products/vessel-status.webp",
-      "alt": "Existing vessel-status view showing a vessel map and operational measurements.",
-      "width": 1800,
-      "height": 1013
+      "src": "/assets/products/fleet-overview-current.webp",
+      "alt": "Fleet overview world map showing vessel positions coloured by status over a global wind and weather layer.",
+      "width": 1853,
+      "height": 1147
+    }
+  },
+  {
+    "slug": "vesselgpt",
+    "name": "VesselGPT",
+    "title": "Ask more of your vessel data.",
+    "description": "Planned LLM integration brings a conversational layer to platform modules. Ask for context and interpretation of the data, and discuss customised graphs and notifications.",
+    "bullets": [
+      "Explore what the data means in the context of a module.",
+      "Discuss the questions and views that matter to your operation."
+    ],
+    "sensor": false,
+    "icon": null,
+    "image": {
+      "src": "/assets/products/vesselgpt-current-v2.webp",
+      "alt": "VesselGPT conversation alongside a vessel consumption dashboard, with analysis of fuel use, operating modes and weather impact.",
+      "width": 1316,
+      "height": 1293
     }
   },
   {
@@ -72,6 +90,25 @@
     }
   },
   {
+    "slug": "emissions",
+    "name": "Emissions",
+    "title": "Know your emissions. Simplify compliance.",
+    "description": "Dipai brings emissions monitoring and regulatory reporting together in one platform. Track vessel carbon intensity, understand your allowance requirements and streamline compliance with end-to-end support—from data collection to verification.",
+    "bullets": [
+      "CII — Calculate vessel carbon intensity using the applicable IMO methodology for each supported vessel type.",
+      "EU MRV & IMO DCS — Simplify reporting with continuous API transfer of operational data to your verifier and hands-on resolution of data-quality issues and warnings.",
+      "EU ETS — Monitor emissions within scope and calculate the corresponding emissions allowance requirements."
+    ],
+    "sensor": false,
+    "icon": "products/icons/emissions.svg",
+    "image": {
+      "src": "/assets/products/emissions-current.webp",
+      "alt": "MRV playback report showing a vessel track across Europe with geofences, port calls and logged events, plus summary counts and a playback timeline.",
+      "width": 1719,
+      "height": 1258
+    }
+  },
+  {
     "slug": "seemp",
     "name": "SEEMP",
     "title": "Build your next plan on real performance.",
@@ -93,10 +130,10 @@
     "slug": "maintenance",
     "name": "Condition-based Maintenance",
     "title": "See the signs. Plan with confidence.",
-    "description": "Combine machinery load profiles, key engine condition parameters and onboard engine performance tests to identify wear and performance deviations early.",
+    "description": "Combine machinery load profiles, onboard engine performance tests, anomaly detection and VesselGPT to identify wear and performance deviations early and trigger condition-based maintenance jobs.",
     "bullets": [
-      "Understand how machinery is being used.",
-      "Support informed, proactive maintenance decisions."
+      "Give crew and shore teams a shared view of machinery condition.",
+      "Support maintenance decisions with AI recommendations."
     ],
     "sensor": true,
     "icon": "products/icons/cbm.svg",
@@ -159,24 +196,6 @@
       "alt": "Data download interface with selected sensors, date range and a tabular data preview.",
       "width": 1140,
       "height": 824
-    }
-  },
-  {
-    "slug": "vesselgpt",
-    "name": "VesselGPT",
-    "title": "Ask more of your vessel data.",
-    "description": "Planned LLM integration brings a conversational layer to platform modules. Ask for context and interpretation of the data, and discuss customised graphs and notifications.",
-    "bullets": [
-      "Explore what the data means in the context of a module.",
-      "Discuss the questions and views that matter to your operation."
-    ],
-    "sensor": true,
-    "icon": null,
-    "image": {
-      "src": "/assets/products/vesselgpt-current-v2.webp",
-      "alt": "VesselGPT conversation alongside a vessel consumption dashboard, with analysis of fuel use, operating modes and weather impact.",
-      "width": 1316,
-      "height": 1293
     }
   }
 ]
