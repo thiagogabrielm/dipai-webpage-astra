@@ -1,4 +1,5 @@
 import { renderPlatformVisual } from './platform-visuals.js';
+import { updateMotionControl } from './motion-control.js';
 import products from '../data/platform.js';
 // A duplicated, inaccessible logo set makes a seamless loop without duplicate announcements.
 const logoSet = document.querySelector('.logo-set');
@@ -20,7 +21,7 @@ reducedMotion.addEventListener('change', () => {
 });
 ribbonPause.addEventListener('click', () => {
   const paused = ribbonPause.getAttribute('aria-pressed') !== 'true';
-  ribbonPause.setAttribute('aria-pressed', String(paused));
+  updateMotionControl(ribbonPause, paused);
   document.querySelector('.logo-track').style.animationPlayState = paused ? 'paused' : '';
 });
 logoWindow.addEventListener('focusin', (event) => {

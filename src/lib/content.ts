@@ -28,12 +28,9 @@ export function articleSchema(
   extra: Record<string, unknown> = {},
 ) {
   return {
-    '@context': 'https://schema.org',
     '@type': 'Article',
     headline: title,
     description,
-    author: { '@type': 'Organization', name: 'Dipai' },
-    publisher: { '@type': 'Organization', name: 'Dipai' },
     ...extra,
   };
 }

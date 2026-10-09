@@ -20,7 +20,7 @@ Add an entry to `src/data/news.json`. Copy a neighboring post as the starting po
 }
 ```
 
-Place the referenced image in `public/assets/news/`. Use `images: []` for a text-only story. `contain: true` fits a poster or event graphic inside a card without cropping it.
+Place the referenced image in `src/assets/news/` (the JSON path remains `assets/news/filename.webp`). Astro imports the source and generates responsive WebP variants automatically. JPG, PNG, WebP and AVIF sources are supported. Use `images: []` for a text-only story. `contain: true` fits a poster or event graphic inside a card without cropping it.
 
 Run `npm run build`. Astro automatically creates `/news/new-partnership/`, its old-style `.html` redirect, archive card, category filter, related-story entry and sitemap entry. The latest four posts populate the landing-page carousel. No new page implementation is needed.
 
@@ -41,7 +41,9 @@ Source-slide and evidence metadata may remain beside the editorial fields; it is
 
 ## Images and other shared content
 
-The build calculates image dimensions automatically. Prefer web-sized WebP photographs; the current hero uses 1280, 1920 and 2560-pixel variants. Changing a hero image requires the same three file sizes using the existing naming pattern. SVG logos stay vector-based.
+The build calculates image dimensions automatically. Team photographs belong in `src/assets/team/`; news photographs belong in `src/assets/news/`. The shared `ResponsiveImage` component generates sizes at build time and supplies `srcset`, `sizes`, intrinsic dimensions, and lazy loading. The current hero uses 1280, 1920 and 2560-pixel variants with the first image prioritised. Changing a hero image requires the same three file sizes using the existing naming pattern. SVG logos stay vector-based. Product and use-case screenshots remain lossless to keep labels readable.
+
+Canonical URLs, article structured data, social previews and sitemap entries come from the shared template. News uses the first article image as its social preview; text-only posts use the generated Dipai card. Keep dates, captions, alternative text and evidence accurate; do not invent publication or modification dates for search engines.
 
 `clients.json` is shared by the landing ribbon and demo grid. Each entry contains its label, image, dimensions and website. `ribbon: false` excludes a client from the ribbon while retaining it in the grid.
 

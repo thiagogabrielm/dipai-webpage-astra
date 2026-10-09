@@ -1,3 +1,7 @@
+---
+import MotionControl from '../MotionControl.astro';
+---
+
 <section aria-labelledby="journey-heading" class="data-journey dark" id="how-it-works-journey">
   <div class="journey-sticky wrap">
     <header class="journey-heading">
@@ -26,9 +30,7 @@
       </nav>
       <svg aria-hidden="true" class="journey-svg" viewBox="-30 -18 1080 486"></svg>
       <footer class="journey-readout">
-        <button class="motion-control" data-journey-pause type="button" aria-pressed="false" hidden>
-          Pause particles
-        </button>
+        <MotionControl control="journey" subject="particles" />
         <h3 class="journey-title">Every source starts a signal.</h3>
         <p class="journey-description">
           Sensor data, manual reports, weather data and metadata emit individual data points into

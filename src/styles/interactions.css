@@ -605,19 +605,39 @@ html[data-theme='dark'] #product-panel .product-graphic {
 }
 .motion-control {
   flex: 0 0 auto;
-  min-height: 32px;
-  padding: 6px 10px;
-  border: 1px solid currentColor;
-  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 9px;
+  border: 0;
+  border-radius: 50%;
   color: inherit;
   background: transparent;
-  font-size: 11px;
-  line-height: 1.4;
   cursor: pointer;
 }
-.motion-control[aria-pressed='true'] {
-  background: var(--yellow);
-  color: var(--navy);
+.motion-control:is(:hover, :focus-visible) {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+.motion-control:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.motion-control svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.motion-control [data-play-icon] {
+  display: none;
+  fill: currentColor;
+  stroke: none;
+}
+.motion-control[aria-pressed='true'] [data-play-icon] {
+  display: block;
+}
+.motion-control[aria-pressed='true'] [data-pause-icon] {
+  display: none;
 }
 .ribbon-pause {
   align-self: center;
@@ -625,11 +645,6 @@ html[data-theme='dark'] #product-panel .product-graphic {
 .journey-readout .motion-control {
   float: right;
   margin: 0 0 12px 16px;
-}
-@media (max-width: 600px) {
-  [data-quote-pause] {
-    order: 1;
-  }
 }
 .section-carousel-arrow {
   width: 58px;
@@ -752,7 +767,8 @@ html[data-theme='dark'] #product-panel .product-graphic {
     flex-basis: 44px;
   }
   .team-page .section-carousel-dot {
-    width: clamp(18px, 5vw, 24px);
+    width: 24px;
+    min-width: 24px;
   }
 }
 .faq--bands {

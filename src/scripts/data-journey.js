@@ -1,4 +1,5 @@
 import { mountJourneyMarker } from './journey-marker.js';
+import { updateMotionControl } from './motion-control.js';
 // A moving viewport follows one stream; analysis lives inside the context intersection.
 const section = document.querySelector('#how-it-works-journey');
 const clamp = (n) => Math.max(0, Math.min(1, n));
@@ -385,7 +386,7 @@ if (section) {
   });
   pauseButton.addEventListener('click', () => {
     particlesPaused = !particlesPaused;
-    pauseButton.setAttribute('aria-pressed', String(particlesPaused));
+    updateMotionControl(pauseButton, particlesPaused);
     update();
   });
   function positionParticles() {

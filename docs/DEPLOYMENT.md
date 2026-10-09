@@ -37,3 +37,7 @@ npm run preview
 ```
 
 To test an explicitly configured local environment, use `node --env-file=.env server/serve.mjs`. The ordinary preview leaves delivery disabled unless variables are supplied. Stop the development server first; both use port 48767 by default. A separate preview can use `PORT=48768 npm run preview`.
+
+## Pre-launch checks
+
+See [Launch readiness](READINESS.md) for cookie storage, the analytics decision, SEO/AI-search metadata, image handling and accessibility checks. Keep `SITE_URL=https://dipai.no` in production **and previews** so canonical URLs stay consistent. Netlify non-production build contexts are marked noindex automatically. Leave analytics off until the provider and data handling have been selected.

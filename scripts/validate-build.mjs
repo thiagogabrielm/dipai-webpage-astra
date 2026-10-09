@@ -46,7 +46,7 @@ for (const file of files.filter((f) => f.endsWith('.html'))) {
     if (node.tagName === 'img' && !('alt' in attrs))
       errors.push(`${route}: image without alt text`);
   });
-  if (route !== '/404.html' && h1 !== 1) errors.push(`${route}: expected one h1, found ${h1}`);
+  if (h1 !== 1) errors.push(`${route}: expected one h1, found ${h1}`);
   if (main !== 1 || headers !== 1 || footers !== 1) errors.push(`${route}: invalid shared layout`);
   pages.set(route, { ids, links });
   // Collect root-relative assets in inline scripts and styles as well as HTML.

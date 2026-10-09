@@ -1,5 +1,6 @@
 ---
 import quotes from '../../data/testimonials.json';
+import MotionControl from '../MotionControl.astro';
 ---
 
 <section
@@ -66,9 +67,7 @@ import quotes from '../../data/testimonials.json';
     class="section-carousel-controls"
     role="group"
   >
-    <button class="motion-control" data-quote-pause type="button" aria-pressed="false" hidden>
-      Pause quotes
-    </button>
+    <MotionControl control="quote" subject="quotes" />
     <button
       aria-label="Previous customer quote"
       class="section-carousel-arrow"

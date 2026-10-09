@@ -1,6 +1,7 @@
 ---
 import clients from '../data/clients.json';
 import ClientLogo from './ClientLogo.astro';
+import MotionControl from './MotionControl.astro';
 interface Props {
   ribbon?: boolean;
 }
@@ -25,15 +26,7 @@ const { ribbon = false } = Astro.props;
           </div>
         </div>
       </div>
-      <button
-        class="motion-control ribbon-pause"
-        data-ribbon-pause
-        type="button"
-        aria-pressed="false"
-        hidden
-      >
-        Pause logos
-      </button>
+      <MotionControl control="ribbon" subject="logos" class="ribbon-pause" />
     </div>
   </section>
 ) : (

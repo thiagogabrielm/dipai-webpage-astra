@@ -831,7 +831,7 @@ blockquote {
   font-size: 9px;
   color: #b1c4d3;
 }
-.closing-content h2 {
+.closing-content :is(h1, h2) {
   font-size: clamp(44px, 5vw, 72px);
   line-height: 1.1;
 }
@@ -1331,7 +1331,7 @@ select {
   .closing-content .eyebrow {
     font-size: 7px;
   }
-  .closing-content h2 {
+  .closing-content :is(h1, h2) {
     font-size: 46px;
   }
   .closing-content .actions {

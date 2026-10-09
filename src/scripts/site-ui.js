@@ -46,6 +46,8 @@ export function mountSiteUi() {
         menu.querySelector('a, button')?.focus();
       }
       if (event.key === 'Escape' && menu.open) {
+        event.preventDefault();
+        event.stopPropagation();
         menu.open = false;
         summary.focus();
       }

@@ -14,7 +14,7 @@ npm run dev
 Open http://127.0.0.1:48767/. The dev server supports the enquiry endpoint and redirects the previous `.html` URLs. Optional local environment values can be supplied with `node --env-file=.env node_modules/astro/bin/astro.mjs dev --port 48767` after `npm run predev`.
 
 ```sh
-npm run build       # Image dimensions, type/content checks, static build, link/asset audit
+npm run build       # Responsive images, type/content checks, static build, link/asset/SEO audit
 npm run preview     # Serve dist/ plus redirects and the enquiry API on port 48767
 npm test            # Isolated enquiry-handler tests; never sends email
 npm run test:browser # Desktop/mobile site checks against the production build
@@ -33,14 +33,15 @@ Before the browser suite, run `npx playwright install chromium` once. To use an 
 | Product overview tabs / product modules | `src/data/platform.js`, `src/data/modules.json` |
 | Client logos and website links | `src/data/clients.json` |
 | Testimonials / team / FAQs | `src/data/testimonials.json`, `team.json`, `faqs.json` |
-| Legal copy | `src/data/privacy-policy.json` |
+| Legal copy / browser storage disclosure | `src/data/privacy-policy.json`, `src/pages/privacy-policy.astro` |
 | Header, footer, CTA and shared components | `src/components/` |
 | Article templates | `src/pages/news/[slug].astro`, `src/pages/use-cases/[slug].astro` |
 | Shared page shell and metadata | `src/layouts/BaseLayout.astro` |
 | Styles / progressive enhancements | `src/styles/`, `src/scripts/` |
-| Public images and SVGs | `public/assets/` |
+| Responsive news and team images | `src/assets/news/`, `src/assets/team/` |
+| Hero variants, lossless screenshots and SVGs | `public/assets/` |
 | Email delivery | `netlify/functions/enquiries.mjs`, `server/enquiries.mjs` |
 
 Generated files belong in `dist/`, `.astro/` and `src/generated/`; do not edit them. There is no separate HTML-page generator or duplicated legacy site to maintain.
 
-See [content editing](docs/CONTENT.md), [Netlify deployment](docs/DEPLOYMENT.md) and [migration notes](docs/MIGRATION.md).
+See [content editing](docs/CONTENT.md), [Netlify deployment](docs/DEPLOYMENT.md), [launch readiness](docs/READINESS.md) and [migration notes](docs/MIGRATION.md).

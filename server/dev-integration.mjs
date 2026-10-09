@@ -13,6 +13,11 @@ export default function enquiriesIntegration() {
                 configureServer(server) {
                   server.middlewares.use(async (req, res, next) => {
                     const url = new URL(req.url, 'http://localhost');
+                    if (['/about-us', '/about-us/', '/about-us.html'].includes(url.pathname)) {
+                      res.writeHead(301, { Location: '/team/' + url.search });
+                      res.end();
+                      return;
+                    }
                     if (url.pathname === '/api/enquiries') {
                       try {
                         await serveEnquiry(req, res);

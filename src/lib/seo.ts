@@ -58,9 +58,8 @@ export function structuredData({ site, canonical, title, description, image, art
     },
   ];
   if (article) {
-    const { '@context': _context, ...data } = article;
     graph.push({
-      ...data,
+      ...article,
       '@id': canonical.href + '#article',
       url: canonical.href,
       mainEntityOfPage: { '@id': pageId },

@@ -15,6 +15,9 @@ html[data-theme='dark'] body {
 html[data-theme='dark'] main > section {
   border-bottom: 1px solid var(--line);
 }
+html[data-theme='dark'] #news {
+  border-bottom: 0;
+}
 html[data-theme='dark'] :is(#partners, #testimonials, #stories, #faq) {
   background: var(--dark-raised);
   color: var(--ink);

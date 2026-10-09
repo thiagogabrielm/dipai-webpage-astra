@@ -6,6 +6,7 @@ interface Props {
   label?: string;
   secondary?: boolean;
   id?: string;
+  heading?: 'h1' | 'h2';
 }
 const {
   title,
@@ -14,13 +15,14 @@ const {
   label = 'Book a demo',
   secondary = false,
   id,
+  heading: Heading = 'h2',
 } = Astro.props;
 const external = href.startsWith('https:');
 ---
 
 <section id={id} class="closing-cta neural-cta" aria-labelledby="cta-title">
   <div class="wrap closing-content">
-    <h2 id="cta-title">{title}</h2>
+    <Heading id="cta-title">{title}</Heading>
     {description && <p>{description}</p>}
     <div class="actions">
       <a

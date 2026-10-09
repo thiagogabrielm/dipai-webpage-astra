@@ -1,4 +1,5 @@
 import { mountCarouselMarker } from './carousel-marker.js';
+import { updateMotionControl } from './motion-control.js';
 // Timed customer testimonial carousel.
 const section = document.querySelector('#testimonials-focus');
 if (section) {
@@ -28,7 +29,7 @@ if (section) {
   pauseButton.hidden = reduced.matches;
   pauseButton.addEventListener('click', () => {
     paused = !paused;
-    pauseButton.setAttribute('aria-pressed', String(paused));
+    updateMotionControl(pauseButton, paused);
     clock();
   });
   reduced.addEventListener('change', () => {

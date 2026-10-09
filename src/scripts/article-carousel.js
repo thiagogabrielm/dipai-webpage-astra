@@ -9,7 +9,6 @@ for (const gallery of document.querySelectorAll('[data-article-carousel]')) {
   track.tabIndex = 0;
   track.setAttribute('aria-label', 'Post pictures. Use left and right arrow keys to browse.');
   slides.forEach((slide, i) => {
-    slide.setAttribute('role', 'group');
     slide.setAttribute('aria-roledescription', 'slide');
     slide.setAttribute('aria-label', `Picture ${i + 1} of ${slides.length}`);
     slide.querySelector('img').draggable = false;

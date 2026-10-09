@@ -1,6 +1,24 @@
 const dialog = document.querySelector('#cookie-settings');
 if (dialog instanceof HTMLDialogElement) {
   const status = dialog.querySelector('[data-theme-status]');
+  dialog.addEventListener('keydown', (event) => {
+    // Keep boundary Tab presses inside the modal, including after browser tooling
+    // or assistive technology restores focus to the document.
+    if (event.key !== 'Tab') return;
+    const controls = [...dialog.querySelectorAll('button:not([disabled]), a[href]')];
+    const first = controls[0];
+    const last = controls.at(-1);
+    if (
+      event.shiftKey &&
+      (document.activeElement === first || !dialog.contains(document.activeElement))
+    ) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
   const update = () => {
     try {
       const theme = localStorage.getItem('dipai-color-theme');

@@ -13,6 +13,7 @@ const routes = [
   '/faq/',
   '/book-demo/',
   '/privacy-policy/',
+  '/404.html',
   ...news.map((p) => `/news/${p.slug}/`),
   ...cases.map((p) => `/use-cases/${p.slug}/`),
 ];
