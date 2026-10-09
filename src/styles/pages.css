@@ -24,11 +24,11 @@
 }
 .products-hero-visual {
   margin: 0;
-  border: 1px solid #34475e30;
+  border: 1px solid color-mix(in srgb, var(--slate) 18.8%, transparent);
   border-radius: 10px;
   background: var(--module-surface);
   overflow: hidden;
-  box-shadow: 0 8px 24px #1c2b3912;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--navy) 7.1%, transparent);
 }
 .products-hero-visual img {
   width: 100%;
@@ -59,11 +59,11 @@
   margin-top: 54px;
 }
 .products-data-grid article {
-  border-top: 1px solid #cdddea45;
+  border-top: 1px solid color-mix(in srgb, var(--blue) 27.1%, transparent);
   padding-top: 25px;
 }
 .data-type {
-  color: #cdddea;
+  color: var(--blue);
   font-size: 12px;
 }
 .products-data-grid h3 {
@@ -79,7 +79,7 @@
   display: flex;
   align-items: start;
   gap: 15px;
-  border-top: 1px solid #cdddea45;
+  border-top: 1px solid color-mix(in srgb, var(--blue) 27.1%, transparent);
   padding-top: 28px;
   margin-top: 50px;
 }
@@ -115,16 +115,16 @@
 }
 html[data-theme='dark'] .products-page {
   --module-surface: #25394b;
-  --module-tint: #34475e;
+  --module-tint: var(--slate);
 }
 html[data-theme='dark'] .products-hero {
-  background: #34475e;
+  background: var(--slate);
 }
 html[data-theme='dark'] .products-page .products-foundation {
-  background: #34475e;
+  background: var(--slate);
 }
 html[data-theme='dark'] .products-hero-visual {
-  border-color: #cdddea45;
+  border-color: color-mix(in srgb, var(--blue) 27.1%, transparent);
   box-shadow: none;
 }
 @media (max-width: 1100px) {
@@ -199,7 +199,7 @@ html[data-theme='dark'] .products-hero-visual {
   inset-block: 0;
   left: 0;
   width: var(--module-sidebar-width);
-  background: #2c4a61;
+  background: var(--slate);
   pointer-events: none;
 }
 .products-pin {
@@ -231,7 +231,7 @@ html[data-theme='dark'] .products-hero-visual {
   align-items: stretch;
   gap: 0;
   align-self: start;
-  background: #2c4a61;
+  background: var(--slate);
   border: 0;
   border-radius: 0;
   overflow: hidden;
@@ -268,7 +268,7 @@ html[data-theme='dark'] .products-hero-visual {
     color: #e2ebf1;
     background: #415d72;
     box-shadow:
-      inset 0 1px 0 #cdddea35,
+      inset 0 1px 0 color-mix(in srgb, var(--blue) 20.8%, transparent),
       inset 0 -1px 0 #14273565,
       0 3px 5px #0c1b2b70;
   }
@@ -276,15 +276,15 @@ html[data-theme='dark'] .products-hero-visual {
 .module-nav-link[aria-current='true'],
 .module-nav-link:active {
   z-index: 1;
-  color: #ffd600;
+  color: var(--yellow);
   background: #233e51;
   box-shadow:
     inset 0 3px 5px #0c1b2b80,
     inset 0 1px 1px #0c1b2b85,
-    inset 0 -1px 0 #cdddea28;
+    inset 0 -1px 0 color-mix(in srgb, var(--blue) 15.7%, transparent);
 }
 .module-nav-link:focus-visible {
-  outline: 2px solid #ffd600;
+  outline: 2px solid var(--yellow);
   outline-offset: -3px;
 }
 .module-icon {
@@ -351,7 +351,7 @@ span.module-icon {
   font-size: 11px;
 }
 .module-name-pill {
-  background: #34475e0b;
+  background: color-mix(in srgb, var(--slate) 4.3%, transparent);
   font-weight: 600;
 }
 .module-name-pill .module-icon {
@@ -455,14 +455,14 @@ span.module-icon {
     visibility 0s;
 }
 html[data-theme='dark'] .products-explorer {
-  background: #1c2b39;
+  background: var(--navy);
   border-block: 0;
 }
 html[data-theme='dark'] .module-name-pill {
-  background: #34475e80;
+  background: color-mix(in srgb, var(--slate) 50.2%, transparent);
 }
 html[data-theme='dark'] .module-copy li::before {
-  background: #ffd600;
+  background: var(--yellow);
 }
 @media (max-width: 1100px) {
   .products-explorer {
@@ -584,11 +584,11 @@ html[data-theme='dark'] .module-copy li::before {
   height: 7px;
   border-radius: 50%;
   background: var(--yellow);
-  box-shadow: 0 0 0 3px #1c2b3910;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--navy) 6.3%, transparent);
 }
 .demo-form-card {
   background: #fff;
-  border: 1px solid #34475e40;
+  border: 1px solid color-mix(in srgb, var(--slate) 25.1%, transparent);
   border-radius: 10px;
   padding: clamp(24px, 3vw, 40px);
   min-width: 0;
@@ -626,7 +626,7 @@ html[data-theme='dark'] .module-copy li::before {
   line-height: 1.5;
   color: var(--navy);
   background: var(--paper);
-  border: 1px solid #34475e40;
+  border: 1px solid color-mix(in srgb, var(--slate) 25.1%, transparent);
   border-radius: 8px;
   padding: 11px 12px;
   margin: 8px 0 0;
@@ -636,7 +636,7 @@ html[data-theme='dark'] .module-copy li::before {
   resize: vertical;
 }
 #demo-form textarea:focus-visible {
-  outline: 2px solid #538bb7;
+  outline: 2px solid var(--focus);
   outline-offset: 5px;
 }
 #demo-form .form-note {
@@ -658,7 +658,7 @@ html[data-theme='dark'] .module-copy li::before {
   flex-direction: column;
 }
 #demo-result #demo-edit {
-  --action-bg: #1c2b3909;
+  --action-bg: color-mix(in srgb, var(--navy) 3.5%, transparent);
   --action-color: var(--navy);
   --action-hover-bg: var(--navy);
   --action-hover-color: white;
@@ -819,13 +819,13 @@ html[data-theme='dark'] .module-copy li::before {
   font-size: 13px;
   line-height: 1.6;
   color: var(--ink);
-  background: #34475e0d;
+  background: color-mix(in srgb, var(--slate) 5.1%, transparent);
 }
 [data-form-status][data-error] {
   border-left: 3px solid #9c5b1c;
 }
 html[data-theme='dark'] [data-form-status][data-error] {
-  border-left-color: #ffd600;
+  border-left-color: var(--yellow);
 }
 :is(#contact-form, #demo-form)[aria-busy='true'] {
   cursor: progress;
@@ -962,7 +962,7 @@ html body.faq-page .faq-page-layout {
 }
 .contact-form-card {
   background: #fff;
-  border: 1px solid #34475e4d;
+  border: 1px solid color-mix(in srgb, var(--slate) 30.2%, transparent);
   border-radius: 10px;
   padding: 36px;
 }
@@ -984,8 +984,8 @@ html body.faq-page .faq-page-layout {
   font-size: 16px;
   line-height: 1.6;
   color: var(--navy);
-  background: #f8fafb;
-  border: 1px solid #34475e40;
+  background: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--slate) 25.1%, transparent);
   border-radius: 5px;
   padding: 11px 13px;
   margin-top: 8px;
@@ -995,7 +995,7 @@ html body.faq-page .faq-page-layout {
   min-height: 150px;
 }
 #contact-form textarea:focus-visible {
-  outline: 2px solid #538bb7;
+  outline: 2px solid var(--focus);
   outline-offset: 4px;
 }
 #contact-form .button {
@@ -1097,7 +1097,7 @@ html body.faq-page .faq-page-layout {
   gap: 15px;
 }
 .team-frame {
-  --team-border: #34475e40;
+  --team-border: color-mix(in srgb, var(--slate) 25.1%, transparent);
   position: relative;
   border: 1px solid var(--team-border);
 }

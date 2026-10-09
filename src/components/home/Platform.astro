@@ -69,20 +69,23 @@ import products from '../../data/platform.js';
             <span id="product-chart-label">{products[0].chart}</span>
           </div>
           <svg aria-label="Illustrative performance trend" role="img" viewBox="0 0 520 125">
-            <path d="M0 30H520M0 70H520M0 110H520" stroke="#34475e20"></path>
+            <path
+              d="M0 30H520M0 70H520M0 110H520"
+              style="stroke: color-mix(in srgb, var(--slate) 12.5%, transparent)"
+            ></path>
             <path
               d="M0 100L40 93L80 98L120 68L160 78L200 60L240 65L280 42L320 47L360 31L400 35L440 22L480 20L520 10V125H0Z"
-              fill="#cdddea"
+              style="fill: var(--blue)"
               id="product-area"
             ></path>
             <path
               d="M0 100L40 93L80 98L120 68L160 78L200 60L240 65L280 42L320 47L360 31L400 35L440 22L480 20L520 10"
               fill="none"
               id="product-line"
-              stroke="#34475e"
+              style="stroke: var(--slate)"
               stroke-width="2"
             ></path>
-            <circle cx="520" cy="10" fill="#ffd600" r="5"></circle>
+            <circle cx="520" cy="10" style="fill: var(--yellow)" r="5"></circle>
           </svg>
           <div class="mode-labels">
             <span>

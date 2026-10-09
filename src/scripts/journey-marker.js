@@ -14,8 +14,8 @@ export function mountJourneyMarker(nav, buttons) {
     gradientUnits: 'userSpaceOnUse',
   });
   const stops = [
-    el('stop', { offset: 0, 'stop-color': '#ffd600', 'stop-opacity': 1 }),
-    el('stop', { offset: 1, 'stop-color': '#ffd600', 'stop-opacity': 0 }),
+    el('stop', { offset: 0, style: 'stop-color: var(--yellow)', 'stop-opacity': 1 }),
+    el('stop', { offset: 1, style: 'stop-color: var(--yellow)', 'stop-opacity': 0 }),
   ];
   gradient.append(...stops);
   const clip = el('clipPath', { id: 'journey-marker-bounds', clipPathUnits: 'userSpaceOnUse' });
@@ -25,7 +25,7 @@ export function mountJourneyMarker(nav, buttons) {
   const completed = el('path', {
     class: 'journey-marker-completed',
     fill: 'none',
-    stroke: '#ffd600',
+    style: 'stroke: var(--yellow)',
     'stroke-width': 2,
     opacity: 1,
   });
@@ -39,13 +39,13 @@ export function mountJourneyMarker(nav, buttons) {
   const trailGroup = el('g', {
     class: 'journey-marker-trail',
     fill: 'none',
-    stroke: '#ffd600',
+    style: 'stroke: var(--yellow)',
     'stroke-width': 2,
     'stroke-linecap': 'round',
   });
   const trails = Array.from({ length: 64 }, () => el('path', { opacity: 0 }));
   trailGroup.append(...trails);
-  const dot = el('circle', { class: 'journey-marker-node', r: 4, fill: '#ffd600' });
+  const dot = el('circle', { class: 'journey-marker-node', r: 4, style: 'fill: var(--yellow)' });
   svg.append(defs, completed, light, trailGroup, dot);
   nav.append(svg);
   nav.setAttribute('data-progress-marker', '');

@@ -55,7 +55,7 @@ function initializeProximity(card) {
   svg.append(defs);
   const outline = svgElement('path', {
     fill: 'none',
-    stroke: '#ffd600',
+    style: 'stroke: var(--yellow)',
     'stroke-width': 2.5,
     mask: `url(#${maskId})`,
   });
@@ -80,7 +80,7 @@ function initializeProximity(card) {
       return { path, direction, index };
     }),
   );
-  const node = svgElement('circle', { r: 4, fill: '#ffd600' });
+  const node = svgElement('circle', { r: 4, style: 'fill: var(--yellow)' });
   svg.append(node);
   card.append(svg);
 

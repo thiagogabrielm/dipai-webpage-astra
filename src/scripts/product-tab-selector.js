@@ -25,7 +25,9 @@ if (tablist) {
     ['75%', 1],
     ['100%', 0],
   ]) {
-    gradient.append(create('stop', { offset, 'stop-color': '#ffd600', 'stop-opacity': opacity }));
+    gradient.append(
+      create('stop', { offset, style: 'stop-color: var(--yellow)', 'stop-opacity': opacity }),
+    );
   }
   defs.append(gradient);
   const beamPath = create('path', {
@@ -42,7 +44,7 @@ if (tablist) {
   const trailStops = Array.from({ length: 17 }, (_, index) =>
     create('stop', {
       offset: index / 16,
-      'stop-color': '#ffd600',
+      style: 'stop-color: var(--yellow)',
       'stop-opacity': 0,
     }),
   );
@@ -56,7 +58,11 @@ if (tablist) {
     'stroke-linecap': 'round',
     'stroke-linejoin': 'round',
   });
-  const node = create('circle', { class: 'product-selector-node', r: 4, fill: '#ffd600' });
+  const node = create('circle', {
+    class: 'product-selector-node',
+    r: 4,
+    style: 'fill: var(--yellow)',
+  });
   svg.append(defs, beamPath, trailPath, node);
   tablist.append(svg);
 

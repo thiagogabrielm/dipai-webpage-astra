@@ -69,7 +69,11 @@ if (section) {
   circles.forEach((_, i) => {
     common = make('g', { 'clip-path': `url(#journey-context-${i})` }, common);
   });
-  make('rect', { x: 1150, y: 40, width: 400, height: 390, fill: '#ffd600', opacity: 0.14 }, common);
+  make(
+    'rect',
+    { x: 1150, y: 40, width: 400, height: 390, style: 'fill: var(--yellow)', opacity: 0.14 },
+    common,
+  );
   text(1180, 68, 'Operation', context, 'journey-context-label');
   text(1450, 68, 'Location', context, 'journey-context-label');
   text(1310, 435, 'Weather', context, 'journey-context-label');
@@ -191,7 +195,7 @@ if (section) {
   });
   make(
     'rect',
-    { x: 65, y: 530, width: 270, height: 260, fill: '#ffd600', opacity: 0.14 },
+    { x: 65, y: 530, width: 270, height: 260, style: 'fill: var(--yellow)', opacity: 0.14 },
     mobileCommon,
   );
   text(83, 523, 'Operation', mobileContext, 'journey-context-label');

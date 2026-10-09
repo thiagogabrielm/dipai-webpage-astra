@@ -15,11 +15,11 @@ export function mountCarouselMarker(container, buttons) {
   });
   const defs = create('defs');
   const gradient = create('linearGradient', { id, gradientUnits: 'userSpaceOnUse' });
-  const peak = create('stop', { offset: 0.5, 'stop-color': '#ffd600' });
+  const peak = create('stop', { offset: 0.5, style: 'stop-color: var(--yellow)' });
   gradient.append(
-    create('stop', { offset: 0, 'stop-color': '#ffd600', 'stop-opacity': 0 }),
+    create('stop', { offset: 0, style: 'stop-color: var(--yellow)', 'stop-opacity': 0 }),
     peak,
-    create('stop', { offset: 1, 'stop-color': '#ffd600', 'stop-opacity': 0 }),
+    create('stop', { offset: 1, style: 'stop-color: var(--yellow)', 'stop-opacity': 0 }),
   );
   defs.append(gradient);
   // Cut the dot interiors out of every connecting stroke, but not the moving node.
@@ -33,8 +33,8 @@ export function mountCarouselMarker(container, buttons) {
   mask.append(maskArea, ...holes);
   defs.append(mask);
   const baseline = create('path', {
+    class: 'carousel-marker-baseline',
     fill: 'none',
-    stroke: '#34475e',
     'stroke-opacity': 0.19,
     'stroke-width': 1,
   });
@@ -47,13 +47,17 @@ export function mountCarouselMarker(container, buttons) {
   const trace = create('g', {
     class: 'carousel-marker-trail',
     fill: 'none',
-    stroke: '#ffd600',
+    style: 'stroke: var(--yellow)',
     'stroke-width': 2,
     'stroke-linecap': 'round',
   });
   const paths = Array.from({ length: 64 }, () => create('path', { opacity: 0 }));
   trace.append(...paths);
-  const node = create('circle', { class: 'carousel-marker-node', r: 5, fill: '#ffd600' });
+  const node = create('circle', {
+    class: 'carousel-marker-node',
+    r: 5,
+    style: 'fill: var(--yellow)',
+  });
   const lines = create('g', { mask: `url(#${id}-gaps)` });
   lines.append(baseline, light, trace);
   svg.append(defs, lines, node);
