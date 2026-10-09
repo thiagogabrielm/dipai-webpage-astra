@@ -25,7 +25,20 @@ The visitor's `email` field supplies Reply-To. Netlify manages spam filtering an
 
 Before launch, replace the test notification rule with separate destinations as needed (`contact` to `support@dipai.no`, `demo` to `contact@dipai.no`). Recipient settings stay in Netlify rather than the public HTML. Review stored submissions and retention in the Netlify dashboard.
 
-Code checks do not confirm account configuration or email delivery. Automated tests use mocked responses or rejected local requests; the live test in step 3 remains necessary.
+Code checks do not confirm account configuration or email delivery. Automated tests use mocked responses or rejected local requests. The user has confirmed that notifications work on the temporary deployment; repeat the live checks after changing notification recipients.
+
+## Web Analytics
+
+Netlify Web Analytics is the selected service. It runs from CDN server logs and needs no browser script, API key or website environment variable. Dashboard activation is separate from the repository and has not been independently verified.
+
+1. Open the Netlify project for the temporary `netlify.app` site.
+2. Go to **Analytics & metrics → Analytics → Enable Analytics**. Review any plan terms shown in the account before enabling it.
+3. Visit several pages on the deployed site. Localhost visits do not reach Netlify and are not counted.
+4. Revisit the Analytics dashboard after its hourly update and refresh the page. Check pageviews and top pages. See [Netlify's setup instructions](https://docs.netlify.com/manage/monitoring/web-analytics/overview/) and [data collection details](https://docs.netlify.com/manage/monitoring/web-analytics/how-web-analytics-works/).
+
+An already-deployed site does not need another deploy just to enable server-log analytics. Deploy the disclosure changes so the Cookie settings dialog and privacy page describe the selected service. The temporary domain and indexing settings stay unchanged. Test visits will be part of this project's traffic history; use date filters to separate testing from the public launch.
+
+This setup reports traffic and referral statistics. Use **Forms** to review contact and demo enquiries; no custom conversion events are sent. Netlify Real User Monitoring and other script-based analytics are separate features, outside this setup.
 
 ## Local production preview
 
@@ -39,4 +52,4 @@ Local development and preview reject form submissions with a clear error and sen
 
 ## Pre-launch checks
 
-See [Launch readiness](READINESS.md) for cookie storage, the analytics decision, SEO/AI-search metadata, image handling and accessibility checks. During testing, use the temporary Netlify origin for `SITE_URL` and keep `SITE_INDEXING=disabled`. After launch, use `SITE_URL=https://dipai.no` in production and previews so canonical URLs stay consistent. Netlify non-production build contexts are marked noindex automatically. Leave analytics off until the provider and data handling have been selected.
+See [Launch readiness](READINESS.md) for cookie storage, Netlify Web Analytics, SEO/AI-search metadata, image handling and accessibility checks. During testing, use the temporary Netlify origin for `SITE_URL` and keep `SITE_INDEXING=disabled`. After launch, use `SITE_URL=https://dipai.no` in production and previews so canonical URLs stay consistent. Netlify non-production build contexts are marked noindex automatically.
