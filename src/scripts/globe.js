@@ -297,6 +297,18 @@ export async function mountGlobe(canvas) {
     draw();
   }
 
+  // Canvas cannot use CSS variables, so read the shared palette once (6-digit hex values).
+  const rootStyle = getComputedStyle(document.documentElement);
+  const token = (name, fallback) => rootStyle.getPropertyValue(name).trim() || fallback;
+  const colors = {
+    navy: token('--navy', '#1c2b39'),
+    slate: token('--slate', '#2c4a61'),
+    blue: token('--blue', '#cdddea'),
+    yellow: token('--yellow', '#ffd600'),
+    grey300: token('--grey-300', '#a9bfd0'),
+    grey500: token('--grey-500', '#7890a3'),
+    grey700: token('--grey-700', '#435b71'),
+  };
   /** Paint the sphere, geographic land, graticule and visible fleet markers. @returns {void} */
   function draw() {
     const cx = width / 2,
@@ -306,7 +318,7 @@ export async function mountGlobe(canvas) {
     context.clearRect(0, 0, width, height);
     context.save();
     context.shadowBlur = 28;
-    context.shadowColor = '#1c2b3922';
+    context.shadowColor = `${colors.navy}22`;
     context.shadowOffsetY = 18;
     const ocean = context.createRadialGradient(
       cx - radius * 0.5,
@@ -316,8 +328,8 @@ export async function mountGlobe(canvas) {
       cy,
       radius * 1.15,
     );
-    ocean.addColorStop(0, '#435f76');
-    ocean.addColorStop(1, '#182a39');
+    ocean.addColorStop(0, colors.grey700);
+    ocean.addColorStop(1, colors.navy);
     context.beginPath();
     path({ type: 'Sphere' });
     context.fillStyle = ocean;
@@ -325,14 +337,14 @@ export async function mountGlobe(canvas) {
     context.restore();
     context.beginPath();
     path(land);
-    context.fillStyle = '#6b879b';
+    context.fillStyle = colors.grey500;
     context.fill();
-    context.strokeStyle = '#a1b6c333';
+    context.strokeStyle = `${colors.grey300}33`;
     context.lineWidth = 0.5;
     context.stroke();
     context.beginPath();
     path(graticule);
-    context.strokeStyle = '#cdddea17';
+    context.strokeStyle = `${colors.blue}17`;
     context.lineWidth = 0.6;
     context.stroke();
     const center = [-rotation[0], -rotation[1]];
@@ -341,13 +353,13 @@ export async function mountGlobe(canvas) {
       const [x, y] = projection(location);
       context.beginPath();
       context.arc(x, y, 1.9, 0, Math.PI * 2);
-      context.fillStyle = '#ffd600';
+      context.fillStyle = colors.yellow;
       context.fill();
     }
     // A thin ring reinforces the same fine-line framing used throughout the page.
     context.beginPath();
     context.arc(cx, cy, radius + 12, 0, Math.PI * 2);
-    context.strokeStyle = '#34475e15';
+    context.strokeStyle = `${colors.slate}15`;
     context.lineWidth = 1;
     context.stroke();
   }

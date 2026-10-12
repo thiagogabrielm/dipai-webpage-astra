@@ -1,16 +1,76 @@
+/* Component colours that switch with the theme: light values here, dark values in the block below. */
+:root {
+  --use-case-category-bg: color-mix(in srgb, var(--slate) 5.1%, transparent);
+  --use-case-category-border: color-mix(in srgb, var(--slate) 14.9%, transparent);
+  --product-panel-top-border: color-mix(in srgb, var(--slate) 12.5%, transparent);
+  --product-panel-top-text: var(--slate);
+  --fleet-globe-filter: drop-shadow(
+      0 0 12px color-mix(in srgb, var(--navy-shadow) 25.1%, transparent)
+    )
+    drop-shadow(0 0 30px color-mix(in srgb, var(--navy) 22%, transparent))
+    drop-shadow(0 0 65px color-mix(in srgb, var(--slate) 22%, transparent));
+  --fleet-stars-display: none;
+  --products-hero-visual-border: color-mix(in srgb, var(--slate) 18.8%, transparent);
+  --products-hero-visual-shadow: 0 8px 24px color-mix(in srgb, var(--navy) 7.1%, transparent);
+  --module-name-pill-bg: color-mix(in srgb, var(--slate) 4.3%, transparent);
+  --module-bullet-bg: #9c8500;
+  --logo-filter-ostensjo: url('/assets/brand-filters.svg#navy-ink');
+  --case-card-border: color-mix(in srgb, var(--slate) 30.2%, transparent);
+  --product-panel-bg: linear-gradient(
+    90deg,
+    var(--white) 0%,
+    color-mix(in srgb, var(--white) 25.1%, transparent) 100%
+  );
+  --carousel-dot-border: color-mix(in srgb, var(--slate) 27.1%, transparent);
+  --carousel-dots-track-bg: color-mix(in srgb, var(--slate) 18.8%, transparent);
+  --cookie-settings-bg: var(--surface-base);
+  --theme-switcher-bg: var(--navy);
+  --use-case-metrics-bg: var(--navy);
+  --use-case-arrow-text: var(--grey-600);
+  --footer-top-text: var(--grey-600);
+  --footer-panel-bg: color-mix(in srgb, var(--tint-100) 87.8%, transparent);
+  --footer-panel-shadow: 0 12px 40px color-mix(in srgb, var(--navy) 3.1%, transparent);
+}
+/* Dark theme: semantic colour values. Light values live in :root in foundation.css. */
 html[data-theme='dark'] body {
-  --ink: #f2f6fa;
-  --muted: #c2d1dd;
+  --ink: var(--tint-100);
+  --muted: var(--grey-200);
   --line: color-mix(in srgb, var(--blue) 25.1%, transparent);
-  --dark-surface: var(--navy);
-  --dark-raised: var(--slate);
-  --action-bg: #2b3a48;
-  --action-color: #f2f6fa;
-  --action-hover-bg: #435b71;
-  --action-hover-color: #fff;
+  --surface-base: var(--navy);
+  --surface-raised: var(--navy-raised);
+  --surface-section: var(--slate);
+  --surface-input: var(--navy);
+  --action-bg: var(--navy-raised);
+  --action-color: var(--tint-100);
+  --action-hover-bg: var(--grey-700);
+  --action-hover-color: var(--white);
   --action-radius: 8px;
-  background: var(--dark-surface);
-  color: var(--ink);
+  --use-case-category-bg: color-mix(in srgb, var(--blue) 7.1%, transparent);
+  --use-case-category-border: color-mix(in srgb, var(--blue) 25.1%, transparent);
+  --product-panel-top-border: color-mix(in srgb, var(--blue) 14.9%, transparent);
+  --product-panel-top-text: var(--blue);
+  --fleet-globe-filter: none;
+  --fleet-stars-display: block;
+  --products-hero-visual-border: color-mix(in srgb, var(--blue) 27.1%, transparent);
+  --products-hero-visual-shadow: none;
+  --module-name-pill-bg: color-mix(in srgb, var(--slate) 50.2%, transparent);
+  --module-bullet-bg: var(--yellow);
+  --logo-filter-ostensjo: url('/assets/brand-filters.svg#navy-ink') brightness(0) invert(1);
+  --case-card-border: color-mix(in srgb, var(--blue) 27.1%, transparent);
+  --product-panel-bg: linear-gradient(
+    90deg,
+    var(--navy-raised) 0%,
+    color-mix(in srgb, var(--navy-raised) 25.1%, transparent) 100%
+  );
+  --carousel-dot-border: color-mix(in srgb, var(--blue) 60%, transparent);
+  --carousel-dots-track-bg: color-mix(in srgb, var(--blue) 40%, transparent);
+  --cookie-settings-bg: var(--navy-raised);
+  --theme-switcher-bg: var(--slate);
+  --use-case-metrics-bg: var(--surface-raised);
+  --use-case-arrow-text: var(--blue);
+  --footer-top-text: var(--grey-400);
+  --footer-panel-bg: color-mix(in srgb, var(--navy) 87.8%, transparent);
+  --footer-panel-shadow: 0 12px 40px color-mix(in srgb, var(--navy-shadow) 14.9%, transparent);
 }
 html[data-theme='dark'] main > section {
   border-bottom: 1px solid var(--line);
@@ -19,18 +79,14 @@ html[data-theme='dark'] #news {
   border-bottom: 0;
 }
 html[data-theme='dark'] :is(#partners, #testimonials, #stories, #faq) {
-  background: var(--dark-raised);
+  background: var(--surface-section);
   color: var(--ink);
-}
-html[data-theme='dark'] #partners {
-  background: var(--dark-raised);
 }
 html[data-theme='dark'] :is(#platform, #fleet, #news, .site-footer) {
-  background: var(--dark-surface);
-  color: var(--ink);
+  background: var(--surface-base);
 }
 html[data-theme='dark'] .dark {
-  --muted: #c2d1dd;
+  --muted: var(--grey-200);
 }
 html[data-theme='dark']
   :is(
@@ -51,28 +107,15 @@ html[data-theme='dark']
 }
 html[data-theme='dark'] .logo-set img {
   filter: brightness(0) invert(1);
-  opacity: 0.9;
-}
-html[data-theme='dark'] .logo-set img[src$='ostensjo.svg'] {
-  filter: url('/assets/brand-filters.svg#navy-ink') brightness(0) invert(1);
-}
-html[data-theme='dark'] .partner-row > p {
-  color: #f2f6fa;
 }
 html[data-theme='dark'] body[data-card-border-mode] :is(.quote-card, .case-card, .news-card) {
   --card-edge: color-mix(in srgb, var(--blue) 27.1%, transparent);
-  background: #25394b;
-  color: #f2f6fa;
-  border-color: color-mix(in srgb, var(--blue) 27.1%, transparent);
+  background: var(--navy-raised);
   box-shadow: none;
 }
-html[data-theme='dark'] #platform .product-panel {
-  background: linear-gradient(90deg, #25394b 0%, #25394b40 100%);
-}
 html[data-theme='dark'] #platform .product-tabs button {
-  color: #f2f6fa;
   --tab-fill: 37, 57, 75;
-  border-color: var(--dark-surface);
+  border-color: var(--surface-base);
 }
 html[data-theme='dark'] #platform .product-tabs button:hover {
   --tab-fill: 52, 71, 94;
@@ -100,56 +143,48 @@ html[data-theme='dark'] .quote-logo {
 html[data-theme='dark'] .quote-logo[src*='ostensjo'] {
   filter: url('/assets/brand-filters.svg#navy-ink') brightness(0) invert(1);
 }
-html[data-theme='dark'] .quote-glyph {
-  color: #aabecf;
-}
 html[data-theme='dark'] .globe-caption {
-  background: #25394b;
-  color: #e5eef5;
+  background: var(--navy-raised);
+  color: var(--tint-200);
   border: 1px solid color-mix(in srgb, var(--blue) 25.1%, transparent);
 }
 html[data-theme='dark'] .region-buttons button[aria-pressed='true'] {
   --action-bg: var(--blue);
   --action-color: var(--navy);
-  --action-hover-bg: #e3edf4;
+  --action-hover-bg: var(--tint-200);
   --action-hover-color: var(--navy);
 }
 html[data-theme='dark'] .use-case-visual {
-  --visual-muted: #c2d1dd;
+  --visual-muted: var(--grey-200);
   --visual-rule: color-mix(in srgb, var(--blue) 25.1%, transparent);
-  background: var(--navy);
-  color: var(--yellow);
 }
 html[data-theme='dark'] .use-case-visual--blue {
-  background: #435f76;
-  color: #fff;
-  --visual-muted: #e3edf4;
+  background: var(--grey-700);
+  color: var(--white);
+  --visual-muted: var(--tint-200);
 }
 html[data-theme='dark'] .use-case-visual--signal {
-  color: #f2f6fa;
+  color: var(--tint-100);
 }
 html[data-theme='dark'] .news-image {
   background: var(--slate);
 }
 html[data-theme='dark'] .news-image-contain {
-  background: #183952;
+  background: var(--navy-raised);
 }
 html[data-theme='dark'] .faq-list details {
   border-color: color-mix(in srgb, var(--blue) 27.1%, transparent);
 }
 html[data-theme='dark'] .faq-list details:not([open]):hover {
-  background: #3c536a;
+  background: var(--grey-700);
 }
 html[data-theme='dark'] .faq-list details[open] {
   background: var(--navy);
-  color: #f2f6fa;
+  color: var(--tint-100);
   border-color: color-mix(in srgb, var(--blue) 27.1%, transparent);
 }
 html[data-theme='dark'] .faq-list .faq-answer {
   color: var(--blue);
-}
-html[data-theme='dark'] .faq-list details summary {
-  color: #f2f6fa;
 }
 html[data-theme='dark'] .section-carousel-arrow {
   --action-radius: 999px;
@@ -158,17 +193,9 @@ html[data-theme='dark'] .section-carousel-dot::before {
   border-color: color-mix(in srgb, var(--blue) 60%, transparent);
   background: var(--slate);
 }
-html[data-theme='dark']
-  .section-carousel-dots.has-energy-marker
-  .section-carousel-dot[aria-current='true']::before {
-  border-color: color-mix(in srgb, var(--blue) 60%, transparent);
-}
 html[data-theme='dark'] .carousel-marker path[stroke='var(--slate)'] {
   stroke: var(--blue);
   stroke-opacity: 0.45;
-}
-html[data-theme='dark'] .section-carousel-dots::before {
-  background: color-mix(in srgb, var(--blue) 40%, transparent);
 }
 html[data-theme='dark'] :is(button, a, summary, [tabindex]):focus-visible {
   outline-color: var(--yellow);
@@ -180,26 +207,13 @@ html[data-theme='dark'] .site-footer .brand img {
   filter: none;
 }
 html[data-theme='dark'] .site-footer a:hover {
-  color: #fff;
-}
-html[data-theme='dark'] .footer-top a:not(.footer-brand),
-html[data-theme='dark'] .fleet-numbers div > span,
-html[data-theme='dark'] .fleet-copy > small {
-  color: var(--muted);
-}
-html[data-theme='dark'] .closing-cta {
-  border-top-color: color-mix(in srgb, var(--blue) 25.1%, transparent);
+  color: var(--white);
 }
 html[data-theme='dark'] .text-button {
-  color: #f2f6fa;
+  color: var(--tint-100);
 }
 html[data-theme='dark'] dialog {
-  background: #25394b;
-  color: #f2f6fa;
   border-color: color-mix(in srgb, var(--blue) 33.3%, transparent);
-}
-html[data-theme='dark'] dialog > p {
-  color: var(--muted);
 }
 html[data-theme='light'] {
   color-scheme: light;
@@ -242,15 +256,11 @@ html[data-theme='dark'] {
 }
 .theme-switcher button:hover {
   color: var(--ink);
-  background: #7890a31a;
+  background: color-mix(in srgb, var(--grey-500) 10.2%, transparent);
 }
 .theme-switcher button[aria-pressed='true'] {
   color: var(--paper);
-  background: var(--navy);
-}
-html[data-theme='dark'] .theme-switcher button[aria-pressed='true'] {
-  color: var(--paper);
-  background: var(--slate);
+  background: var(--theme-switcher-bg);
 }
 .theme-switcher button[aria-pressed='true'] svg {
   color: var(--yellow);
@@ -274,12 +284,6 @@ html[data-theme='dark'] .theme-switcher button[aria-pressed='true'] {
 .skip-link {
   color: var(--navy);
 }
-html[data-theme='dark'] body {
-  --surface-base: var(--navy);
-  --surface-raised: #25394b;
-  --surface-section: var(--slate);
-  --surface-input: var(--navy);
-}
 html[data-theme='dark']
   body
   :is(.news-intro, .support-intro, .team-intro, .use-case-intro, .use-case-article-heading)
@@ -302,7 +306,6 @@ html[data-theme='dark'] body .team-frame {
 }
 html[data-theme='dark'] body :is(.team-board-section, .demo-intro-section) {
   background: var(--surface-section);
-  color: var(--ink);
 }
 html[data-theme='dark'] body .team-person-photo {
   background: var(--surface-section);
@@ -312,9 +315,6 @@ html[data-theme='dark'] body .team-person--board .team-person-photo {
 }
 html[data-theme='dark'] body :is(.demo-copy > p:not(.eyebrow), #demo-result p) {
   color: var(--muted);
-}
-html[data-theme='dark'] body .demo-client-grid li {
-  background: var(--surface-raised);
 }
 html[data-theme='dark'] body .demo-client-grid img {
   filter: brightness(0) invert(1);
@@ -328,29 +328,23 @@ html[data-theme='dark'] body :is(#contact-form, #demo-form) :is(input, select, t
   border-color: color-mix(in srgb, var(--blue) 33.3%, transparent);
 }
 html[data-theme='dark'] body :is(#contact-form, #demo-form) :is(input, textarea)::placeholder {
-  color: #aabecf;
+  color: var(--grey-300);
   opacity: 1;
 }
 html[data-theme='dark'] body :is(.news-filters, .use-case-filters) button[aria-pressed='true'] {
   --action-bg: var(--blue);
   --action-color: var(--navy);
-  --action-hover-bg: #e3edf4;
+  --action-hover-bg: var(--tint-200);
   --action-hover-color: var(--navy);
 }
 html[data-theme='dark'] body #demo-result #demo-edit {
   --action-bg: var(--slate);
-  --action-color: #fff;
-  --action-hover-bg: #435b71;
+  --action-color: var(--white);
+  --action-hover-bg: var(--grey-700);
 }
 html[data-theme='dark'] body :is(.use-case-figure > a, .article-image img) {
   background: var(--surface-raised);
   border-color: var(--line);
-}
-html[data-theme='dark'] body .use-case-metrics {
-  background: var(--surface-raised);
-}
-html[data-theme='dark'] body .use-case-context-arrow {
-  color: var(--blue);
 }
 html[data-theme='dark'] body .faq--contained .faq-list details {
   background: var(--surface-raised);
@@ -389,8 +383,6 @@ html[data-theme='dark'] body .hero:not(.hero-fullscreen) h1 em {
   color: var(--yellow);
 }
 html[data-theme='dark'] body .site-footer {
-  background: var(--surface-base);
-  color: var(--ink);
   border-color: var(--line);
 }
 @media (max-width: 900px) {
@@ -423,13 +415,10 @@ body .site-footer[data-site-footer] .footer-top > div {
   min-width: 0;
 }
 body .site-footer[data-site-footer] .footer-top strong {
-  color: #667e90;
+  color: var(--footer-top-text);
 }
 body .site-footer[data-site-footer] .footer-top a:not(.footer-brand) {
   color: var(--ink);
-}
-html[data-theme='dark'] body .site-footer[data-site-footer] .footer-top strong {
-  color: #8da2b3;
 }
 body .site-footer[data-site-footer] .footer-top a:not(.footer-brand):is(:hover, :focus-visible) {
   color: var(--yellow);
@@ -535,7 +524,7 @@ html
   border-bottom: 0;
 }
 body.network-footer-page {
-  --closing-surface: #f2f6f8;
+  --closing-surface: var(--tint-100);
   --network-ink: #476e88;
 }
 html[data-theme='dark'] body.network-footer-page {
@@ -631,12 +620,8 @@ body.network-footer-page .site-footer > .footer-panel {
   padding: 38px 40px 10px;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: #f2f6f8e0;
-  box-shadow: 0 12px 40px color-mix(in srgb, var(--navy) 3.1%, transparent);
-}
-html[data-theme='dark'] body.network-footer-page .site-footer > .footer-panel {
-  background: color-mix(in srgb, var(--navy) 87.8%, transparent);
-  box-shadow: 0 12px 40px #08121c26;
+  background: var(--footer-panel-bg);
+  box-shadow: var(--footer-panel-shadow);
 }
 body.network-footer-page .footer-panel > .wrap {
   width: 100%;

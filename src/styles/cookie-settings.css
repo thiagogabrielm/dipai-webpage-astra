@@ -8,12 +8,12 @@
   overflow: auto;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: var(--dark-surface, var(--paper));
+  background: var(--cookie-settings-bg);
   color: var(--ink);
   box-shadow: 0 24px 80px #0006;
 }
 .cookie-settings::backdrop {
-  background: #101c28b3;
+  background: color-mix(in srgb, var(--navy-deep) 70.2%, transparent);
 }
 .cookie-settings h2 {
   padding-right: 2rem;

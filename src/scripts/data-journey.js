@@ -44,7 +44,7 @@ if (section) {
     const y = 85 + i * 95;
     wire(`M240 ${y}H520C680 ${y} 730 225 900 225`, sources, 12);
     make('circle', { cx: 220, cy: y, r: 20, class: 'journey-emitter' }, sources);
-    make('circle', { cx: 220, cy: y, r: 5, fill: '#a9bfd0' }, sources);
+    make('circle', { cx: 220, cy: y, r: 5, style: 'fill: var(--grey-300)' }, sources);
     text(184, y + 5, label, sources, 'journey-source');
   });
   wire('M900 225H1350', sources, 15);
@@ -169,7 +169,7 @@ if (section) {
         text(x, 34 + line * 17, word, mobileSources, 'journey-mobile-source'),
       );
     make('circle', { cx: x, cy: 90, r: 15, class: 'journey-emitter' }, mobileSources);
-    make('circle', { cx: x, cy: 90, r: 4, fill: '#a9bfd0' }, mobileSources);
+    make('circle', { cx: x, cy: 90, r: 4, style: 'fill: var(--grey-300)' }, mobileSources);
     wire(`M${x} 105V230C${x} 320 200 320 200 390`, mobileSources, 8);
   });
   wire('M200 390V650', mobileSources, 9);
