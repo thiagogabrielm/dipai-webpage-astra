@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<BaseLayout
+  title="About us"
+  description="Dipai grew out of PhD research at NTNU in Ålesund. We combine artificial intelligence with maritime domain knowledge to improve fuel efficiency, reduce emissions and support condition-based maintenance."
+  bodyClass="about-page"
+  active="about"
+>
+  <section class="about-body">
+    <article class="about-article wrap" aria-labelledby="about-page-title">
+      <header class="about-header">
+        <h1 id="about-page-title">Hello, we’re Dipai.</h1>
+        <p class="about-lead">
+          We turn vessel data into practical decisions on fuel, emissions and maintenance.
+        </p>
+      </header>
+
+      <section aria-labelledby="about-who">
+        <h2 id="about-who">Who we are</h2>
+        <p>
+          Founded in 2021, Dipai grew out of PhD research at the Norwegian University of Science and
+          Technology (NTNU) in Ålesund, one of Norway’s leading maritime hubs.
+        </p>
+      </section>
+
+      <section aria-labelledby="about-what">
+        <h2 id="about-what">What we do</h2>
+        <p>
+          We combine deep expertise in artificial intelligence with maritime domain knowledge to
+          improve fuel efficiency, reduce emissions and support condition-based maintenance.
+        </p>
+      </section>
+
+      <section aria-labelledby="about-why">
+        <h2 id="about-why">Why work with us</h2>
+        <p>
+          Our cloud-based Dipai Digital Fleet Platform supports 250+ vessels worldwide, analysing
+          data from multiple sources to identify the root causes of operational issues and provide
+          practical recommendations.
+        </p>
+        <p>
+          Our independence from service suppliers and integrators makes the platform well suited to
+          fleet-wide deployment.
+        </p>
+      </section>
+    </article>
+  </section>
+
+  <CTA title="Let’s talk about your fleet." description="Feel free to contact us below.">
+    <a class="button button-outline" href="/contact/">
+      Contact us <span aria-hidden="true"> ›</span>
+    </a>
+  </CTA>
+</BaseLayout>

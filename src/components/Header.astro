@@ -55,11 +55,17 @@ const path = Astro.url.pathname;
           Contact
         </a>
         <details class="nav-dropdown">
-          <summary class:list={[{ 'nav-current': active === 'team' }]}>
+          <summary class:list={[{ 'nav-current': active === 'team' || active === 'about' }]}>
             Company <span>⌄</span>
           </summary>
           <div>
-            <a href="/team/">About us</a>
+            <a
+              href="/about-us/"
+              class:list={[{ 'nav-current': active === 'about' }]}
+              aria-current={path === '/about-us/' ? 'page' : undefined}
+            >
+              About us
+            </a>
             <a
               href="/team/"
               class:list={[{ 'nav-current': active === 'team' }]}

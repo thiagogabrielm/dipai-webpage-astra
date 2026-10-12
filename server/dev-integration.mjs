@@ -25,11 +25,6 @@ export default function localIntegration() {
                       );
                       return;
                     }
-                    if (['/about-us', '/about-us/', '/about-us.html'].includes(url.pathname)) {
-                      res.writeHead(301, { Location: '/team/' + url.search });
-                      res.end();
-                      return;
-                    }
                     if (url.pathname.endsWith('.html')) {
                       const target = [
                         '/navy-variant.html',

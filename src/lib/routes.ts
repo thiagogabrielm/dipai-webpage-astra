@@ -8,6 +8,7 @@ export async function siteRoutes() {
       'news',
       'contact',
       'team',
+      'about-us',
       'faq',
       'book-demo',
       'privacy-policy',

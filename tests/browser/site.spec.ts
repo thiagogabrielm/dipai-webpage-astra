@@ -9,6 +9,7 @@ const routes = [
   '/contact/',
   '/faq/',
   '/team/',
+  '/about-us/',
   '/book-demo/',
   '/privacy-policy/',
   ...news.map((p) => `/news/${p.slug}/`),

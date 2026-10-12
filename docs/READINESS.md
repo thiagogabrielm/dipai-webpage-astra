@@ -29,7 +29,7 @@ Norwegian guidance covers cookies **and similar browser-storage technologies**, 
 - Shared JSON-LD identifies Dipai, the website, and each page. Article templates add article identity, publisher, image and breadcrumbs; news uses the supplied publication date. No invented ratings, reviews or modification dates.
 - Production `robots.txt` allows crawling and identifies the sitemap. The sitemap includes the 35 public routes, excludes the 404 page and legacy aliases.
 - Netlify deploy previews and branch deploys receive `noindex, nofollow` metadata and an `X-Robots-Tag` header; their robots file disallows crawling. `SITE_INDEXING=disabled` provides the same build setting outside Netlify. Local development also uses noindex. These are indexing controls, not access restrictions.
-- `/about-us/` and `/about-us.html` redirect to `/team/`; navigation links use the existing Team destination. Legacy `.html` routes also redirect.
+- `/about-us/` is the About us page (linked from the Company menu and the footer's “About Dipai”); `/about-us.html` redirects to it like other legacy `.html` routes.
 - `scripts/validate-seo.mjs` checks generated canonical URLs, titles, social assets, structured data, sitemap coverage and production/preview indexing settings during the build.
 
 AI-search work uses the same crawlability and factual-content foundation as SEO. Google explicitly says there are no special AI files or additional schema requirements for its AI search features. Inclusion is not guaranteed. See [Google’s AI search guidance](https://developers.google.com/search/docs/appearance/ai-features).

@@ -90,8 +90,8 @@ if (unused.length)
   errors.push('Unreferenced public assets: ' + unused.map((f) => relative(root, f)).join(', '));
 const news = JSON.parse(await readFile('src/data/news.json', 'utf8')),
   cases = JSON.parse(await readFile('src/data/use-cases.json', 'utf8'));
-if (pages.size !== 10 + news.length + cases.length)
-  errors.push(`Expected ${10 + news.length + cases.length} pages, got ${pages.size}`);
+if (pages.size !== 11 + news.length + cases.length)
+  errors.push(`Expected ${11 + news.length + cases.length} pages, got ${pages.size}`);
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;

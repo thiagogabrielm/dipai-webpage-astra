@@ -15,13 +15,7 @@ async function pages(dir) {
     )
   ).flat();
 }
-const aliases = [
-  '/navy-variant.html / 301',
-  '/index.html / 301',
-  '/dark-variant.html / 301',
-  '/about-us/ /team/ 301',
-  '/about-us.html /team/ 301',
-];
+const aliases = ['/navy-variant.html / 301', '/index.html / 301', '/dark-variant.html / 301'];
 for (const file of await pages(root)) {
   if (file === 'index.html') continue;
   const path = '/' + file.replace(/index\.html$/, '');
