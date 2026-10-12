@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductExplorer from '../components/ProductExplorer.astro';
+import DashboardAnimation from '../components/DashboardAnimation.astro';
+import VesselDataIllustration from '../components/VesselDataIllustration.astro';
 ---
 
 <BaseLayout
@@ -33,37 +35,16 @@ import ProductExplorer from '../components/ProductExplorer.astro';
           </a>
         </div>
       </div>
-      <figure class="products-hero-visual">
-        <div class="products-screen-label">
-          <span class="dot"></span>From onboard signals to fleet-wide insight
-        </div>
-        <img
-          alt="Existing vessel-status view showing a vessel map and operational measurements."
-          decoding="async"
-          fetchpriority="high"
-          height="1013"
-          loading="eager"
-          src="/assets/products/vessel-status.webp"
-          width="1800"
-        />
-        <figcaption>Connected insight for crew and shore teams.</figcaption>
-      </figure>
+      <div class="products-hero-visual">
+        <DashboardAnimation />
+      </div>
     </div>
   </section>
   <ProductExplorer />
   <section class="products-foundation dark section">
     <div class="wrap">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">
-            <span class="dot"></span>A shared data foundation
-          </p>
-          <h2>
-            Start with your fleet.
-            <br />
-            Build from its data.
-          </h2>
-        </div>
+      <div class="section-heading section-heading--stacked">
+        <h2>A shared data foundation</h2>
         <p>
           Bring vessels onboard together, even when their data maturity differs. Deepen the analysis
           as more data becomes available.
@@ -71,20 +52,26 @@ import ProductExplorer from '../components/ProductExplorer.astro';
       </div>
       <div class="products-data-grid">
         <article>
-          <span class="data-type">Connected vessels</span>
-          <h3>High-frequency insight.</h3>
-          <p>
-            Sensor integration supports the full platform, combining data from engines, thrusters,
-            auxiliary equipment and navigation systems for detailed analysis.
-          </p>
+          <VesselDataIllustration variant="connected" />
+          <div class="products-data-copy">
+            <span class="data-type">Connected vessels</span>
+            <h3>High-frequency insight.</h3>
+            <p>
+              Sensor integration supports the full platform, combining data from engines, thrusters,
+              auxiliary equipment and navigation systems for detailed analysis.
+            </p>
+          </div>
         </article>
         <article>
-          <span class="data-type">Report-based vessels</span>
-          <h3>A fleet-wide starting point.</h3>
-          <p>
-            Manual reports, weather and third-party AIS data support a higher-level operational
-            view. Add sensor integration as your fleet’s digital capabilities develop.
-          </p>
+          <VesselDataIllustration variant="report" />
+          <div class="products-data-copy">
+            <span class="data-type">Report-based vessels</span>
+            <h3>A fleet-wide starting point.</h3>
+            <p>
+              Manual reports, weather and third-party AIS data support a higher-level operational
+              view. Add sensor integration as your fleet’s digital capabilities develop.
+            </p>
+          </div>
         </article>
       </div>
       <div class="products-data-note">

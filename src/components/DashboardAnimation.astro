@@ -1,0 +1,41 @@
+---
+import MotionControl from './MotionControl.astro';
+---
+
+<div class="dashboard-animation" data-dashboard-animation>
+  <div
+    class="dashboard-animation-frame"
+    role="img"
+    aria-label="Selecting Vessel A in the Dipai platform opens its consumption dashboard, with fleet metrics, a stacked quarterly fuel chart and a weather map."
+  >
+    <picture>
+      <source
+        media="(max-width: 700px)"
+        srcset="/assets/products/dashboard-animation/final-small.webp"
+      />
+      <img
+        class="dashboard-animation-still"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+        height="1017"
+        loading="eager"
+        src="/assets/products/dashboard-animation/final.webp"
+        width="1331"
+      />
+    </picture>
+    <div class="dashboard-animation-stage" data-dashboard-stage></div>
+  </div>
+  <MotionControl
+    control="dashboard"
+    subject="dashboard animation"
+    class="dashboard-animation-pause"
+  />
+</div>
+
+<script>
+  import { initDashboardAnimation } from '../scripts/dashboard-animation.js';
+  document
+    .querySelectorAll('[data-dashboard-animation]')
+    .forEach((root) => initDashboardAnimation(root));
+</script>
