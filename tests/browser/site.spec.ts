@@ -84,7 +84,7 @@ test('hero, product tabs and continent controls work', async ({ page }) => {
       .poll(() => page.locator('.hero-background').last().getAttribute('src'))
       .toContain(id === 'offshore' ? 'offshore' : id);
   }
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 5; i++) {
     await page.locator(`[data-product="${i}"]`).click();
     await expect(page.locator(`[data-product="${i}"]`)).toHaveAttribute('aria-selected', 'true');
   }

@@ -21,10 +21,17 @@ export default [
     chart: 'Turn condition trends into an early warning',
   },
   {
-    category: 'SEEMP & REPORTING',
-    title: 'Stop rebuilding the same data structure for every report',
+    category: 'SEEMP',
+    title: 'Turn your SEEMP into a living target plan',
     description:
-      'Combine operational modes, fuel consumption and emissions data in powerful monitoring and reporting tools. Spend less time handling inputs and more time understanding how you are progressing towards your structured goals.',
-    chart: 'Connect the data behind your plan and reports',
+      'Take your SEEMP from a static, qualitative document to a dynamic, quantitative management tool. Set targets from historical performance, follow up measures with the crew and see which vessels and operating modes need attention.',
+    chart: 'Track measured KPIs against your SEEMP targets',
+  },
+  {
+    category: 'MRV & EU ETS',
+    title: 'End-to-end MRV, from vessel data to verified report',
+    description:
+      'One automated pipeline combines sensor and AIS data with fuel, cargo and crew reports, corrects voyages, events and bunkers with a full audit trail, and delivers EU/UK MRV and IMO DCS reports with EU ETS allowance estimates.',
+    chart: 'From raw vessel data to compliant emissions reports',
   },
 ];
