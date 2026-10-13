@@ -244,7 +244,7 @@ test('local preview refuses real form submissions instead of reporting success',
   await form.locator('[name="email"]').fill('test@example.com');
   await form.locator('[name="message"]').fill('This stays on the local preview server.');
   await form.locator('[type="submit"]').click();
-  await expect(form.locator('[data-form-status]')).toContainText('not enabled');
+  await expect(form.locator('[data-form-status]')).toContainText('online sending isn’t available');
   await expect(page.locator('#contact-result')).toBeHidden();
   await expect(form.locator('[name="message"]')).toHaveValue(
     'This stays on the local preview server.',

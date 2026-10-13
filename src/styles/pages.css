@@ -1020,7 +1020,11 @@ html[data-theme='dark'] .products-explorer {
 .contact-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.75fr);
-  gap: 72px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'form direct'
+    'form routes';
+  gap: 44px 72px;
   padding-bottom: 90px;
   align-items: start;
 }
@@ -1051,6 +1055,9 @@ html body.faq-page .faq-page-layout {
 .contact-page .support-intro > p:last-child {
   text-wrap: balance;
 }
+.contact-page .intro-direct {
+  display: none;
+}
 .support-intro > p a {
   color: var(--ink);
   text-decoration: underline;
@@ -1061,17 +1068,24 @@ html body.faq-page .faq-page-layout {
   color: var(--yellow);
 }
 /* Sidebar: direct contact first, then the other routes as a ruled list. */
-.contact-copy {
-  display: grid;
-  gap: 44px;
+/* Source order is form, direct contact, routes at every width, so reading, keyboard and visual
+   order agree; on wide screens the grid places both sidebar blocks to the right of the form. */
+.contact-direct-block {
+  grid-area: direct;
 }
-.contact-copy h2 {
+.contact-form-card {
+  grid-area: form;
+}
+.contact-routes-block {
+  grid-area: routes;
+}
+:is(.contact-direct-block, .contact-routes-block) h2 {
   font-size: 20px;
   margin-bottom: 8px;
 }
 .contact-direct {
   display: grid;
-  gap: 4px;
+  gap: 0;
   margin: 0;
   font-size: 15px;
 }
@@ -1199,7 +1213,7 @@ html body.faq-page .faq-page-layout {
 }
 #contact-form textarea:focus-visible {
   outline: 2px solid var(--focus);
-  outline-offset: 4px;
+  outline-offset: 5px;
 }
 .field-hint {
   display: block;
@@ -1218,6 +1232,38 @@ html body.faq-page .faq-page-layout {
 }
 .field-count[data-near-limit] {
   color: var(--ink);
+}
+.field-count[data-over] {
+  color: var(--ink);
+  font-weight: 600;
+}
+/* Restored draft: a quiet line at the top of the form with a way to start over. */
+.form-draft {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 4px 4px 4px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 13px;
+}
+.form-draft[hidden] {
+  display: none;
+}
+.form-draft p {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+}
+.form-draft .text-button {
+  min-height: 44px;
+  padding: 0 10px;
+}
+[data-form-status] strong {
+  font-weight: 650;
 }
 /* Inline validation: invalid fields take Alert Coral; the message names the fix. */
 .field-error {
@@ -1245,17 +1291,12 @@ html body.faq-page .faq-page-layout {
   border-color: var(--field-error);
   box-shadow: inset 0 0 0 1px var(--field-error);
 }
-/* One ring, not two: a focused invalid field draws its focus outline in the error colour. */
-:is(#contact-form, #demo-form) :is(input, textarea, select)[aria-invalid='true']:focus-visible {
-  outline-color: var(--field-error);
-  box-shadow: none;
-}
 .contact-required {
   margin: -16px 0 22px;
   color: var(--muted);
   font-size: 12px;
 }
-/* What happens next: three steps on one drawn line, the site's signal-path motif at rest. */
+/* What happens next: two steps on one drawn line, the site's signal-path motif at rest. */
 .contact-next {
   margin-top: 32px;
   padding-top: 26px;
@@ -1412,12 +1453,18 @@ html body.faq-page .faq-page-layout {
     gap: 38px;
     grid-template-columns: 1fr;
   }
-  /* Single column: email and phone move above the form, the other routes follow it. */
-  .contact-copy {
-    display: contents;
+  /* Single column follows the source order: form, email and phone, then the other routes.
+     The intro carries a direct email link so a non-form route is visible on the first screen. */
+  .contact-layout {
+    grid-template-rows: none;
+    grid-template-areas:
+      'form'
+      'direct'
+      'routes';
   }
-  .contact-direct-block {
-    order: -1;
+  .contact-page .intro-direct {
+    display: block;
+    margin-top: 10px;
   }
   .contact-direct {
     grid-template-columns: repeat(2, max-content);
@@ -1443,6 +1490,27 @@ html body.faq-page .faq-page-layout {
   }
   #contact-form {
     grid-template-columns: 1fr;
+  }
+  /* On phones the draft bar stays one line, and the error summary (below the fold when focus
+     lands on the first field) is kept for screen readers while the inline errors show the way. */
+  .form-draft {
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding-left: 12px;
+    font-size: 12px;
+  }
+  .form-draft .text-button {
+    flex: none;
+    padding: 0 8px;
+  }
+  [data-form-status][data-summary] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .contact-required {
     margin-top: -18px;

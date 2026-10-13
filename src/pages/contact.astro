@@ -30,6 +30,7 @@ const steps = [
     title: 'We reply within 24 hours',
     sent: 'Message received',
     text: 'By email, from the team that runs the platform.',
+    sentText: 'We’ll reply by email within 24 hours, from the team that runs the platform.',
   },
   {
     title: 'We follow up on what you need',
@@ -40,7 +41,7 @@ const steps = [
 
 <BaseLayout
   title="Contact"
-  description="Contact Dipai at contact@dipai.no about the platform, your fleet or your account. We usually reply within 24 hours."
+  description="Contact Dipai at contact@dipai.no about the platform, your fleet or your account. We reply within 24 hours."
   bodyClass="support-page contact-page"
   active="contact"
 >
@@ -49,6 +50,9 @@ const steps = [
     <p>
       Questions about the platform, a new project or your existing account all reach the same team.
       Tell us about your vessels and the data you have today.
+      <span class="intro-direct">
+        Prefer email? <a href="mailto:contact@dipai.no">contact@dipai.no</a>
+      </span>
     </p>
   </header>
   <section aria-labelledby="contact-form-title" class="contact-layout wrap">
@@ -97,8 +101,9 @@ const steps = [
         <label for="contact-message">
           Message
           <span aria-hidden="true" class="field-hint" id="contact-message-hint">
-            Helpful to include: fleet size, vessel types, whether vessels have sensors or only noon
-            reports, and what you want to improve.
+            For a new project: fleet size, vessel types, whether vessels have sensors or only noon
+            reports, and what you want to improve. For your account: the vessel or module it’s
+            about.
           </span>
           <textarea
             aria-describedby="contact-message-hint"
@@ -111,10 +116,10 @@ const steps = [
             rows="5"
           ></textarea>
           <span aria-hidden="true" class="field-count" id="contact-message-count">
-            0 / 4000
+            0 / 4,000
           </span>
-          <span aria-live="polite" class="field-live" data-count-live=""></span>
         </label>
+        <span aria-live="polite" class="field-live" data-count-live="contact-message"></span>
         <p aria-atomic="true" aria-live="polite" data-form-status="" hidden="" role="status"></p>
         <div class="contact-submit">
           <button aria-describedby="contact-form-note" class="button" type="submit">
@@ -127,20 +132,20 @@ const steps = [
         </div>
       </form>
       <div hidden="" id="contact-result">
-        <h2 tabindex="-1">Thank you. Your message is on its way.</h2>
+        <h2 tabindex="-1">Thank you. We’ve received your message.</h2>
         <p>
-          We’ll reply to <strong data-result-email="">your email address</strong>. While you wait:
+          Our reply will go to <strong data-result-email="">your email address</strong>.
         </p>
         <div class="contact-result-actions">
-          <button class="button contact-another" data-send-another="" type="button">
-            Send another message
-          </button>
           <a class="text-button" href="/use-cases/">
             See how operators use Dipai <span aria-hidden="true">›</span>
           </a>
           <a class="text-button" href="/book-demo/">
             Book a demo <span aria-hidden="true">›</span>
           </a>
+          <button class="button contact-another" data-send-another="" type="button">
+            Send another message
+          </button>
         </div>
       </div>
       <div class="contact-next">
@@ -150,54 +155,53 @@ const steps = [
             <li>
               <strong class:list={[{ 'step-default': step.sent }]}>{step.title}</strong>
               {step.sent && <strong class="step-sent">{step.sent}</strong>}
-              <span>{step.text}</span>
+              <span class:list={[{ 'step-default': step.sentText }]}>{step.text}</span>
+              {step.sentText && <span class="step-sent">{step.sentText}</span>}
             </li>
           ))}
         </ol>
       </div>
     </div>
-    <aside aria-label="Other ways to reach Dipai" class="contact-copy">
-      <div class="contact-direct-block">
-        <h2 id="contact-direct-title">Prefer to email or call?</h2>
-        <dl class="contact-direct">
-          <div>
-            <dt>Email</dt>
-            <dd>
-              <a href="mailto:contact@dipai.no">contact@dipai.no</a>
-            </dd>
-          </div>
-          <div>
-            <dt>Call</dt>
-            <dd>
-              <a href="tel:+4790209249">+47 902 09 249</a>
-            </dd>
-          </div>
-        </dl>
-      </div>
-      <div class="contact-routes-block">
-        <h2 id="contact-routes-title">Other routes</h2>
-        <ul class="contact-routes">
-          {routes.map((route) => (
-            <li>
-              <h3>{route.title}</h3>
-              <p>{route.text}</p>
-              <a
-                class="text-button"
-                href={route.href}
-                rel={route.external ? 'noopener noreferrer' : undefined}
-                target={route.external ? '_blank' : undefined}
-              >
-                {route.label}
-                <span aria-hidden="true">›</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p class="contact-visit">
-          <span>Visit</span>
-          Norwegian Maritime Competence Center (NMCC), Borgundvegen 340, 6009 Ålesund, Norway
-        </p>
-      </div>
+    <aside aria-labelledby="contact-direct-title" class="contact-direct-block">
+      <h2 id="contact-direct-title">Prefer to email or call?</h2>
+      <dl class="contact-direct">
+        <div>
+          <dt>Email</dt>
+          <dd>
+            <a href="mailto:contact@dipai.no">contact@dipai.no</a>
+          </dd>
+        </div>
+        <div>
+          <dt>Call</dt>
+          <dd>
+            <a href="tel:+4790209249">+47 902 09 249</a>
+          </dd>
+        </div>
+      </dl>
+    </aside>
+    <aside aria-labelledby="contact-routes-title" class="contact-routes-block">
+      <h2 id="contact-routes-title">Other routes</h2>
+      <ul class="contact-routes">
+        {routes.map((route) => (
+          <li>
+            <h3>{route.title}</h3>
+            <p>{route.text}</p>
+            <a
+              class="text-button"
+              href={route.href}
+              rel={route.external ? 'noopener noreferrer' : undefined}
+              target={route.external ? '_blank' : undefined}
+            >
+              {route.label}
+              <span aria-hidden="true">›</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="contact-visit">
+        <span>Visit</span>
+        Norwegian Maritime Competence Center (NMCC), Borgundvegen 340, 6009 Ålesund, Norway
+      </p>
     </aside>
   </section>
 </BaseLayout>

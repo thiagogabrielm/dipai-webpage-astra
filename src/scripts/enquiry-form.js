@@ -11,7 +11,7 @@ export async function submitEnquiry(data, fetcher = fetch) {
   if (!response.ok) {
     if ([404, 405, 501, 503].includes(response.status))
       throw new Error(
-        'Online sending is not enabled yet. Your message has not been sent. Please try again later.',
+        'Your message wasn’t sent: online sending isn’t available right now. Please try again later.',
       );
     if (response.status === 429)
       throw new Error('Your message wasn’t sent: too many attempts. Please try again later.');
@@ -22,6 +22,7 @@ export async function submitEnquiry(data, fetcher = fetch) {
 // Inline field errors. The message sits after the field (hidden from the label's name) and is linked
 // to it with aria-describedby, so screen readers hear it with the field.
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const number = (value) => value.toLocaleString('en-GB');
 function fieldError(field) {
   if (field.validity.valueMissing || (field.required && !field.value.trim()))
     return (
@@ -30,6 +31,11 @@ function fieldError(field) {
     );
   if (field.type === 'email' && !EMAIL.test(field.value.trim()))
     return 'Enter an email address like name@company.com.';
+  const max = Number(field.dataset.max);
+  if (max && field.value.length > max) {
+    const over = field.value.length - max;
+    return `Shorten your message by ${number(over)} ${over === 1 ? 'character' : 'characters'} to send it (limit ${number(max)}).`;
+  }
   return '';
 }
 function showError(field, message) {
@@ -106,54 +112,200 @@ export function mountEnquiryForm(kind) {
   const required = [...form.querySelectorAll('[required]')];
   const next = form.parentElement?.querySelector('.contact-next');
   let sending = false;
-  // Character counters for fields that declare one. Near the limit the counter says what is left,
-  // and a polite live region announces crossing the threshold once rather than every keystroke.
+  // A draft survives a refresh or a reloaded phone tab for this tab only, and is cleared once sent.
+  // Storage can be unavailable (private mode, blocked site data), so every access is guarded.
+  const draftKey = `dipai-draft-${kind}`;
+  const draftFields = [
+    ...form.querySelectorAll('input[name], textarea[name], select[name]'),
+  ].filter((field) => field.type !== 'hidden' && !field.closest('.enquiry-trap'));
+  const saveDraft = () => {
+    try {
+      const draft = Object.fromEntries(draftFields.map((field) => [field.name, field.value]));
+      if (Object.values(draft).some((value) => value.trim())) {
+        sessionStorage.setItem(draftKey, JSON.stringify(draft));
+      } else sessionStorage.removeItem(draftKey);
+    } catch {
+      /* Drafts are a convenience; the form works without them. */
+    }
+  };
+  const clearDraft = () => {
+    try {
+      sessionStorage.removeItem(draftKey);
+    } catch {
+      /* Ignore unavailable storage. */
+    }
+  };
+  // A restored draft is named at the top of the form, with a way to start over. It doesn't claim
+  // the message was never sent: after a timeout it may still have arrived.
+  const draftNote = document.createElement('div');
+  draftNote.className = 'form-draft';
+  draftNote.hidden = true;
+  const draftText = document.createElement('p');
+  draftText.setAttribute('role', 'status');
+  const startOver = document.createElement('button');
+  startOver.type = 'button';
+  startOver.className = 'text-button';
+  startOver.textContent = 'Start over';
+  draftNote.append(draftText, startOver);
+  form.querySelector('input[type="hidden"]')?.after(draftNote);
+  const hideDraftNote = () => {
+    draftNote.hidden = true;
+    draftText.textContent = '';
+    startOver.textContent = 'Start over';
+  };
+  let restored = false;
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(draftKey) || 'null');
+    if (saved)
+      draftFields.forEach((field) => {
+        if (!field.value && typeof saved[field.name] === 'string' && saved[field.name]) {
+          field.value = saved[field.name];
+          restored = true;
+        }
+      });
+  } catch {
+    /* Ignore unreadable drafts. */
+  }
+  if (restored) {
+    draftNote.hidden = false;
+    // Set after insertion so the status is announced.
+    requestAnimationFrame(() => {
+      draftText.textContent = 'Restored what you wrote earlier.';
+    });
+  }
+  // Start over is reversible: the cleared values are held for ten seconds behind an Undo.
+  let draftMode = 'restored';
+  let cleared = null;
+  let undoTimer;
+  const setFields = (values) => {
+    draftFields.forEach((field) => {
+      field.value = values?.[field.name] ?? '';
+      showError(field, '');
+      field.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  };
+  startOver.addEventListener('click', () => {
+    if (draftMode === 'undo') {
+      clearTimeout(undoTimer);
+      draftMode = 'restored';
+      setFields(cleared);
+      cleared = null;
+      saveDraft();
+      draftText.textContent = 'Your draft is back.';
+      startOver.textContent = 'Start over';
+      draftFields.find((field) => !field.value)?.focus() || draftFields.at(-1)?.focus();
+      undoTimer = setTimeout(hideDraftNote, 4000);
+      return;
+    }
+    cleared = Object.fromEntries(draftFields.map((field) => [field.name, field.value]));
+    draftMode = 'undo';
+    setFields(null);
+    clearDraft();
+    draftText.textContent = 'Draft cleared.';
+    startOver.textContent = 'Undo';
+    startOver.focus();
+    undoTimer = setTimeout(() => {
+      cleared = null;
+      draftMode = 'restored';
+      hideDraftNote();
+    }, 10000);
+  });
+  form.addEventListener('input', () => {
+    saveDraft();
+    if (
+      draftMode === 'restored' &&
+      !draftNote.hidden &&
+      draftFields.every((field) => !field.value.trim())
+    )
+      hideDraftNote();
+  });
+  // Character counters for fields that declare one. Typing stops at the limit, but pasted text is
+  // kept even when it runs over, so nothing written is lost; the counter shows how far over it is
+  // and sending is blocked until it is trimmed. Without JavaScript the native maxlength applies.
   form.querySelectorAll('[data-count]').forEach((field) => {
     const counter = document.getElementById(field.dataset.count);
-    const live = field.closest('label')?.querySelector('[data-count-live]');
+    // The announcer sits outside the label so its text never becomes part of the field's name.
+    const live = form.querySelector(`[data-count-live="${field.id}"]`);
     const max = field.maxLength;
+    field.dataset.max = String(max);
+    field.removeAttribute('maxlength');
     let stage = 0;
-    let clipped = false;
     const announce = (text) => {
       if (live) live.textContent = text;
     };
     const update = () => {
       const length = field.value.length;
-      const left = max - length;
       const near = length > max * 0.9;
-      let text = `${length} / ${max}`;
-      if (length >= max)
-        text = clipped
-          ? `Pasted text was cut at ${max.toLocaleString('en-GB')} characters`
-          : `Limit reached: ${max.toLocaleString('en-GB')} characters`;
-      else if (near) text = `${left.toLocaleString('en-GB')} characters left`;
+      const over = length > max;
+      // Over the limit the counter only counts; the field error says what to do.
+      let text = `${number(length)} / ${number(max)}`;
+      if (!over && length === max) text = `Limit reached: ${number(max)} characters`;
+      else if (near && !over) text = `${number(max - length)} characters left`;
       counter.textContent = text;
       counter.toggleAttribute('data-near-limit', near);
-      const next = length >= max ? 2 : near ? 1 : 0;
-      if (next > stage) announce(text);
+      counter.toggleAttribute('data-over', over);
+      const next = over ? 3 : length === max ? 2 : near ? 1 : 0;
+      if (next > stage && !over) announce(text);
+      // Once back under a threshold the old announcement is stale, so clear it.
+      if (next < stage) announce('');
       stage = next;
-      if (length < max) clipped = false;
     };
-    // Pasting past the limit is cut by the browser without warning; note it in the counter.
-    field.addEventListener('paste', (event) => {
-      const pasted = event.clipboardData?.getData('text') || '';
-      const room = max - field.value.length + (field.selectionEnd - field.selectionStart);
-      clipped = pasted.length > room;
+    // Typed characters stop at the limit; pastes and drops are let through and flagged instead.
+    field.addEventListener('beforeinput', (event) => {
+      const typed = ['insertText', 'insertLineBreak', 'insertCompositionText'].includes(
+        event.inputType,
+      );
+      const replacing = field.selectionEnd - field.selectionStart;
+      const adding = event.inputType === 'insertLineBreak' ? 1 : (event.data || '').length;
+      if (typed && field.value.length - replacing + adding > max) event.preventDefault();
     });
-    field.addEventListener('input', update);
+    field.addEventListener('input', (event) => {
+      update();
+      // Flag an over-limit paste straight away rather than waiting for submit.
+      if (field.value.length > max && !field.hasAttribute('aria-invalid'))
+        showError(field, fieldError(field));
+      if (event.inputType?.startsWith('insertFrom') && field.value.length > max)
+        announce(fieldError(field));
+    });
     form.addEventListener('reset', () => requestAnimationFrame(update));
     update();
   });
   // Once a field has shown an error, re-check it as the visitor corrects it.
+  // The error summary is kept in step with the fields: it counts down and disappears at zero.
+  // Once a submit has found errors, the summary tracks every change until the next send: it
+  // counts down, hides below two, and comes back if errors return.
+  let summaryArmed = false;
+  const refreshSummary = () => {
+    if (!summaryArmed) return;
+    const remaining = required.filter((field) => field.hasAttribute('aria-invalid')).length;
+    if (remaining > 1) {
+      status.hidden = false;
+      status.dataset.error = '';
+      status.dataset.summary = '';
+      status.textContent = `${remaining} fields need attention.`;
+    } else if (status.hasAttribute('data-summary')) {
+      status.hidden = true;
+      status.removeAttribute('data-summary');
+      status.removeAttribute('data-error');
+      status.textContent = '';
+    }
+  };
+  // Corrections are acknowledged at once, but an email is not re-judged mid-word: while it is
+  // still being typed its error is set aside, and the blur or submit check brings it back.
   form.addEventListener('input', (event) => {
-    if (event.target.hasAttribute('aria-invalid'))
-      showError(event.target, fieldError(event.target));
+    const field = event.target;
+    if (field.hasAttribute('aria-invalid')) {
+      const message = fieldError(field);
+      showError(field, field.type === 'email' && message && field.value.trim() ? '' : message);
+    }
+    refreshSummary();
   });
   form.addEventListener(
     'blur',
     (event) => {
       if (required.includes(event.target) && event.target.value)
         showError(event.target, fieldError(event.target));
+      refreshSummary();
     },
     true,
   );
@@ -176,14 +328,9 @@ export function mountEnquiryForm(kind) {
     });
     if (invalid.length) {
       // A short summary in the status region when more than one field needs attention.
-      if (invalid.length > 1) {
-        status.hidden = false;
-        status.dataset.error = '';
-        status.removeAttribute('data-sending');
-        status.textContent = `${invalid.length} fields need attention.`;
-      } else if (status.hasAttribute('data-error') && !status.querySelector('.form-fallback')) {
-        status.hidden = true;
-      }
+      summaryArmed = true;
+      status.removeAttribute('data-sending');
+      refreshSummary();
       invalid[0].focus();
       return;
     }
@@ -193,6 +340,8 @@ export function mountEnquiryForm(kind) {
     sending = true;
     status.hidden = false;
     status.removeAttribute('data-error');
+    status.removeAttribute('data-summary');
+    summaryArmed = false;
     // The button shows progress visually; the status line announces it to screen readers only.
     status.dataset.sending = '';
     status.textContent = 'Sending your message…';
@@ -215,6 +364,10 @@ export function mountEnquiryForm(kind) {
       kept.forEach(([field, value]) => {
         field.value = value;
       });
+      clearDraft();
+      clearTimeout(undoTimer);
+      draftMode = 'restored';
+      hideDraftNote();
       status.hidden = true;
       next?.setAttribute('data-sent', '');
       form.hidden = true;
@@ -223,10 +376,18 @@ export function mountEnquiryForm(kind) {
     } catch (error) {
       failed = true;
       status.dataset.error = '';
-      status.textContent =
-        error.name === 'TimeoutError' || error.name === 'TypeError'
-          ? 'We could not confirm sending. Check your connection and try again; your details are still here.'
-          : error.message;
+      // A network error means nothing reached us; only a timeout leaves the outcome unknown.
+      const message =
+        error.name === 'TypeError'
+          ? 'Your message wasn’t sent. Check your connection and try again; your details are still here.'
+          : error.name === 'TimeoutError'
+            ? 'We could not confirm sending. It may still arrive; trying again is safe, and if we receive it twice that’s fine. Your details are still here.'
+            : error.message;
+      // The first sentence says what happened; it is set in bold so it can be scanned.
+      const [lead, ...rest] = message.split(/(?<=[.:])\s/);
+      const strong = document.createElement('strong');
+      strong.textContent = lead;
+      status.replaceChildren(strong, rest.length ? ` ${rest.join(' ')}` : '');
       showFallback(status, form, payload);
     } finally {
       sending = false;
