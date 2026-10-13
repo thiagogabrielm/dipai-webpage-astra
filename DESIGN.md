@@ -17,6 +17,7 @@ colors:
   steel-grey: "#8699a7"
   deep-steel: "#435b71"
   focus-blue: "#538bb7"
+  focus-blue-on-dark: "#8ab9de"
   alert-coral: "#ff6b57"
 typography:
   display:
@@ -161,8 +162,8 @@ A narrow, cool navy-and-mist palette with a single warm signal.
 - **Paper White** (#f8fafb) / **Pure White** (#ffffff): navigation text, hero text, and light-theme surfaces.
 
 ### Functional
-- **Focus Blue** (#538bb7): keyboard focus outlines only.
-- **Alert Coral** (#ff6b57): the critical state in condition charts (the critical limit line and its tint). It is a status colour, not a brand colour.
+- **Focus Blue** (#538bb7 on light surfaces, lifted to #8ab9de on dark surfaces): the only keyboard focus colour, on every control in every theme. The dark value keeps the 2px ring at 4.4:1 or better on Deep-Sea Navy, Raised Hull and Harbour Slate. Signal Yellow is never a focus colour; it stays reserved for the one action to take.
+- **Alert Coral** (#ff6b57): the critical state in condition charts (the critical limit line and its tint), and form errors (invalid-field borders and error dots; #c2412d on light surfaces). It is a status colour, not a brand colour.
 
 ### Named Rules
 **The One Signal Rule.** Signal Yellow marks only the single thing to act on or notice in a view: the primary action, the active selection, the latest or outlier value. It is never decoration, never a large fill, and never two competing things on one screen.

@@ -378,7 +378,7 @@ html[data-theme='dark'] .products-page .products-foundation {
     inset 0 -1px 0 color-mix(in srgb, var(--blue) 15.7%, transparent);
 }
 .module-nav-link:focus-visible {
-  outline: 2px solid var(--yellow);
+  outline: 2px solid var(--focus);
   outline-offset: -3px;
 }
 .module-icon {

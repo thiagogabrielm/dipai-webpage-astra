@@ -212,7 +212,9 @@
           "#8cb1cf",
           "#bed3e4",
           "#edf3f7"
-        ]
+        ],
+        "onDark": "#8ab9de",
+        "usage": "The only keyboard focus colour, in every theme; #8ab9de on dark surfaces. Never Signal Yellow."
       },
       "alert-coral": {
         "role": "functional",

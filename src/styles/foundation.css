@@ -18,7 +18,8 @@
   /* Form fields: borders meet 3:1 against their surface; invalid fields take the signal colour. */
   --field-border: color-mix(in srgb, var(--slate) 64%, transparent);
   --field-error: #c2412d;
-  /* Keyboard focus outline. */
+  /* Keyboard focus outline, in every theme and on every control. Yellow is never a focus colour:
+     it is reserved for the one action to take. */
   --focus: #538bb7;
   /* Navy family: raised dark surfaces, deep overlays/backdrops, and near-black shadows. */
   --navy-raised: #25394b;
@@ -1856,9 +1857,6 @@ select {
 .site-header .nav-dropdown button:hover {
   background: var(--slate);
   color: var(--white);
-}
-.site-header :focus-visible {
-  outline-color: var(--yellow);
 }
 .hero {
   background: var(--tint-200);

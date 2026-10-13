@@ -1266,7 +1266,7 @@ html[data-theme='dark'] #platform .product-graphic {
   background: color-mix(in srgb, currentColor 10%, transparent);
 }
 .motion-control:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
 }
 .motion-control svg {
@@ -1490,9 +1490,6 @@ html[data-theme='dark'] #platform .product-graphic {
 :is(.faq--bands, .faq--contained) .faq-list summary:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: -5px;
-}
-:is(.faq--bands, .faq--contained) .faq-list details[open] summary:focus-visible {
-  outline-color: var(--yellow);
 }
 :is(.faq--bands, .faq--contained) .faq-toggle {
   position: relative;
@@ -1991,7 +1988,7 @@ body[data-card-border-mode] .section-carousel-arrow {
   border-radius: inherit;
 }
 .focus-quote-select:focus-visible {
-  outline: 2px solid var(--yellow);
+  outline: 2px solid var(--focus);
   outline-offset: -5px;
 }
 .focus-quote-status {
@@ -2305,7 +2302,7 @@ html body .fleet-scroll-reveal #fleet + #stories {
   border-color: var(--yellow);
 }
 .journey-chapters button:focus-visible {
-  outline: 2px solid var(--yellow);
+  outline: 2px solid var(--focus);
   outline-offset: 4px;
 }
 .journey-summary {

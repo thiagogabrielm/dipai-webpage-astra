@@ -40,6 +40,8 @@ html[data-theme='dark'] body {
   --surface-raised: var(--navy-raised);
   --surface-section: var(--slate);
   --surface-input: var(--navy);
+  /* Focus Blue, lifted for dark surfaces: at least 4.1:1 on navy, raised and slate. */
+  --focus: #8ab9de;
   --action-bg: var(--navy-raised);
   --action-color: var(--tint-100);
   --action-hover-bg: var(--grey-700);
@@ -184,9 +186,6 @@ html[data-theme='dark'] .section-carousel-dot::before {
 html[data-theme='dark'] .carousel-marker path[stroke='var(--slate)'] {
   stroke: var(--blue);
   stroke-opacity: 0.45;
-}
-html[data-theme='dark'] :is(button, a, summary, [tabindex]):focus-visible {
-  outline-color: var(--yellow);
 }
 html[data-theme='dark'] .site-footer .footer-top {
   border-color: var(--line);
@@ -354,9 +353,6 @@ html[data-theme='dark'] body .faq--contained .faq-list details:not([open]):hover
 }
 html[data-theme='dark'] body .faq--contained .faq-list details[open] {
   background: var(--surface-base);
-}
-html[data-theme='dark'] body .faq-list summary:focus-visible {
-  outline-color: var(--yellow);
 }
 html[data-theme='dark'] body.framed-layout :is(.page-frame, .site-footer) {
   background: var(--surface-base);

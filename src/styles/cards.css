@@ -1150,7 +1150,7 @@ html[data-theme='dark'] .use-case-category {
   stroke: none;
 }
 .vessel-ribbon button:focus-visible {
-  outline: 2px solid var(--yellow);
+  outline: 2px solid var(--focus);
   outline-offset: -3px;
 }
 .vessel-sr-only {
