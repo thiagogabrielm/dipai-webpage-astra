@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T13:29:08+00:00",
+  "title": "Design System: Dipai",
+  "extensions": {
+    "colorMeta": {
+      "signal-yellow": {
+        "role": "primary",
+        "displayName": "Signal Yellow",
+        "tonalRamp": [
+          "#4c4000",
+          "#806b00",
+          "#b29600",
+          "#e6c100",
+          "#ffda1a",
+          "#ffe55c",
+          "#fff0a3",
+          "#fffbe5"
+        ]
+      },
+      "signal-yellow-pressed": {
+        "role": "primary",
+        "displayName": "Signal Yellow Pressed",
+        "tonalRamp": [
+          "#4c4000",
+          "#806b00",
+          "#b29600",
+          "#e6c100",
+          "#ffda1a",
+          "#ffe55c",
+          "#fff0a3",
+          "#fffbe5"
+        ]
+      },
+      "deep-sea-navy": {
+        "role": "neutral",
+        "displayName": "Deep Sea Navy",
+        "tonalRamp": [
+          "#080f18",
+          "#142431",
+          "#1c2b39",
+          "#25394b",
+          "#2c4a61",
+          "#435b71",
+          "#8699a7",
+          "#c2d1dd"
+        ]
+      },
+      "raised-hull": {
+        "role": "neutral",
+        "displayName": "Raised Hull",
+        "tonalRamp": [
+          "#080f18",
+          "#142431",
+          "#1c2b39",
+          "#25394b",
+          "#2c4a61",
+          "#435b71",
+          "#8699a7",
+          "#c2d1dd"
+        ]
+      },
+      "abyss-navy": {
+        "role": "neutral",
+        "displayName": "Abyss Navy",
+        "tonalRamp": [
+          "#080f18",
+          "#142431",
+          "#1c2b39",
+          "#25394b",
+          "#2c4a61",
+          "#435b71",
+          "#8699a7",
+          "#c2d1dd"
+        ]
+      },
+      "night-shadow": {
+        "role": "neutral",
+        "displayName": "Night Shadow",
+        "tonalRamp": [
+          "#080f18",
+          "#142431",
+          "#1c2b39",
+          "#25394b",
+          "#2c4a61",
+          "#435b71",
+          "#8699a7",
+          "#c2d1dd"
+        ]
+      },
+      "harbour-slate": {
+        "role": "neutral",
+        "displayName": "Harbour Slate",
+        "tonalRamp": [
+          "#080f18",
+          "#142431",
+          "#1c2b39",
+          "#25394b",
+          "#2c4a61",
+          "#435b71",
+          "#8699a7",
+          "#c2d1dd"
+        ]
+      },
+      "mist-blue": {
+        "role": "neutral",
+        "displayName": "Mist Blue",
+        "tonalRamp": [
+          "#435b71",
+          "#607483",
+          "#7890a3",
+          "#8699a7",
+          "#a9bfd0",
+          "#c2d1dd",
+          "#dce6ed",
+          "#f2f6fa"
+        ]
+      },
+      "foam-white": {
+        "role": "neutral",
+        "displayName": "Foam White",
+        "tonalRamp": [
+          "#435b71",
+          "#607483",
+          "#7890a3",
+          "#8699a7",
+          "#a9bfd0",
+          "#c2d1dd",
+          "#dce6ed",
+          "#f2f6fa"
+        ]
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "tonalRamp": [
+          "#435b71",
+          "#607483",
+          "#7890a3",
+          "#8699a7",
+          "#a9bfd0",
+          "#c2d1dd",
+          "#dce6ed",
+          "#f2f6fa"
+        ]
+      },
+      "pure-white": {
+        "role": "neutral",
+        "displayName": "Pure White",
+        "tonalRamp": [
+          "#435b71",
+          "#607483",
+          "#7890a3",
+          "#8699a7",
+          "#a9bfd0",
+          "#c2d1dd",
+          "#dce6ed",
+          "#f2f6fa"
+        ]
+      },
+      "haze-grey": {
+        "role": "neutral",
+        "displayName": "Haze Grey",
+        "tonalRamp": [
+          "#435b71",
+          "#607483",
+          "#7890a3",
+          "#8699a7",
+          "#a9bfd0",
+          "#c2d1dd",
+          "#dce6ed",
+          "#f2f6fa"
+        ]
+      },
+      "steel-grey": {
+        "role": "neutral",
+        "displayName": "Steel Grey",
+        "tonalRamp": [
+          "#435b71",
+          "#607483",
+          "#7890a3",
+          "#8699a7",
+          "#a9bfd0",
+          "#c2d1dd",
+          "#dce6ed",
+          "#f2f6fa"
+        ]
+      },
+      "deep-steel": {
+        "role": "neutral",
+        "displayName": "Deep Steel",
+        "tonalRamp": [
+          "#435b71",
+          "#607483",
+          "#7890a3",
+          "#8699a7",
+          "#a9bfd0",
+          "#c2d1dd",
+          "#dce6ed",
+          "#f2f6fa"
+        ]
+      },
+      "focus-blue": {
+        "role": "functional",
+        "displayName": "Focus Blue",
+        "tonalRamp": [
+          "#172836",
+          "#26435a",
+          "#355e7e",
+          "#4478a2",
+          "#5d92bb",
+          "#8cb1cf",
+          "#bed3e4",
+          "#edf3f7"
+        ]
+      },
+      "alert-coral": {
+        "role": "functional",
+        "displayName": "Alert Coral",
+        "tonalRamp": [
+          "#4c0900",
+          "#800f00",
+          "#b21500",
+          "#e61b00",
+          "#ff351a",
+          "#ff6f5c",
+          "#ffaea3",
+          "#ffe9e5"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page heroes; the home hero colours its key phrase Signal Yellow."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card and panel titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text."
+      },
+      "body-small": {
+        "displayName": "Body small",
+        "purpose": "Panel descriptions, kept under ~445px wide."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase eyebrows and small section labels."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Button and text-button labels."
+      },
+      "category-mono": {
+        "displayName": "Category mono",
+        "purpose": "Module category chips only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "footer-float",
+        "value": "0 12px 40px color-mix(in srgb, #080f18 14.9%, transparent)",
+        "purpose": "The floating footer panel only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "spring",
+        "value": "linear(0, 0.048, 0.162, 0.309, 0.464, 0.609, 0.737, 0.841, 0.921, 0.979, 1.018, 1.041, 1.052, 1.054, 1.051, 1.044, 1.036, 1.028, 1.02, 1.013, 1.008, 1.004, 1.001, 0.999, 1)",
+        "purpose": "Bars, bands and panels settling into place (≈5% overshoot)."
+      },
+      {
+        "name": "spring-pop",
+        "value": "linear(0, 0.035, 0.126, 0.255, 0.406, 0.563, 0.715, 0.853, 0.97, 1.063, 1.132, 1.177, 1.2, 1.205, 1.195, 1.174, 1.147, 1.115, 1.083, 1.052, 1.025, 1.002, 0.984, 0.971, 0.962, 0.958, 0.958, 0.961, 0.965, 0.971, 0.978, 0.984, 0.99, 0.996, 1)",
+        "purpose": "Points and shapes popping in (≈20% overshoot)."
+      },
+      {
+        "name": "ease-write",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Text writing in with a left-to-right reveal."
+      },
+      {
+        "name": "chart-duration",
+        "value": "2s",
+        "purpose": "Total length of a chart's entrance; plays once per view, replays on tab selection."
+      },
+      {
+        "name": "tab-selector",
+        "value": "300–460ms ease-out-cubic travel, 380ms edge spread, 320ms trail fade",
+        "purpose": "Yellow node moving between platform tabs."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "600px"
+      },
+      {
+        "name": "tablet",
+        "value": "900px"
+      },
+      {
+        "name": "laptop",
+        "value": "1100px"
+      },
+      {
+        "name": "wide",
+        "value": "1600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one primary action per view, e.g. Book a demo.",
+      "html": "<button class=\"ds-btn-primary\">Book a demo</button>",
+      "css": ".ds-btn-primary{background:#ffd600;color:#1c2b39;font:650 13px/1.2 'DM Sans Variable',Arial,sans-serif;padding:10px 16px;min-height:40px;border:0;border-radius:8px;cursor:pointer;transition:background-color 160ms ease-out}.ds-btn-primary:hover{background:#e6c100}.ds-btn-primary:focus-visible{outline:2px solid #538bb7;outline-offset:3px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quieter actions such as Log in.",
+      "html": "<button class=\"ds-btn-secondary\">Log in <span aria-hidden=\"true\">›</span></button>",
+      "css": ".ds-btn-secondary{background:#25394b;color:#f2f6fa;font:650 13px/1.2 'DM Sans Variable',Arial,sans-serif;padding:10px 16px;border:0;border-radius:8px;cursor:pointer;transition:background-color 160ms ease-out}.ds-btn-secondary:hover{background:#435b71;color:#fff}.ds-btn-secondary:focus-visible{outline:2px solid #538bb7;outline-offset:3px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form inputs on contact and demo pages.",
+      "html": "<label class=\"ds-field\"><span>Work email</span><input class=\"ds-input\" type=\"email\" placeholder=\"name@company.com\"></label>",
+      "css": ".ds-field{display:grid;gap:6px;font:500 13px/1.6 'DM Sans Variable',Arial,sans-serif;color:#f2f6fa}.ds-input{background:#1c2b39;color:#f2f6fa;font:400 16px/1.6 'DM Sans Variable',Arial,sans-serif;padding:11px 13px;border:1px solid color-mix(in srgb,#cdddea 33%,transparent);border-radius:5px}.ds-input:focus-visible{outline:2px solid #538bb7;outline-offset:2px}"
+    },
+    {
+      "name": "Category Chip",
+      "kind": "chip",
+      "refersTo": "category-chip",
+      "description": "Labels a platform module.",
+      "html": "<span class=\"ds-chip\">MRV &amp; EU ETS</span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;padding:6px 10px;border:1px solid color-mix(in srgb,#cdddea 15%,transparent);border-radius:999px;background:#2c4a61;color:#cdddea;font:400 9px/1.5 monospace;letter-spacing:.08em;text-transform:uppercase}"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Raised content card with hairline border.",
+      "html": "<article class=\"ds-card\"><h3>Turn your SEEMP into a living target plan</h3><p>Set targets from historical performance and follow up measures with the crew.</p></article>",
+      "css": ".ds-card{background:#25394b;color:#f2f6fa;border:1px solid color-mix(in srgb,#cdddea 27%,transparent);border-radius:10px;padding:32px;max-width:420px;font:400 15px/1.6 'DM Sans Variable',Arial,sans-serif}.ds-card h3{margin:0 0 12px;font:500 27px/1.12 'Manrope Variable',Arial,sans-serif;letter-spacing:-.055em}.ds-card p{margin:0;color:#c2d1dd;font-size:12px;line-height:1.8}"
+    },
+    {
+      "name": "Platform Tab",
+      "kind": "nav",
+      "refersTo": "button-secondary",
+      "description": "Selected platform tab with the yellow edge marker and glow.",
+      "html": "<div class=\"ds-tabs\"><button class=\"ds-tab\">Evaluate &amp; improve operations</button><button class=\"ds-tab\" aria-selected=\"true\">Reduce fuel &amp; emissions</button></div>",
+      "css": ".ds-tabs{display:grid;gap:2px;max-width:280px}.ds-tab{position:relative;text-align:left;padding:20px 22px;border:0;color:#f2f6fa;font:500 14px/1.4 'DM Sans Variable',Arial,sans-serif;background:linear-gradient(90deg,rgba(37,57,75,1),rgba(37,57,75,.25));cursor:pointer}.ds-tab:first-child{border-radius:8px 8px 0 0}.ds-tab:last-child{border-radius:0 0 8px 8px}.ds-tab:hover,.ds-tab[aria-selected=true]{background:linear-gradient(90deg,rgba(52,71,94,1),rgba(52,71,94,.25))}.ds-tab[aria-selected=true]::before{content:'';position:absolute;left:-1px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,#ffd600 50%,transparent)}.ds-tab:focus-visible{outline:2px solid #538bb7;outline-offset:3px}"
+    },
+    {
+      "name": "Vessel KPI Callout",
+      "kind": "custom",
+      "refersTo": "kpi-callout",
+      "description": "Translucent label attached to a point on the hero vessel.",
+      "html": "<div class=\"ds-kpi\"><p class=\"ds-kpi-label\">Loss in hydrodynamic performance</p><p class=\"ds-kpi-value\">7%</p><p class=\"ds-kpi-q\">Consider hull cleaning</p></div>",
+      "css": ".ds-kpi{width:260px;padding:21px 23px;border:1px solid color-mix(in srgb,#cdddea 40%,transparent);border-radius:10px 10px 10px 0;background:color-mix(in srgb,#1c2b39 91%,transparent);color:#fff;font-family:'DM Sans Variable',Arial,sans-serif}.ds-kpi p{margin:0}.ds-kpi-label{font-size:12px;line-height:1.4;color:#f2f6fa}.ds-kpi-value{margin-top:7px!important;font:500 42px/1.2 'Manrope Variable',Arial,sans-serif;letter-spacing:-.055em;color:#ffd600}.ds-kpi-q{font-size:12px;line-height:1.4;color:#dce6ed}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Signal at Sea",
+    "overview": "Dipai's interface is a quiet, ocean-dark surface where vessel data comes up as clear signals: a yellow node travelling to the tab you chose, a line drawing itself across a chart, a single number typed into a callout beside a ship. Everything else stays calm and deep. The navy layers are the sea; the information is what breaks the surface. The site serves technical evaluators and executives alike, so it reads like a well-run instrument panel — precise and legible — without becoming a dense engineering tool.\n\nDark is the shipped theme and the reference for every decision. A light theme exists in code (`:root` in `src/styles/foundation.css`) but is hidden behind `themeSwitching` in `src/data/site-config.js` until it reaches the same quality; design dark first and keep light tokens in step.\n\nMotion is part of the voice. It is precise and purposeful — nodes travel, lines draw, values write in, panels spring open once — and always respects reduced motion. Nothing loops for attention except the ribbons and hero rotation, which carry pause controls.",
+    "keyCharacteristics": [
+      "Deep navy tonal layers; hairline blue-grey borders; depth from tone, not shadow.",
+      "One accent, Signal Yellow, reserved for what to act on or notice.",
+      "Manrope headlines with tight negative tracking over a DM Sans body.",
+      "Data shown as real charts and diagrams, drawn in the same quiet palette.",
+      "Motion that traces cause and effect, plays once, and replays on request."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Signal Yellow marks only the single thing to act on or notice in a view: the primary action, the active selection, the latest or outlier value. It is never decoration, never a large fill, and never two competing things on one screen.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hairline Rule",
+        "body": "Borders and dividers are always Mist Blue at partial alpha (15–40%), never solid greys. Lines should be felt, not seen.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tight Headline Rule",
+        "body": "Every Manrope heading uses −0.055em tracking and 1.12 leading. Don't loosen them for emphasis; use size and the yellow highlight instead.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tone-Not-Shadow Rule",
+        "body": "To lift a surface, step it to Raised Hull and give it a Mist Blue hairline. Reach for a shadow only for a panel that genuinely floats over imagery or mesh.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do design in the dark theme first; it is the only theme visitors see.",
+      "Do keep Signal Yellow (#ffd600) to one focal element per view: the primary CTA, the active selection, or the key data point.",
+      "Do build depth with Raised Hull (#25394b) and Mist Blue hairlines at 15–40% alpha.",
+      "Do set every Manrope heading at weight 500 with −0.055em tracking and 1.12 leading.",
+      "Do give every animation a reduced-motion fallback that shows the final state, and a pause control for anything that repeats.",
+      "Do keep chart text at real size across widths, and simplify charts for phones rather than scaling them down."
+    ],
+    "donts": [
+      "Don't use Signal Yellow as a background fill, a decorative stroke, or on two competing elements in one view.",
+      "Don't introduce new accent hues; status colours (Alert Coral) belong only to data states.",
+      "Don't add heavy or dark drop shadows; the footer float is the ceiling.",
+      "Don't use solid grey borders; borders are Mist Blue at partial alpha.",
+      "Don't let animated text reflow while it animates; reserve its final layout first.",
+      "Don't present illustrative chart values as customer results."
+    ]
+  }
+}
