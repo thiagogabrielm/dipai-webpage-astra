@@ -84,9 +84,20 @@ test('hero, product tabs and continent controls work', async ({ page }) => {
       .poll(() => page.locator('.hero-background').last().getAttribute('src'))
       .toContain(id === 'offshore' ? 'offshore' : id);
   }
+  // Wide screens use tabs; narrow screens use a strip of links over one card per module.
+  const narrow = (page.viewportSize()?.width ?? 1440) <= 900;
   for (let i = 0; i < 5; i++) {
-    await page.locator(`[data-product="${i}"]`).click();
-    await expect(page.locator(`[data-product="${i}"]`)).toHaveAttribute('aria-selected', 'true');
+    if (narrow) {
+      await page.locator(`[data-module-link="${i}"]`).click();
+      await expect(page.locator(`#platform-module-${i}`)).toBeInViewport();
+      await expect(page.locator(`[data-module-link="${i}"]`)).toHaveAttribute(
+        'aria-current',
+        'true',
+      );
+    } else {
+      await page.locator(`[data-product="${i}"]`).click();
+      await expect(page.locator(`[data-product="${i}"]`)).toHaveAttribute('aria-selected', 'true');
+    }
   }
   await page.locator('#fleet').scrollIntoViewIfNeeded();
   await expect

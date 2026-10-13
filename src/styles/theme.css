@@ -98,7 +98,6 @@ html[data-theme='dark']
     .news-category,
     .product-panel-top,
     .product-chart-label,
-    .mode-labels,
     .globe-hint,
     .closing-bottom,
     .footer-bottom
@@ -125,17 +124,6 @@ html[data-theme='dark'] #platform .product-tabs button[aria-selected='true'] {
 }
 html[data-theme='dark'] #platform .product-tabs button > span {
   color: var(--muted);
-}
-html[data-theme='dark'] #product-line {
-  stroke: var(--blue);
-}
-html[data-theme='dark'] #product-area {
-  fill: color-mix(in srgb, var(--blue) 14.5%, transparent);
-}
-html[data-theme='dark']
-  .product-graphic
-  path[stroke='color-mix(in srgb, var(--slate) 12.5%, transparent)'] {
-  stroke: color-mix(in srgb, var(--blue) 18.8%, transparent);
 }
 html[data-theme='dark'] .quote-logo {
   filter: brightness(0) invert(1);

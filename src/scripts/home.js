@@ -1,4 +1,4 @@
-import { renderPlatformVisual } from './platform-visuals.js';
+import { renderPlatformVisual, armMotion } from './platform-visuals.js';
 import { updateMotionControl } from './motion-control.js';
 import products from '../data/platform.js';
 // A duplicated, inaccessible logo set makes a seamless loop without duplicate announcements.
@@ -90,9 +90,134 @@ document
 keyboardTabs('[data-product]', selectProduct);
 selectProduct(0);
 
+// Narrow screens: one card per module under a sticky, swipeable strip that follows the scroll.
+const moduleStack = document.querySelector('[data-module-stack]');
+if (moduleStack) {
+  const strip = moduleStack.querySelector('[data-module-strip]');
+  const links = [...moduleStack.querySelectorAll('[data-module-link]')];
+  const modules = [...moduleStack.querySelectorAll('[data-module]')];
+  const examples = modules.map((module) => module.querySelector('.platform-example'));
+  examples.forEach(armMotion);
+  let active = 0;
+  let centreTimer = 0;
+  // Tweened by hand: a native smooth scroll here would cancel the page's own smooth scroll.
+  let centreFrame = 0;
+  const centreStrip = (target, smooth) => {
+    cancelAnimationFrame(centreFrame);
+    const from = strip.scrollLeft;
+    const to = Math.max(0, Math.min(target, strip.scrollWidth - strip.clientWidth));
+    if (!smooth || reducedMotion.matches || Math.abs(to - from) < 1) {
+      strip.scrollLeft = to;
+      return;
+    }
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / 320);
+      strip.scrollLeft = from + (to - from) * (1 - (1 - t) ** 3);
+      if (t < 1) centreFrame = requestAnimationFrame(step);
+    };
+    centreFrame = requestAnimationFrame(step);
+  };
+  const setActive = (index, smooth = true) => {
+    if (index === active && links[index].hasAttribute('aria-current')) return;
+    active = index;
+    links.forEach((link, i) =>
+      i === index
+        ? link.setAttribute('aria-current', 'true')
+        : link.removeAttribute('aria-current'),
+    );
+    // Let the selector node travel across the strip first, then bring the tab to the centre.
+    clearTimeout(centreTimer);
+    centreTimer = setTimeout(
+      () => {
+        const link = links[index];
+        centreStrip(link.offsetLeft - (strip.clientWidth - link.offsetWidth) / 2, smooth);
+      },
+      smooth && !reducedMotion.matches ? 520 : 0,
+    );
+  };
+  // The active card is the one with the largest share of its own height visible below the strip.
+  let frame = 0;
+  let held = false;
+  let quietTimer = 0;
+  let fallbackTimer = 0;
+  const release = () => {
+    held = false;
+    clearTimeout(quietTimer);
+    clearTimeout(fallbackTimer);
+    spy();
+  };
+  const holdSpy = () => {
+    held = true;
+    clearTimeout(quietTimer);
+    clearTimeout(fallbackTimer);
+    quietTimer = setTimeout(release, 250);
+    fallbackTimer = setTimeout(release, 2500);
+  };
+  const spy = () => {
+    frame = 0;
+    if (held || !moduleStack.offsetParent) return;
+    const top = strip.getBoundingClientRect().bottom;
+    let current = active;
+    let best = 0;
+    modules.forEach((module, i) => {
+      const box = module.getBoundingClientRect();
+      const visible = Math.min(box.bottom, innerHeight) - Math.max(box.top, top);
+      const share = Math.max(0, visible) / box.height;
+      if (share > best + 0.001) [best, current] = [share, i];
+    });
+    setActive(current);
+  };
+  addEventListener(
+    'scroll',
+    () => {
+      if (held) {
+        clearTimeout(quietTimer);
+        quietTimer = setTimeout(release, 160);
+      }
+      frame ||= requestAnimationFrame(spy);
+    },
+    { passive: true },
+  );
+  addEventListener('resize', () => (frame ||= requestAnimationFrame(spy)), { passive: true });
+
+  // Mouse users can drag the strip like a touch screen; a drag does not count as a click.
+  let drag = null;
+  strip.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    // Focusing a tab would make the browser jump the strip before the node can travel.
+    event.preventDefault();
+    cancelAnimationFrame(centreFrame);
+    drag = { x: event.clientX, left: strip.scrollLeft, moved: false };
+  });
+  addEventListener('pointermove', (event) => {
+    if (!drag) return;
+    const dx = event.clientX - drag.x;
+    if (Math.abs(dx) > 4) drag.moved = true;
+    if (drag.moved) strip.scrollLeft = drag.left - dx;
+  });
+  addEventListener('pointerup', () => {
+    if (drag?.moved) setTimeout(() => (drag = null));
+    else drag = null;
+  });
+
+  links.forEach((link, index) =>
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (drag?.moved) return;
+      setActive(index);
+      // Hold the spy while the page scrolls past the cards in between; release once scrolling
+      // has been quiet for a moment (or after a fallback), so it cannot pick a card on the way.
+      holdSpy();
+      modules[index].scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+      armMotion(examples[index]);
+    }),
+  );
+}
+
 // Reserve each text row's largest height across all modules at the current width.
 // This keeps the panel, chart, CTA and adjacent tab selector still during selection.
-const productPanel = document.querySelector('#platform[data-product-border-orbit] .product-panel');
+const productPanel = document.querySelector('#platform[data-product-border-orbit] #product-panel');
 if (productPanel) {
   const fields = [
     ['#product-category', 'category'],

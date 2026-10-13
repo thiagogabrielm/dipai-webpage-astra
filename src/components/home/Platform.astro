@@ -1,5 +1,17 @@
 ---
 import products from '../../data/platform.js';
+import { platformVisuals } from '../../scripts/platform-visuals.js';
+
+const tabLabels = [
+  'Evaluate & improve operations',
+  'Reduce fuel & emissions',
+  'Make maintenance smarter',
+  'Quantify and measure your SEEMP',
+  'Accurate MRV & ETS reporting',
+];
+// The narrow-screen cards render every chart at once, so SVG ids get a per-card prefix.
+const moduleVisual = (index: number) =>
+  platformVisuals[index].replaceAll('mrv-mask-', `mrv-mask-m${index}-`);
 ---
 
 <section class="products section" data-product-border-orbit="" id="platform">
@@ -15,51 +27,17 @@ import products from '../../data/platform.js';
         </a>
       </div>
       <div aria-label="Platform capabilities" class="product-tabs" role="tablist">
-        <button
-          aria-controls="product-panel"
-          aria-selected="true"
-          data-product="0"
-          id="product-tab-0"
-          role="tab"
-        >
-          <strong>Evaluate &amp; improve operations</strong>
-        </button>
-        <button
-          aria-controls="product-panel"
-          aria-selected="false"
-          data-product="1"
-          id="product-tab-1"
-          role="tab"
-        >
-          <strong>Reduce fuel &amp; emissions</strong>
-        </button>
-        <button
-          aria-controls="product-panel"
-          aria-selected="false"
-          data-product="2"
-          id="product-tab-2"
-          role="tab"
-        >
-          <strong>Make maintenance smarter</strong>
-        </button>
-        <button
-          aria-controls="product-panel"
-          aria-selected="false"
-          data-product="3"
-          id="product-tab-3"
-          role="tab"
-        >
-          <strong>Quantify and measure your SEEMP</strong>
-        </button>
-        <button
-          aria-controls="product-panel"
-          aria-selected="false"
-          data-product="4"
-          id="product-tab-4"
-          role="tab"
-        >
-          <strong>Accurate MRV &amp; ETS reporting</strong>
-        </button>
+        {tabLabels.map((label, index) => (
+          <button
+            aria-controls="product-panel"
+            aria-selected={index === 0 ? 'true' : 'false'}
+            data-product={index}
+            id={`product-tab-${index}`}
+            role="tab"
+          >
+            <strong>{label}</strong>
+          </button>
+        ))}
       </div>
       <div
         aria-labelledby="product-tab-0"
@@ -77,35 +55,58 @@ import products from '../../data/platform.js';
           <div class="product-chart-label">
             <span id="product-chart-label">{products[0].chart}</span>
           </div>
-          <svg aria-label="Illustrative performance trend" role="img" viewBox="0 0 520 125">
-            <path
-              d="M0 30H520M0 70H520M0 110H520"
-              style="stroke: color-mix(in srgb, var(--slate) 12.5%, transparent)"
-            ></path>
-            <path
-              d="M0 100L40 93L80 98L120 68L160 78L200 60L240 65L280 42L320 47L360 31L400 35L440 22L480 20L520 10V125H0Z"
-              style="fill: var(--blue)"
-              id="product-area"
-            ></path>
-            <path
-              d="M0 100L40 93L80 98L120 68L160 78L200 60L240 65L280 42L320 47L360 31L400 35L440 22L480 20L520 10"
-              fill="none"
-              id="product-line"
-              style="stroke: var(--slate)"
-              stroke-width="2"
-            ></path>
-            <circle cx="520" cy="10" style="fill: var(--yellow)" r="5"></circle>
-          </svg>
-          <div class="mode-labels">
-            <span>
-              <i></i> Dynamic baseline
-            </span>
-            <span>
-              <i></i> Vessel performance
-            </span>
-          </div>
+          {/* Server-rendered first chart, so nothing is swapped out on load. */}
+          <div class="platform-example-host" set:html={platformVisuals[0]} />
+          {/* Hide the animated marks from first paint; home.js starts the motion. */}
+          <script is:inline>
+            document.currentScript.previousElementSibling.firstElementChild?.classList.add(
+              'is-waiting',
+            );
+          </script>
         </div>
       </div>
+    </div>
+    {/* Narrow screens: a swipeable strip of capabilities over one card per module. */}
+    <div class="module-stack" data-module-stack>
+      <div aria-label="Platform capabilities" class="module-strip" role="navigation">
+        <div class="module-strip-track" data-module-strip>
+          {tabLabels.map((label, index) => (
+            <a
+              aria-current={index === 0 ? 'true' : undefined}
+              data-module-link={index}
+              href={`#platform-module-${index}`}
+            >
+              <strong>{label}</strong>
+            </a>
+          ))}
+        </div>
+      </div>
+      {products.map((product, index) => (
+        <article
+          aria-labelledby={`platform-module-title-${index}`}
+          class="product-panel platform-module"
+          data-module={index}
+          id={`platform-module-${index}`}
+        >
+          <div class="product-panel-top">
+            <span>{product.category}</span>
+          </div>
+          <h3 id={`platform-module-title-${index}`}>{product.title}</h3>
+          <p>{product.description}</p>
+          <div class="product-graphic">
+            <div class="product-chart-label">
+              <span>{product.chart}</span>
+            </div>
+            <div class="platform-example-host" set:html={moduleVisual(index)} />
+          </div>
+        </article>
+      ))}
+      {/* Hide the animated marks from first paint; home.js arms each card's motion. */}
+      <script is:inline>
+        document
+          .querySelectorAll('[data-module-stack] .platform-example[data-motion]')
+          .forEach((example) => example.classList.add('is-waiting'));
+      </script>
     </div>
   </div>
 </section>

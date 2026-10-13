@@ -1,7 +1,13 @@
 // The node leads; its moving trail decays, then light spreads along the new edge.
-const tablist = document.querySelector('#platform .product-tabs');
-if (tablist) {
-  const tabs = [...tablist.querySelectorAll('[role="tab"]')];
+// Vertical tab lists light their outer side edge; horizontal strips light the bottom edge.
+let selectorCount = 0;
+// `layer` holds the drawing; for a scrolling strip it is a non-scrolling parent, so the node
+// travels across the screen while the strip re-centres, and the marker tracks the moving tab.
+function createTabSelector(
+  tablist,
+  { tabs, selected, attribute, horizontal = false, layer = tablist },
+) {
+  const uid = selectorCount++;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const ns = 'http://www.w3.org/2000/svg';
   const create = (tag, attrs = {}) => {
@@ -16,7 +22,7 @@ if (tablist) {
   });
   const defs = create('defs');
   const gradient = create('linearGradient', {
-    id: 'product-selector-light',
+    id: `product-selector-light-${uid}`,
     gradientUnits: 'userSpaceOnUse',
   });
   for (const [offset, opacity] of [
@@ -33,12 +39,12 @@ if (tablist) {
   const beamPath = create('path', {
     class: 'product-selector-beam',
     fill: 'none',
-    stroke: 'url(#product-selector-light)',
+    stroke: `url(#product-selector-light-${uid})`,
     'stroke-width': 2,
   });
   // One stroke avoids the bright seams between overlapping round-capped pieces.
   const trailGradient = create('linearGradient', {
-    id: 'product-selector-trail',
+    id: `product-selector-trail-${uid}`,
     gradientUnits: 'userSpaceOnUse',
   });
   const trailStops = Array.from({ length: 17 }, (_, index) =>
@@ -53,7 +59,7 @@ if (tablist) {
   const trailPath = create('path', {
     class: 'product-selector-trail',
     fill: 'none',
-    stroke: 'url(#product-selector-trail)',
+    stroke: `url(#product-selector-trail-${uid})`,
     'stroke-width': 2,
     'stroke-linecap': 'round',
     'stroke-linejoin': 'round',
@@ -64,7 +70,11 @@ if (tablist) {
     style: 'fill: var(--yellow)',
   });
   svg.append(defs, beamPath, trailPath, node);
-  tablist.append(svg);
+  layer.append(svg);
+  const setPhase = (phase) => {
+    tablist.dataset.selectorPhase = phase;
+    layer.dataset.selectorPhase = phase;
+  };
 
   const trailLifetime = 320;
   const spreadDuration = 380;
@@ -80,6 +90,7 @@ if (tablist) {
   // The growing beam reveals this curve from the node instead of drawing a
   // straight line through the rounded area outside the tab.
   function edgePath(light) {
+    if (horizontal) return `M ${light.x - light.half} ${light.y} H ${light.x + light.half}`;
     const top = light.y - light.height / 2;
     const bottom = light.y + light.height / 2;
     const start = light.y - light.half;
@@ -106,10 +117,10 @@ if (tablist) {
     node.setAttribute('cy', current.y);
     beamPath.setAttribute('d', edgePath(beam));
     beamPath.setAttribute('opacity', beam.opacity);
-    gradient.setAttribute('x1', beam.x);
-    gradient.setAttribute('x2', beam.x);
-    gradient.setAttribute('y1', beam.y - beam.half);
-    gradient.setAttribute('y2', beam.y + beam.half);
+    const along = horizontal
+      ? [beam.x - beam.half, beam.y, beam.x + beam.half, beam.y]
+      : [beam.x, beam.y - beam.half, beam.x, beam.y + beam.half];
+    ['x1', 'y1', 'x2', 'y2'].forEach((key, index) => gradient.setAttribute(key, along[index]));
     const cutoff = now - trailLifetime;
     // Retain one sample before the cutoff and interpolate the tail, rather than
     // dropping a whole frame's distance at a time as the trail expires.
@@ -145,6 +156,8 @@ if (tablist) {
   function tick(now) {
     frame = 0;
     if (!motion) return;
+    // A strip may still be scrolling its new tab into place; aim at where it is now.
+    if (layer !== tablist) destination = measure() || destination;
     const elapsed = now - motion.start;
     if (elapsed < motion.duration) {
       const t = ease(elapsed / motion.duration);
@@ -158,44 +171,57 @@ if (tablist) {
         opacity: motion.oldBeam.opacity * Math.max(0, 1 - elapsed / 120),
       };
       history.push({ ...current, time: now });
-      tablist.dataset.selectorPhase = 'moving';
+      setPhase('moving');
     } else {
       const arrival = motion.start + motion.duration;
       if (!motion.arrived) {
-        current = { x: destination.x, y: destination.y };
-        history.push({ ...current, time: arrival });
+        history.push({ x: destination.x, y: destination.y, time: arrival });
         motion.arrived = true;
       }
+      current = { x: destination.x, y: destination.y };
       const spread = Math.min(1, (now - arrival) / spreadDuration);
-      beam = { ...destination, half: (destination.height / 2) * ease(spread), opacity: 1 };
-      tablist.dataset.selectorPhase = spread < 1 ? 'spreading' : 'idle';
+      beam = { ...destination, half: (destination.length / 2) * ease(spread), opacity: 1 };
+      setPhase(spread < 1 ? 'spreading' : 'idle');
       if (spread === 1 && now - arrival >= trailLifetime) motion = null;
     }
     paint(now);
     if (motion) frame = requestAnimationFrame(tick);
   }
 
-  function position(animate = true) {
-    const selected = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true');
-    if (!selected) return;
-    const parent = tablist.getBoundingClientRect();
-    const bounds = selected.getBoundingClientRect();
-    const style = getComputedStyle(selected);
+  function measure() {
+    const active = tabs.find(selected);
+    if (!active) return null;
+    const parent = layer.getBoundingClientRect();
+    const bounds = active.getBoundingClientRect();
+    const left = bounds.left - parent.left + layer.scrollLeft;
+    const top = bounds.top - parent.top + layer.scrollTop;
+    if (horizontal)
+      return { x: left + bounds.width / 2, y: top + bounds.height, length: bounds.width };
+    const style = getComputedStyle(active);
     const radius = (value) => Math.min(parseFloat(value) || 0, bounds.height / 2, bounds.width / 2);
-    const rightEdge = bounds.left - parent.left > parent.width / 4;
-    const next = {
-      x: (rightEdge ? bounds.right : bounds.left) - parent.left,
-      y: bounds.top - parent.top + bounds.height / 2,
+    const rightEdge = left > parent.width / 4;
+    return {
+      x: rightEdge ? left + bounds.width : left,
+      y: top + bounds.height / 2,
       height: bounds.height,
+      length: bounds.height,
       direction: rightEdge ? -1 : 1,
       topRadius: radius(rightEdge ? style.borderTopRightRadius : style.borderTopLeftRadius),
       bottomRadius: radius(
         rightEdge ? style.borderBottomRightRadius : style.borderBottomLeftRadius,
       ),
     };
-    svg.setAttribute('viewBox', `0 0 ${parent.width} ${parent.height}`);
-    svg.style.width = `${parent.width}px`;
-    svg.style.height = `${parent.height}px`;
+  }
+
+  function position(animate = true) {
+    const next = measure();
+    if (!next) return;
+    const parent = layer.getBoundingClientRect();
+    const width = Math.max(parent.width, layer.scrollWidth);
+    const height = Math.max(parent.height, layer.scrollHeight);
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.style.width = `${width}px`;
+    svg.style.height = `${height}px`;
     if (
       animate &&
       destination &&
@@ -210,8 +236,8 @@ if (tablist) {
       motion = null;
       history = [];
       current = { x: next.x, y: next.y };
-      beam = { ...next, half: next.height / 2, opacity: 1 };
-      tablist.dataset.selectorPhase = 'idle';
+      beam = { ...next, half: next.length / 2, opacity: 1 };
+      setPhase('idle');
       paint(now);
       return;
     }
@@ -224,7 +250,7 @@ if (tablist) {
       arrived: false,
     };
     history.push({ ...current, time: now });
-    tablist.dataset.selectorPhase = 'moving';
+    setPhase('moving');
     frame = requestAnimationFrame(tick);
   }
 
@@ -233,13 +259,33 @@ if (tablist) {
   new MutationObserver(() => position()).observe(tablist, {
     subtree: true,
     attributes: true,
-    attributeFilter: ['aria-selected'],
+    attributeFilter: [attribute],
   });
+  if (layer !== tablist)
+    tablist.addEventListener('scroll', () => motion || position(false), { passive: true });
   const resize = new ResizeObserver(() => position(false));
   resize.observe(tablist);
   tabs.forEach((tab) => resize.observe(tab));
   reducedMotion.addEventListener('change', () => position(false));
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) position(false);
+  });
+}
+
+const productTabs = document.querySelector('#platform .product-tabs');
+if (productTabs) {
+  createTabSelector(productTabs, {
+    tabs: [...productTabs.querySelectorAll('[role="tab"]')],
+    selected: (tab) => tab.getAttribute('aria-selected') === 'true',
+    attribute: 'aria-selected',
+  });
+}
+const moduleStrip = document.querySelector('[data-module-strip]');
+if (moduleStrip) {
+  createTabSelector(moduleStrip, {
+    tabs: [...moduleStrip.querySelectorAll('[data-module-link]')],
+    selected: (tab) => tab.getAttribute('aria-current') === 'true',
+    attribute: 'aria-current',
+    horizontal: true,
   });
 }

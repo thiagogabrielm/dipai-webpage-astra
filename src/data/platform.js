@@ -18,7 +18,8 @@ export default [
     title: 'Spot equipment deterioration before it disrupts operations',
     description:
       'Combine engine and thruster load profiles with condition data to support maintenance decisions and aid in the discussions with OEMs and classification societies.',
-    chart: 'Turn condition trends into an early warning',
+    chart:
+      'Turn condition trends into early warnings using our custom anomaly detection algorithms',
   },
   {
     category: 'SEEMP',
