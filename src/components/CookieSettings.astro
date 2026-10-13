@@ -1,3 +1,7 @@
+---
+import { themeSwitching } from '../data/site-config.js';
+---
+
 <dialog class="cookie-settings" id="cookie-settings" aria-labelledby="cookie-settings-title">
   <form method="dialog">
     <button class="cookie-close" aria-label="Close cookie settings" type="submit">
@@ -6,17 +10,19 @@
   </form>
   <h2 id="cookie-settings-title">Cookie settings</h2>
   <p>This website does not use analytics or advertising cookies.</p>
-  <div class="cookie-setting">
-    <h3>Colour preference</h3>
-    <p>
-      When you choose light or dark mode, we save your choice in this browser. It stays here until
-      you clear it. You can return to the default dark theme at any time.
-    </p>
-    <button class="button secondary" type="button" data-theme-reset>
-      Use default theme
-    </button>
-    <p class="cookie-status" role="status" data-theme-status></p>
-  </div>
+  {themeSwitching && (
+    <div class="cookie-setting">
+      <h3>Colour preference</h3>
+      <p>
+        When you choose light or dark mode, we save your choice in this browser. It stays here until
+        you clear it. You can return to the default dark theme at any time.
+      </p>
+      <button class="button secondary" type="button" data-theme-reset>
+        Use default theme
+      </button>
+      <p class="cookie-status" role="status" data-theme-status></p>
+    </div>
+  )}
   <div class="cookie-setting">
     <h3>Analytics and advertising</h3>
     <p>

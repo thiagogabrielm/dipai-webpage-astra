@@ -1,35 +1,69 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CTA from '../components/CTA.astro';
+
+// Enquiry routes beside the form: demo intent, existing customers and quick questions.
+const routes = [
+  {
+    title: 'Exploring Dipai for your fleet?',
+    text: 'See the platform with your vessel types and the data you already collect.',
+    href: '/book-demo/',
+    label: 'Book a demo',
+  },
+  {
+    title: 'Already using Dipai?',
+    text: 'Log in to the Digital Fleet Platform. Account questions can also go through the form.',
+    href: 'https://portal.dipai.no',
+    label: 'Log in to the portal',
+    external: true,
+  },
+  {
+    title: 'Looking for a quick answer?',
+    text: 'Integration with your current vendors, sensors, modules, data ownership and reporting.',
+    href: '/faq/',
+    label: 'Read the FAQs',
+  },
+];
+
+// Sets expectations for every kind of enquiry; the only place the reply time is promised.
+const steps = [
+  {
+    title: 'We reply within 24 hours',
+    sent: 'Message received',
+    text: 'By email, from the team that runs the platform.',
+  },
+  {
+    title: 'We follow up on what you need',
+    text: 'A call about your data, a demo on your vessel types, or help with your account.',
+  },
+];
 ---
 
 <BaseLayout
   title="Contact"
-  description="Contact the Dipai team at support@dipai.no with questions about the platform or your vessel data."
+  description="Contact Dipai at contact@dipai.no about the platform, your fleet or your account. We usually reply within 24 hours."
   bodyClass="support-page contact-page"
   active="contact"
 >
   <header class="support-intro wrap">
-    <h1>Let’s talk.</h1>
-    <p>Do you have questions about Dipai, your vessel data or the platform? Get in touch.</p>
+    <h1>Let’s talk about your fleet.</h1>
+    <p>
+      Questions about the platform, a new project or your existing account all reach the same team.
+      Tell us about your vessels and the data you have today.
+    </p>
   </header>
   <section aria-labelledby="contact-form-title" class="contact-layout wrap">
-    <div class="contact-copy">
-      <h2>How can we help?</h2>
-      <p>
-        Tell us what you need and give us a little context so we can point you in the right
-        direction.
-      </p>
-      <a class="contact-email" href="mailto:support@dipai.no">
-        support@dipai.no
-      </a>
-    </div>
     <div class="contact-form-card">
-      <h2 id="contact-form-title">Write to us</h2>
+      <h2 id="contact-form-title">Send us a message</h2>
+      <p class="contact-required" id="contact-required">
+        All fields are required.
+      </p>
       <form
         name="contact"
         id="contact-form"
         method="post"
+        aria-describedby="contact-required"
+        data-fallback-email="contact@dipai.no"
+        data-fallback-phone="+47 902 09 249"
         data-netlify="true"
         netlify-honeypot="website"
       >
@@ -40,7 +74,14 @@ import CTA from '../components/CTA.astro';
         </label>
         <label for="contact-name">
           Name
-          <input autocomplete="name" id="contact-name" maxlength="100" name="name" required="" />
+          <input
+            autocomplete="name"
+            data-empty="Add your name."
+            id="contact-name"
+            maxlength="100"
+            name="name"
+            required=""
+          />
         </label>
         <label for="contact-email">
           Email
@@ -55,35 +96,110 @@ import CTA from '../components/CTA.astro';
         </label>
         <label for="contact-message">
           Message
+          <span aria-hidden="true" class="field-hint" id="contact-message-hint">
+            Helpful to include: fleet size, vessel types, whether vessels have sensors or only noon
+            reports, and what you want to improve.
+          </span>
           <textarea
+            aria-describedby="contact-message-hint"
+            data-count="contact-message-count"
+            data-empty="Tell us a little about your fleet or your question."
             id="contact-message"
             maxlength="4000"
             name="message"
             required=""
-            rows="6"
+            rows="5"
           ></textarea>
+          <span aria-hidden="true" class="field-count" id="contact-message-count">
+            0 / 4000
+          </span>
+          <span aria-live="polite" class="field-live" data-count-live=""></span>
         </label>
-        <p class="contact-form-note" id="contact-form-note">
-          Send your message directly to the Dipai team. We’ll reply by email.
-        </p>
         <p aria-atomic="true" aria-live="polite" data-form-status="" hidden="" role="status"></p>
-        <button aria-describedby="contact-form-note" class="button" type="submit">
-          Send message
-        </button>
+        <div class="contact-submit">
+          <button aria-describedby="contact-form-note" class="button" type="submit">
+            Send message
+          </button>
+          <p class="contact-form-note" id="contact-form-note">
+            Your details go only to the Dipai team and are used to answer you. See our{' '}
+            <a href="/privacy-policy/">privacy policy</a>.
+          </p>
+        </div>
       </form>
       <div hidden="" id="contact-result">
-        <h2 tabindex="-1">Thank you for getting in touch.</h2>
-        <p>Your message has been sent. The Dipai team will reply by email.</p>
+        <h2 tabindex="-1">Thank you. Your message is on its way.</h2>
+        <p>
+          We’ll reply to <strong data-result-email="">your email address</strong>. While you wait:
+        </p>
+        <div class="contact-result-actions">
+          <button class="button contact-another" data-send-another="" type="button">
+            Send another message
+          </button>
+          <a class="text-button" href="/use-cases/">
+            See how operators use Dipai <span aria-hidden="true">›</span>
+          </a>
+          <a class="text-button" href="/book-demo/">
+            Book a demo <span aria-hidden="true">›</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-next">
+        <h3 id="contact-next-title">What happens next</h3>
+        <ol>
+          {steps.map((step) => (
+            <li>
+              <strong class:list={[{ 'step-default': step.sent }]}>{step.title}</strong>
+              {step.sent && <strong class="step-sent">{step.sent}</strong>}
+              <span>{step.text}</span>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
+    <aside aria-label="Other ways to reach Dipai" class="contact-copy">
+      <div class="contact-direct-block">
+        <h2 id="contact-direct-title">Prefer to email or call?</h2>
+        <dl class="contact-direct">
+          <div>
+            <dt>Email</dt>
+            <dd>
+              <a href="mailto:contact@dipai.no">contact@dipai.no</a>
+            </dd>
+          </div>
+          <div>
+            <dt>Call</dt>
+            <dd>
+              <a href="tel:+4790209249">+47 902 09 249</a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+      <div class="contact-routes-block">
+        <h2 id="contact-routes-title">Other routes</h2>
+        <ul class="contact-routes">
+          {routes.map((route) => (
+            <li>
+              <h3>{route.title}</h3>
+              <p>{route.text}</p>
+              <a
+                class="text-button"
+                href={route.href}
+                rel={route.external ? 'noopener noreferrer' : undefined}
+                target={route.external ? '_blank' : undefined}
+              >
+                {route.label}
+                <span aria-hidden="true">›</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="contact-visit">
+          <span>Visit</span>
+          Norwegian Maritime Competence Center (NMCC), Borgundvegen 340, 6009 Ålesund, Norway
+        </p>
+      </div>
+    </aside>
   </section>
-  <CTA
-    title="Looking for a quick answer?"
-    description=""
-    href="/faq/"
-    label="Explore our FAQs"
-    secondary={false}
-  />
 </BaseLayout>
 <script>
   import { mountEnquiryForm } from '../scripts/enquiry-form.js';

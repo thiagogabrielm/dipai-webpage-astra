@@ -15,6 +15,9 @@
   --surface-input: var(--white);
   /* Darker yellow for hover/pressed feedback on yellow controls (#ffd600 at 90% lightness). */
   --yellow-hover: #e6c100;
+  /* Form fields: borders meet 3:1 against their surface; invalid fields take the signal colour. */
+  --field-border: color-mix(in srgb, var(--slate) 64%, transparent);
+  --field-error: #c2412d;
   /* Keyboard focus outline. */
   --focus: #538bb7;
   /* Navy family: raised dark surfaces, deep overlays/backdrops, and near-black shadows. */

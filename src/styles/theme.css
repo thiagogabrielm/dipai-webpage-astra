@@ -310,10 +310,21 @@ html[data-theme='dark'] body .demo-client-grid img {
 html[data-theme='dark'] body .demo-client-grid img[src$='ostensjo.svg'] {
   filter: url('/assets/brand-filters.svg#navy-ink') brightness(0) invert(1);
 }
+html[data-theme='dark'] body {
+  --field-border: color-mix(in srgb, var(--blue) 58%, transparent);
+  /* Alert Coral: errors never borrow the signal yellow, which is reserved for the next action. */
+  --field-error: #ff6b57;
+}
 html[data-theme='dark'] body :is(#contact-form, #demo-form) :is(input, select, textarea) {
   color: var(--ink);
   background: var(--surface-input);
-  border-color: color-mix(in srgb, var(--blue) 33.3%, transparent);
+  border-color: var(--field-border);
+}
+html[data-theme='dark']
+  body
+  :is(#contact-form, #demo-form)
+  :is(input, select, textarea)[aria-invalid='true'] {
+  border-color: var(--field-error);
 }
 html[data-theme='dark'] body :is(#contact-form, #demo-form) :is(input, textarea)::placeholder {
   color: var(--grey-300);
@@ -420,6 +431,8 @@ body .site-footer[data-site-footer] .footer-bottom {
   justify-content: space-between;
 }
 .footer-social {
+  /* Stays on the right whether or not the theme switcher is shown. */
+  margin-left: auto;
   display: grid;
   place-items: center;
   width: 36px;

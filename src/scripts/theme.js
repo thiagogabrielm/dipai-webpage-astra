@@ -6,9 +6,13 @@
   const valid = (value) => value === 'light' || value === 'dark';
   // Dark is the default; light mode is only used when a visitor chooses it.
   const fallback = 'dark';
+  // site-config.js can hide the light/dark choice; the site then always starts in dark mode
+  // and clears any choice saved while switching was available. `?theme=` stays as a test hook.
+  const switching = window.__dipaiThemeSwitching !== false;
   let saved;
   try {
-    saved = localStorage.getItem(key);
+    if (switching) saved = localStorage.getItem(key);
+    else localStorage.removeItem(key);
   } catch {
     /* Storage can be unavailable in local previews. */
   }
@@ -18,13 +22,13 @@
   const apply = (theme) => {
     current = theme;
     document.documentElement.dataset.theme = theme;
-    if (!controls) return;
-    controls.querySelectorAll('[data-theme-choice]').forEach((button) => {
-      button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));
-    });
+    // The footer logo follows the theme whether or not the switcher is shown.
     const logo = document.querySelector('.footer-brand img');
     if (logo)
       logo.src = theme === 'dark' ? '/assets/dipai-logo-light.svg' : '/assets/dipai-logo.svg';
+    controls?.querySelectorAll('[data-theme-choice]').forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));
+    });
   };
   apply(current);
   window.addEventListener('dipai:reset-theme', () => {
@@ -47,6 +51,7 @@
   document.addEventListener(
     'DOMContentLoaded',
     () => {
+      apply(current);
       const footer = document.querySelector('.footer-bottom');
       if (!footer) return;
       controls = footer.querySelector('.theme-switcher');
@@ -80,7 +85,7 @@
   );
   // Keep open site tabs consistent without changing isolated comparison panes.
   window.addEventListener('storage', (event) => {
-    if (preview || params.has('theme') || event.key !== key) return;
+    if (!switching || preview || params.has('theme') || event.key !== key) return;
     explicit = valid(event.newValue) ? event.newValue : null;
     apply(explicit || fallback);
   });

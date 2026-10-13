@@ -20,6 +20,7 @@ if (dialog instanceof HTMLDialogElement) {
     }
   });
   const update = () => {
+    if (!status) return;
     try {
       const theme = localStorage.getItem('dipai-color-theme');
       status.textContent = ['light', 'dark'].includes(theme)
@@ -37,7 +38,7 @@ if (dialog instanceof HTMLDialogElement) {
       dialog.showModal();
     });
   });
-  dialog.querySelector('[data-theme-reset]').addEventListener('click', () => {
+  dialog.querySelector('[data-theme-reset]')?.addEventListener('click', () => {
     window.dispatchEvent(new Event('dipai:reset-theme'));
     update();
   });

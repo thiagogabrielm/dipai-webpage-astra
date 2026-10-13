@@ -1,5 +1,9 @@
+/* The current page is marked by weight and an underline, not yellow: the signal stays on the CTA. */
 .site-header .nav-current {
-  color: var(--yellow);
+  color: var(--white);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
 }
 .news-image {
   aspect-ratio: 16 / 10;
@@ -989,16 +993,22 @@ html[data-theme='dark'] .use-case-category {
   line-height: 1.4;
   margin-top: 2px;
 }
-.vessel-kpi-copy :is(.is-typing, .is-awaiting-input)::after {
+.vessel-untyped {
+  visibility: hidden;
+}
+.vessel-caret {
+  position: relative;
+}
+.vessel-kpi-copy :is(.is-typing, .is-awaiting-input) .vessel-caret::before {
   content: '';
-  display: inline-block;
+  position: absolute;
+  left: 3px;
+  bottom: 0.08em;
   width: 1px;
   height: 0.85em;
-  margin-left: 3px;
   background: currentColor;
-  vertical-align: -0.02em;
 }
-.vessel-kpi-copy .is-awaiting-input::after {
+.vessel-kpi-copy .is-awaiting-input .vessel-caret::before {
   animation: vessel-caret-pulse 1.1s ease-in-out infinite;
 }
 @keyframes vessel-caret-pulse {
@@ -1011,7 +1021,7 @@ html[data-theme='dark'] .use-case-category {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .vessel-kpi-copy .is-awaiting-input::after {
+  .vessel-kpi-copy .is-awaiting-input .vessel-caret::before {
     animation: none;
   }
 }

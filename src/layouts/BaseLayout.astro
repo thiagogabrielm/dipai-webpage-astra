@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import CookieSettings from '../components/CookieSettings.astro';
 import { allowIndexing, structuredData } from '../lib/seo';
 import theme from '../scripts/theme.js?raw';
+import { themeSwitching } from '../data/site-config.js';
 import '../styles/site.css';
 interface Props {
   title: string;
@@ -48,7 +49,7 @@ const graph = structuredData({
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script is:inline set:html={theme} />
+    <script is:inline set:html={`window.__dipaiThemeSwitching = ${themeSwitching};\n${theme}`} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#1c2b39" />

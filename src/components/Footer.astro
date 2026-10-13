@@ -1,3 +1,7 @@
+---
+import { themeSwitching } from '../data/site-config.js';
+---
+
 <footer class="site-footer" data-site-footer="">
   <div class="wrap footer-panel">
     <div class="wrap footer-top">
@@ -12,7 +16,7 @@
             width="105"
           />
         </a>
-        <p class="footer-copyright">© DIPAI AS 2022</p>
+        <p class="footer-copyright">© DIPAI AS {new Date().getFullYear()}</p>
       </div>
       <div>
         <strong>Platform</strong>
@@ -55,33 +59,35 @@
       </div>
     </div>
     <div class="wrap footer-bottom">
-      <div aria-label="Color theme" class="theme-switcher" role="group">
-        <div class="theme-switcher-options">
-          <button
-            aria-label="Light mode"
-            aria-pressed="false"
-            data-theme-choice="light"
-            title="Light mode"
-            type="button"
-          >
-            <svg aria-hidden="true" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"></path>
-            </svg>
-          </button>
-          <button
-            aria-label="Dark mode"
-            aria-pressed="false"
-            data-theme-choice="dark"
-            title="Dark mode"
-            type="button"
-          >
-            <svg aria-hidden="true" viewBox="0 0 24 24">
-              <path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"></path>
-            </svg>
-          </button>
+      {themeSwitching && (
+        <div aria-label="Color theme" class="theme-switcher" role="group">
+          <div class="theme-switcher-options">
+            <button
+              aria-label="Light mode"
+              aria-pressed="false"
+              data-theme-choice="light"
+              title="Light mode"
+              type="button"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"></path>
+              </svg>
+            </button>
+            <button
+              aria-label="Dark mode"
+              aria-pressed="false"
+              data-theme-choice="dark"
+              title="Dark mode"
+              type="button"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
+      )}
       <a
         aria-label="Dipai on LinkedIn"
         class="footer-social"

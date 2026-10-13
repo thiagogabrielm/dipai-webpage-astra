@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import news from '../../src/data/news.json' with { type: 'json' };
 import cases from '../../src/data/use-cases.json' with { type: 'json' };
+import { themeSwitching } from '../../src/data/site-config.js';
 const routes = [
   '/',
   '/products/',
@@ -120,11 +121,27 @@ test('client links, theme switching and legacy URLs remain available', async ({ 
   await page.goto('/book-demo.html?theme=dark');
   await expect(page).toHaveURL('/book-demo/?theme=dark');
   await expect(page.locator('.demo-client-grid a.client-link')).toHaveCount(9);
-  await page.locator('[data-theme-choice="light"]').click();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await expect(page.locator('.footer-brand img')).toHaveAttribute('src', '/assets/dipai-logo.svg');
-  await page.reload();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  if (themeSwitching) {
+    await page.locator('[data-theme-choice="light"]').click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+    await expect(page.locator('.footer-brand img')).toHaveAttribute(
+      'src',
+      '/assets/dipai-logo.svg',
+    );
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  } else {
+    // Light mode is hidden: no switcher, and an old saved choice no longer applies.
+    await expect(page.locator('[data-theme-choice]')).toHaveCount(0);
+    await expect(page.locator('.footer-brand img')).toHaveAttribute(
+      'src',
+      '/assets/dipai-logo-light.svg',
+    );
+    await page.evaluate(() => localStorage.setItem('dipai-color-theme', 'light'));
+    await page.goto('/book-demo/');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    expect(await page.evaluate(() => localStorage.getItem('dipai-color-theme'))).toBeNull();
+  }
 });
 test('forms show success only after a successful mocked response', async ({ page }) => {
   for (const kind of ['contact', 'demo']) {

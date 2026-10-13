@@ -889,7 +889,8 @@ html[data-theme='dark'] .products-explorer {
     padding-top: 40px;
   }
 }
-.enquiry-trap {
+.enquiry-trap,
+.field-live {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -909,16 +910,28 @@ html[data-theme='dark'] .products-explorer {
   background: color-mix(in srgb, var(--slate) 5.1%, transparent);
 }
 [data-form-status][data-error] {
-  border-left: 3px solid #9c5b1c;
+  border-color: var(--field-error);
 }
-html[data-theme='dark'] [data-form-status][data-error] {
-  border-left-color: var(--yellow);
+[data-form-status][data-sending] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.form-fallback a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  white-space: nowrap;
 }
 :is(#contact-form, #demo-form)[aria-busy='true'] {
   cursor: progress;
 }
 :is(#contact-form, #demo-form) button:disabled {
-  opacity: 0.6;
   cursor: wait;
 }
 :is(#contact-form, #demo-form)[hidden],
@@ -928,11 +941,11 @@ html[data-theme='dark'] [data-form-status][data-error] {
 #contact-result h2 {
   margin-bottom: 14px;
 }
-.contact-form-card:has(#contact-result:not([hidden])) > h2,
+.contact-form-card:has(#contact-result:not([hidden])) > :is(h2, .contact-required),
 .demo-form-card:has(#demo-result:not([hidden])) > h2 {
   display: none;
 }
-:is(#contact-result, #demo-result) h2:focus {
+:is(#contact-result, #demo-result) h2:focus:not(:focus-visible) {
   outline: none;
 }
 
@@ -1006,8 +1019,8 @@ html[data-theme='dark'] [data-form-status][data-error] {
 }
 .contact-layout {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 100px;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.75fr);
+  gap: 72px;
   padding-bottom: 90px;
   align-items: start;
 }
@@ -1027,25 +1040,122 @@ html body.faq-page .faq-page-layout {
   border-bottom: 1px solid var(--line);
   pointer-events: none;
 }
-.contact-copy {
-  padding-top: 12px;
+.contact-page .support-intro {
+  padding-block: 64px 40px;
 }
-.contact-copy h2 {
-  font-size: 32px;
-  margin-bottom: 22px;
+.contact-page .support-intro h1 {
+  font-size: clamp(40px, 4vw, 56px);
+  margin-bottom: 18px;
 }
-.contact-copy > p {
-  color: var(--muted);
-  line-height: 1.8;
-  font-size: 15px;
-  max-width: 370px;
-  margin-bottom: 24px;
+.contact-page .support-intro h1,
+.contact-page .support-intro > p:last-child {
+  text-wrap: balance;
 }
-.contact-email {
-  font-size: 23px;
+.support-intro > p a {
+  color: var(--ink);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 6px;
+  text-underline-offset: 4px;
+}
+.support-intro > p a:hover {
+  color: var(--yellow);
+}
+/* Sidebar: direct contact first, then the other routes as a ruled list. */
+.contact-copy {
+  display: grid;
+  gap: 44px;
+}
+.contact-copy h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.contact-direct {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  font-size: 15px;
+}
+.contact-direct dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+.contact-direct dd {
+  margin: 0;
+  line-height: 1.6;
+}
+.contact-direct > div {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: center;
+}
+.contact-direct a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.contact-direct a:hover {
+  color: var(--yellow);
+}
+.contact-routes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.contact-routes li {
+  position: relative;
+  padding: 18px 0 10px 18px;
+  border-bottom: 1px solid var(--line);
+}
+/* A filled marker (not a hollow ring, which reads as a radio button) that takes the signal on focus. */
+.contact-routes li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 26px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--grey-400);
+  transition:
+    background-color 160ms ease-out,
+    transform 160ms ease-out;
+}
+.contact-routes li:has(a:is(:hover, :focus-visible))::before {
+  background: var(--yellow);
+  transform: scale(1.4);
+}
+.contact-routes h3 {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+.contact-routes p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.contact-routes .text-button {
+  min-height: 44px;
+  padding: 0;
+}
+.contact-routes .text-button:hover {
+  color: var(--yellow);
+}
+.contact-visit {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.contact-visit span {
+  display: block;
+  font-size: 12px;
 }
 .contact-form-card {
   background: var(--white);
@@ -1058,7 +1168,13 @@ html body.faq-page .faq-page-layout {
   margin-bottom: 26px;
 }
 #contact-form {
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 16px;
+}
+/* Name and email share a row on wide screens; everything else spans the form. */
+#contact-form > :not([for='contact-name'], [for='contact-email']) {
+  grid-column: 1 / -1;
 }
 #contact-form label {
   font-size: 13px;
@@ -1072,21 +1188,169 @@ html body.faq-page .faq-page-layout {
   line-height: 1.6;
   color: var(--navy);
   background: var(--paper);
-  border: 1px solid color-mix(in srgb, var(--slate) 25.1%, transparent);
+  border: 1px solid var(--field-border);
   border-radius: 5px;
   padding: 11px 13px;
   margin-top: 8px;
 }
 #contact-form textarea {
   resize: vertical;
-  min-height: 150px;
+  min-height: 132px;
 }
 #contact-form textarea:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 4px;
 }
-#contact-form .button {
-  justify-self: start;
+.field-hint {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.field-count {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.field-count[data-near-limit] {
+  color: var(--ink);
+}
+/* Inline validation: invalid fields take Alert Coral; the message names the fix. */
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.5;
+}
+.field-error::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--field-error);
+}
+.field-error[hidden] {
+  display: none;
+}
+:is(#contact-form, #demo-form) :is(input, textarea, select)[aria-invalid='true'] {
+  border-color: var(--field-error);
+  box-shadow: inset 0 0 0 1px var(--field-error);
+}
+/* One ring, not two: a focused invalid field draws its focus outline in the error colour. */
+:is(#contact-form, #demo-form) :is(input, textarea, select)[aria-invalid='true']:focus-visible {
+  outline-color: var(--field-error);
+  box-shadow: none;
+}
+.contact-required {
+  margin: -16px 0 22px;
+  color: var(--muted);
+  font-size: 12px;
+}
+/* What happens next: three steps on one drawn line, the site's signal-path motif at rest. */
+.contact-next {
+  margin-top: 32px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.contact-next h3 {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.contact-next ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: next;
+}
+.contact-next li {
+  position: relative;
+  padding-top: 22px;
+  counter-increment: next;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.contact-next li::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.contact-next li::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 14px;
+  right: -18px;
+  border-top: 1px solid var(--line);
+}
+.contact-next li:last-child::after {
+  display: none;
+}
+.contact-next strong {
+  display: block;
+  font-weight: 600;
+  color: var(--ink);
+}
+/* Once sent, step one becomes the signal: a yellow node and a line drawn towards the next step. */
+.contact-next .step-sent,
+.contact-next[data-sent] .step-default {
+  display: none;
+}
+.contact-next[data-sent] .step-sent {
+  display: block;
+}
+.contact-next[data-sent] li:first-child::before {
+  background: var(--yellow);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--yellow) 22%, transparent);
+}
+.contact-next[data-sent] li:first-child::after {
+  border-top-color: var(--yellow);
+  transform-origin: left;
+  animation: contact-trace 900ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+}
+@keyframes contact-trace {
+  from {
+    transform: scaleX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-next[data-sent] li:first-child::after {
+    animation: none;
+  }
+}
+.contact-next span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+}
+.contact-submit {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+#contact-form .contact-submit .button {
+  min-height: 44px;
 }
 .contact-form-note,
 #contact-result {
@@ -1094,13 +1358,42 @@ html body.faq-page .faq-page-layout {
   font-size: 12px;
   line-height: 1.7;
 }
-#contact-result {
-  margin-top: 24px;
-  border-top: 1px solid var(--line);
-  padding-top: 18px;
+.contact-form-note a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
-#contact-result .text-button {
-  margin-top: 12px;
+#contact-result {
+  margin-top: 4px;
+  font-size: 14px;
+}
+#contact-result h2 {
+  color: var(--ink);
+}
+.contact-result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  margin-top: 20px;
+}
+.contact-result-actions .text-button {
+  min-height: 44px;
+  padding: 0;
+}
+#contact-result .contact-another {
+  --action-bg: transparent;
+  --action-color: var(--ink);
+  --action-border: var(--field-border);
+  --action-hover-bg: var(--slate);
+  --action-hover-color: var(--white);
+  --action-hover-border: var(--field-border);
+  min-height: 44px;
+}
+#contact-result strong {
+  color: var(--ink);
+  font-weight: 600;
+  overflow-wrap: anywhere;
 }
 @media (max-width: 900px) {
   .faq-page-layout {
@@ -1117,10 +1410,18 @@ html body.faq-page .faq-page-layout {
   }
   .contact-layout {
     gap: 38px;
-    grid-template-columns: 1fr 1.3fr;
+    grid-template-columns: 1fr;
   }
-  .contact-email {
-    font-size: 19px;
+  /* Single column: email and phone move above the form, the other routes follow it. */
+  .contact-copy {
+    display: contents;
+  }
+  .contact-direct-block {
+    order: -1;
+  }
+  .contact-direct {
+    grid-template-columns: repeat(2, max-content);
+    column-gap: 40px;
   }
 }
 @media (max-width: 600px) {
@@ -1137,6 +1438,45 @@ html body.faq-page .faq-page-layout {
   .contact-form-card {
     padding: 24px;
   }
+  .contact-direct {
+    grid-template-columns: 1fr;
+  }
+  #contact-form {
+    grid-template-columns: 1fr;
+  }
+  .contact-required {
+    margin-top: -18px;
+  }
+  .contact-next ol {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .contact-next li {
+    padding: 0 0 0 20px;
+  }
+  .contact-next li::after {
+    top: 14px;
+    bottom: -12px;
+    left: 3px;
+    right: auto;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+  .contact-next[data-sent] li:first-child::after {
+    border-left-color: var(--yellow);
+    transform-origin: top;
+    animation-name: contact-trace-down;
+  }
+  @keyframes contact-trace-down {
+    from {
+      transform: scaleY(0);
+    }
+  }
+  .contact-submit,
+  .contact-submit .button {
+    justify-items: stretch;
+    width: 100%;
+  }
   .faq-page-layout,
   .contact-layout {
     padding-bottom: 60px;
@@ -1146,7 +1486,10 @@ html body.faq-page .faq-page-layout {
   }
 }
 .team-page .nav-dropdown:has(a[aria-current='page']) > summary {
-  color: var(--yellow);
+  color: var(--white);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
 }
 .team-intro {
   padding-top: 74px;

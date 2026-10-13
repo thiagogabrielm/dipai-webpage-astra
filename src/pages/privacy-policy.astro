@@ -1,4 +1,5 @@
 ---
+import { themeSwitching } from '../data/site-config.js';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import policy from '../data/privacy-policy.json';
 ---
@@ -47,19 +48,24 @@ import policy from '../data/privacy-policy.json';
           </a>
           .
         </p>
-        <p>
-          If you choose light or dark mode, the website saves that choice in your browser’s local
-          storage under <code>dipai-color-theme</code>. It is used only to remember your colour
-          preference and stays until you clear it. It is not sent to our servers.
-        </p>
-        <p>
-          Open{' '}
-          <a href="#cookies" data-cookie-settings>
-            Cookie settings
-          </a>{' '}
-          and select “Use default theme” to remove the saved preference, or clear it through your
-          browser’s site-data settings. Without a saved preference, the site uses dark mode.
-        </p>
+        {themeSwitching && (
+          <>
+            <p>
+              If you choose light or dark mode, the website saves that choice in your browser’s
+              local storage under <code>dipai-color-theme</code>. It is used only to remember your
+              colour preference and stays until you clear it. It is not sent to our servers.
+            </p>
+            <p>
+              Open{' '}
+              <a href="#cookies" data-cookie-settings>
+                Cookie settings
+              </a>{' '}
+              and select “Use default theme” to remove the saved preference, or clear it through
+              your browser’s site-data settings. Without a saved preference, the site uses dark
+              mode.
+            </p>
+          </>
+        )}
         <p>
           Links to other websites open services with their own privacy and cookie policies.
           Information you submit through our contact and demo forms is handled as described above.

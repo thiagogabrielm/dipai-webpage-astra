@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import news from '../../src/data/news.json' with { type: 'json' };
 import cases from '../../src/data/use-cases.json' with { type: 'json' };
+import { themeSwitching } from '../../src/data/site-config.js';
 
 const routes = [
   '/',
@@ -50,20 +51,25 @@ test('cookie settings are keyboard accessible, removable and load no trackers', 
   expect(await context.cookies()).toEqual([]);
   expect(await page.evaluate(() => Object.keys(localStorage))).toEqual([]);
   const button = page.locator('.site-footer [data-cookie-settings]');
-  await page.locator('[data-theme-choice="light"]').click();
+  if (themeSwitching) await page.locator('[data-theme-choice="light"]').click();
+  else await expect(page.locator('[data-theme-choice]')).toHaveCount(0);
   await button.focus();
   await page.keyboard.press('Enter');
   const dialog = page.getByRole('dialog', { name: 'Cookie settings' });
   await expect(dialog).toBeVisible();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
-  await expect(dialog.locator('[role="status"]')).toContainText('light mode');
   await page.keyboard.press('Shift+Tab');
   expect(await dialog.evaluate((d) => d.contains(document.activeElement))).toBeTruthy();
-  await dialog.getByRole('button', { name: 'Use default theme' }).click();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  expect(await page.evaluate(() => localStorage.getItem('dipai-color-theme'))).toBeNull();
-  await expect(dialog.locator('[role="status"]')).toContainText('No colour preference');
-  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  if (themeSwitching) {
+    await expect(dialog.locator('[role="status"]')).toContainText('light mode');
+    await dialog.getByRole('button', { name: 'Use default theme' }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    expect(await page.evaluate(() => localStorage.getItem('dipai-color-theme'))).toBeNull();
+    await expect(dialog.locator('[role="status"]')).toContainText('No colour preference');
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  } else {
+    await expect(dialog.getByRole('button', { name: 'Use default theme' })).toHaveCount(0);
+  }
   await page.keyboard.press('Escape');
   await expect(dialog).toBeHidden();
   await expect(button).toBeFocused();

@@ -27,7 +27,8 @@ function mountVesselHero(root) {
     anchor: [Number(panel.dataset.anchorX || 0.77), Number(panel.dataset.anchorY || 0.51)],
     lines: [...panel.querySelectorAll('[data-type]')].map((element) => ({
       element,
-      text: [...element.textContent],
+      text: [...element.textContent.trim()],
+      shown: -1,
     })),
   }));
   let active = 0;
@@ -95,6 +96,31 @@ function mountVesselHero(root) {
     path.setAttribute('d', `M ${x} ${y} V ${bendY} H ${endX} V ${endY}`);
   }
 
+  // Text with the rating arrow lifted into its own span.
+  function typedNodes(chars) {
+    const nodes = [];
+    chars
+      .join('')
+      .split('→')
+      .forEach((part, index) => {
+        if (index) {
+          const arrow = document.createElement('span');
+          arrow.className = 'vessel-rating-arrow';
+          arrow.textContent = '→';
+          nodes.push(arrow);
+        }
+        if (part) nodes.push(part);
+      });
+    return nodes;
+  }
+  // A zero-width marker; its caret is drawn outside the text flow so it cannot move line breaks.
+  function caret() {
+    const marker = document.createElement('span');
+    marker.className = 'vessel-caret';
+    marker.setAttribute('aria-hidden', 'true');
+    return marker;
+  }
+
   function render() {
     const time = instantReveal ? REVEAL_END : elapsed;
     const dot = ease(phase(time, 0, 250));
@@ -112,15 +138,14 @@ function mountVesselHero(root) {
     let letters = Math.floor(phase(time, 1700, 3400) * total);
     for (const line of lines) {
       const count = Math.min(line.text.length, Math.max(0, letters));
-      const text = line.text.slice(0, count).join('');
-      if (line.element.textContent !== text) {
-        if (text.includes('→')) {
-          const arrow = document.createElement('span');
-          arrow.className = 'vessel-rating-arrow';
-          arrow.textContent = '→';
-          const [before, after] = text.split('→');
-          line.element.replaceChildren(before, arrow, after);
-        } else line.element.textContent = text;
+      if (line.shown !== count) {
+        // The whole line is always laid out; untyped letters are only invisible. Line breaks
+        // are therefore fixed from the first letter and a word never jumps mid-typing.
+        line.shown = count;
+        const untyped = document.createElement('span');
+        untyped.className = 'vessel-untyped';
+        untyped.append(...typedNodes(line.text.slice(count)));
+        line.element.replaceChildren(...typedNodes(line.text.slice(0, count)), caret(), untyped);
       }
       line.element.classList.toggle(
         'is-typing',
