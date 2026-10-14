@@ -1,8 +1,21 @@
 ---
 import { themeSwitching } from '../data/site-config.js';
+import { Image } from 'astro:assets';
+import artwork from '../assets/backgrounds/footer-neural.webp';
 ---
 
 <footer class="site-footer" data-site-footer="">
+  <div class="footer-artwork" data-footer-artwork aria-hidden="true">
+    <Image
+      src={artwork}
+      alt=""
+      widths={[1440, 1774]}
+      sizes="(min-width: 1800px) 100vw, 1800px"
+      format="webp"
+      quality={85}
+      loading="lazy"
+    />
+  </div>
   <div class="wrap footer-panel">
     <div class="wrap footer-top">
       <div>
@@ -29,7 +42,7 @@ import { themeSwitching } from '../data/site-config.js';
       </div>
       <div>
         <strong>Explore</strong>
-        <a href="/about-us/">About Dipai</a>
+        <a href="/about-us/">About us</a>
         <a href="/team/">Team</a>
         <a href="/news/">News</a>
         <a href="/faq/">FAQs</a>

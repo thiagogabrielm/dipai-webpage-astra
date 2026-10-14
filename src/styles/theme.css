@@ -545,11 +545,9 @@ html
 }
 body.network-footer-page {
   --closing-surface: var(--tint-100);
-  --network-ink: #476e88;
 }
 html[data-theme='dark'] body.network-footer-page {
   --closing-surface: var(--navy);
-  --network-ink: #8cacc1;
 }
 html body.network-footer-page .closing-cta.neural-cta {
   background: transparent;
@@ -609,17 +607,36 @@ body.network-footer-page:not(:has(.neural-cta, [data-footer-network-section]))
   .site-footer[data-site-footer] {
   padding-top: 100px;
 }
-.footer-network {
-  --network-opacity: 1;
+.footer-artwork {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  display: block;
-  color: var(--network-ink);
-  background: var(--closing-surface);
-  pointer-events: none;
+  height: calc(100% + 540px);
   overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, transparent, #000 12%, #000 86%, transparent);
+}
+.footer-artwork img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max(1800px, 100%);
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* Let the Contact artwork bleed into the page without adding layout height. */
+html body.network-footer-page.contact-page .site-footer[data-site-footer] {
+  padding-top: 32px;
+}
+.contact-page .footer-artwork {
+  min-height: max(900px, 50vw);
+}
+.contact-page .contact-layout {
+  z-index: 1;
 }
 @media (max-width: 700px) {
   html body.network-footer-page .closing-cta.neural-cta {
@@ -627,9 +644,6 @@ body.network-footer-page:not(:has(.neural-cta, [data-footer-network-section]))
   }
   .network-footer-page .closing-content {
     padding-top: 72px;
-  }
-  .footer-network {
-    --network-opacity: 0.7;
   }
   body.network-footer-page:not(:has(.neural-cta, [data-footer-network-section]))
     .site-footer[data-site-footer] {

@@ -4,8 +4,11 @@ import ClientLogo from './ClientLogo.astro';
 import MotionControl from './MotionControl.astro';
 interface Props {
   ribbon?: boolean;
+  exclude?: string[];
+  linked?: boolean;
 }
-const { ribbon = false } = Astro.props;
+const { ribbon = false, exclude = [], linked = true } = Astro.props;
+const gridClients = clients.filter((client) => !exclude.includes(client.name));
 ---
 
 {ribbon ? (
@@ -31,17 +34,21 @@ const { ribbon = false } = Astro.props;
   </section>
 ) : (
   <ul class="demo-client-grid" role="list">
-    {clients.map((client) => (
+    {gridClients.map((client) => (
       <li>
-        <a
-          class="client-link"
-          href={client.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${client.name} website (opens in a new tab)`}
-        >
+        {linked ? (
+          <a
+            class="client-link"
+            href={client.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${client.name} website (opens in a new tab)`}
+          >
+            <ClientLogo client={client} linked={false} />
+          </a>
+        ) : (
           <ClientLogo client={client} linked={false} />
-        </a>
+        )}
       </li>
     ))}
   </ul>

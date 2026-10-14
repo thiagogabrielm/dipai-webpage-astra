@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import background from '../assets/backgrounds/neural-editorial-header.webp';
+---
+
+<div class="neural-header">
+  <Image
+    src={background}
+    alt=""
+    widths={[800, 1280, 1942]}
+    sizes="(max-width: 1000px) 1000px, 100vw"
+    format="webp"
+    quality={85}
+    loading="eager"
+  />
+  <slot />
+</div>
+
+<style>
+  .neural-header {
+    --artwork-bleed: 180px;
+    position: relative;
+    isolation: isolate;
+    background: var(--surface-base);
+  }
+  .neural-header :global(header) {
+    padding-block: 80px 52px;
+  }
+  .neural-header :global(h1) {
+    font-size: clamp(42px, 5vw, 68px);
+    min-height: 2.24em;
+    margin-bottom: 25px;
+  }
+  .neural-header :global(header > p:last-child) {
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 3.2em;
+  }
+  img {
+    position: absolute;
+    z-index: -2;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    min-width: 1000px;
+    height: calc(100% + var(--artwork-bleed));
+    object-fit: cover;
+    object-position: center 55%;
+    opacity: 0.24;
+    pointer-events: none;
+  }
+  :global(html[data-theme='dark']) img {
+    opacity: 1;
+  }
+  .neural-header::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 calc(-1 * var(--artwork-bleed));
+    pointer-events: none;
+    background:
+      linear-gradient(0deg, var(--surface-base), transparent 60%),
+      linear-gradient(
+        90deg,
+        var(--surface-base),
+        color-mix(in srgb, var(--surface-base) 75%, transparent) 38%,
+        transparent 85%
+      );
+  }
+  @media (max-width: 900px) {
+    .neural-header :global(header) {
+      padding-block: 55px 35px;
+    }
+  }
+  @media (max-width: 600px) {
+    .neural-header {
+      --artwork-bleed: 140px;
+    }
+    .neural-header :global(h1) {
+      font-size: 42px;
+    }
+    .neural-header :global(header > p:last-child) {
+      font-size: 16px;
+      min-height: 4.8em;
+    }
+  }
+</style>

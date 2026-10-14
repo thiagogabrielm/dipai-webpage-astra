@@ -3,7 +3,7 @@
   --module-tint: var(--tint-200);
 }
 .products-hero {
-  background: var(--surface-section);
+  background: var(--surface-base);
   padding: 84px 0 76px;
 }
 .products-hero-grid {
@@ -782,6 +782,7 @@ html[data-theme='dark'] .products-explorer {
 }
 .demo-client-grid li {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   min-height: 110px;
   padding: 18px 10px;
@@ -795,13 +796,18 @@ html[data-theme='dark'] .products-explorer {
 }
 .demo-client-grid .client-link {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   padding: 18px 10px;
   border-radius: inherit;
 }
 .demo-client-grid .client-link:focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
+}
+.demo-client-grid .client-logo:not(.client-logo-cropped) {
+  /* Very wide wordmarks (Bower) shrink to keep clear space inside the card. */
+  max-width: 78%;
 }
 .demo-client-grid .client-logo {
   --base-ratio: calc(var(--width) / var(--height));
@@ -1025,7 +1031,7 @@ html[data-theme='dark'] .products-explorer {
     'form direct'
     'form routes';
   gap: 44px 72px;
-  padding-bottom: 90px;
+  padding-bottom: 270px;
   align-items: start;
 }
 html body.contact-page .contact-layout,
@@ -1033,7 +1039,6 @@ html body.faq-page .faq-page-layout {
   position: relative;
   border-bottom: 0;
 }
-.contact-page .contact-layout::after,
 .faq-page .faq-page-layout::after {
   content: '';
   position: absolute;
@@ -1054,9 +1059,6 @@ html body.faq-page .faq-page-layout {
 .contact-page .support-intro h1,
 .contact-page .support-intro > p:last-child {
   text-wrap: balance;
-}
-.contact-page .intro-direct {
-  display: none;
 }
 .support-intro > p a {
   color: var(--ink);
@@ -1462,10 +1464,6 @@ html body.faq-page .faq-page-layout {
       'direct'
       'routes';
   }
-  .contact-page .intro-direct {
-    display: block;
-    margin-top: 10px;
-  }
   .contact-direct {
     grid-template-columns: repeat(2, max-content);
     column-gap: 40px;
@@ -1586,59 +1584,346 @@ html body.faq-page .faq-page-layout {
   color: var(--ink);
   font-size: 16px;
 }
-/* About us: a single, centred reading column. */
-.about-article {
-  max-width: 820px;
-  padding-block: 96px 120px;
+/* About us: the proof page. Intro on the site grid, a figures band, four reasons, customers and a
+   quote, then onward routes. Prose is capped near 66ch for comfortable reading. */
+.about-hero {
+  position: relative;
+  isolation: isolate;
 }
-.about-header {
-  margin-bottom: 72px;
+.about-hero-image {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% center;
 }
-.about-article h1 {
-  margin: 0 0 18px;
-  font-size: clamp(42px, 4.6vw, 60px);
-  line-height: 1.08;
-  letter-spacing: -0.05em;
+.about-hero::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgb(28 43 57 / 12%) 35%, rgb(28 43 57 / 35%) 62%, var(--navy) 100%),
+    linear-gradient(90deg, rgb(28 43 57 / 62%), rgb(28 43 57 / 32%) 56%, rgb(28 43 57 / 24%));
 }
-.about-lead {
-  margin: 0;
+.about-hero .about-intro,
+.about-hero .about-facts {
+  border-bottom: 0;
+}
+.about-hero .about-intro h1 span {
+  color: var(--tint-200, #c2d1dd);
+}
+@media (max-width: 700px) {
+  .about-hero-image {
+    object-position: 65% top;
+  }
+  .about-hero::after {
+    background: linear-gradient(
+      180deg,
+      rgb(28 43 57 / 42%),
+      rgb(28 43 57 / 62%) 45%,
+      var(--navy) 85%
+    );
+  }
+}
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: end;
+  gap: 32px 80px;
+  padding-block: 88px 64px;
+}
+.about-intro h1 {
+  font-size: clamp(44px, 5vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+}
+.about-intro h1 span {
+  display: block;
   color: var(--muted);
+}
+.about-intro-copy {
+  max-width: 34rem;
+  padding-bottom: 6px;
+}
+.about-intro-copy p {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.about-intro-copy .about-lead {
+  margin-bottom: 14px;
+  color: var(--ink);
   font-size: 20px;
-  line-height: 1.6;
+  line-height: 1.55;
 }
-.about-article section + section {
-  margin-top: 64px;
-}
-.about-article h2 {
-  margin: 0 0 22px;
-  font-size: clamp(28px, 2.6vw, 34px);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.035em;
-}
-.about-article section p {
+.about-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
   margin: 0;
-  font-size: 19px;
-  line-height: 1.68;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: transparent;
 }
-.about-article section p + p {
-  margin-top: 16px;
+.about-facts-grid > div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 18px;
+  min-width: 0;
+  padding: 32px 28px;
+  background: var(--footer-panel-bg);
+}
+.about-facts-grid > div:first-child {
+  background: color-mix(in srgb, var(--surface-section) 87.8%, transparent);
+}
+.about-facts-grid dd {
+  margin: 0;
+  font-family: 'Manrope Variable', Arial, sans-serif;
+  font-size: clamp(40px, 4.5vw, 56px);
+  font-weight: 500;
+  font-variant-numeric: lining-nums tabular-nums;
+  line-height: 1.12;
+  letter-spacing: -0.055em;
+  color: var(--ink);
+}
+.about-facts-grid > div:first-child dd {
+  color: var(--yellow);
+}
+.about-facts-grid dt {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 26ch;
+}
+.about-why {
+  padding-block: 96px 88px;
+}
+.about-why h2,
+.about-people h2,
+.about-proof h2,
+.about-next h2 {
+  font-size: clamp(30px, 3vw, 44px);
+  letter-spacing: -0.045em;
+  margin-bottom: 36px;
+}
+.about-reasons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 64px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.about-reasons li {
+  padding: 26px 0 30px;
+  border-top: 1px solid var(--line);
+}
+.about-reasons h3 {
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+.about-reasons p {
+  margin-top: 10px;
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+/* Sections inside the content width carry no rule of their own; the full-width proof band
+   separates the page instead of short lines that stop at the content edge. */
+html body.about-page main > section.wrap {
+  border-bottom: 0;
+}
+.about-proof {
+  padding-block: 88px;
+  background: var(--surface-section);
+}
+/* The page's closing heading steps down so the hero headline stays the page's single peak. */
+.about-page .closing-content :is(h1, h2) {
+  font-size: clamp(36px, 3.6vw, 52px);
+}
+.about-partner-note {
+  margin: -20px 0 28px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.about-people {
+  padding-block: 0 88px;
+}
+.about-people-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 32px;
+  margin-bottom: 28px;
+}
+.about-people-heading h2 {
+  margin-bottom: 0;
+}
+.about-people-heading .text-button {
+  min-height: 44px;
+  padding: 0;
+}
+.about-people ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.about-people li {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-raised);
+}
+.about-people img {
+  width: 88px;
+  height: 88px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+.about-people h3 {
+  font-size: 19px;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
+}
+.about-people li p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+/* Eight logos: four columns on wide screens, two on phones, so no row is left with one logo. */
+.about-proof .demo-client-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 1100px) and (min-width: 1001px) {
+  .about-proof .demo-client-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 @media (max-width: 600px) {
-  .about-article {
-    padding-block: 64px 80px;
+  .about-proof .demo-client-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .about-header {
-    margin-bottom: 52px;
+}
+.about-proof-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 40px 72px;
+  align-items: start;
+}
+.about-quote {
+  margin: 0;
+}
+.about-quote blockquote {
+  margin: 0;
+  min-height: 0;
+}
+.about-quote blockquote p {
+  max-width: 44ch;
+  margin: 0;
+  font-family: inherit;
+  font-size: 19px;
+  letter-spacing: 0;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.about-quote figcaption {
+  display: grid;
+  gap: 2px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+.about-quote figcaption span {
+  color: var(--muted);
+}
+.about-next {
+  padding-block: 88px 96px;
+}
+.about-next ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.about-next li {
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.about-next .text-button {
+  min-height: 44px;
+  padding: 0;
+  font-size: 16px;
+}
+.about-next p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+@media (max-width: 1000px) {
+  .about-intro {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding-block: 64px 48px;
   }
-  .about-lead {
-    font-size: 18px;
+  .about-facts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .about-article section + section {
-    margin-top: 48px;
+  .about-proof-layout {
+    grid-template-columns: 1fr;
   }
-  .about-article section p {
-    font-size: 17px;
+  .about-people ul {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .about-reasons {
+    grid-template-columns: 1fr;
+  }
+  .about-next ul {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .about-why,
+  .about-proof,
+  .about-next {
+    padding-block: 56px;
+  }
+  .about-people {
+    padding-bottom: 56px;
+  }
+}
+@media (max-width: 600px) {
+  /* Figures stay two by two on phones; tighter cells keep the band short. */
+  .about-facts-grid > div {
+    gap: 12px;
+    padding: 24px 16px;
+  }
+  .about-facts-grid dd {
+    font-size: 38px;
+  }
+  .about-facts-grid dt {
+    font-size: 13px;
   }
 }
 .team-jump-links {

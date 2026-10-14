@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTA from '../../components/CTA.astro';
+import NeuralHeader from '../../components/NeuralHeader.astro';
 import NewsCard from '../../components/NewsCard.astro';
 import NewsImage from '../../components/NewsImage.astro';
 import NewsMeta from '../../components/NewsMeta.astro';
@@ -16,14 +17,16 @@ const categories = ['All', ...new Set(posts.map((p) => p.category))];
   active="news"
   bodyClass="news-page"
 >
-  <header class="news-intro wrap">
-    <h1>News &amp; perspectives</h1>
-    <p>
-      Partnerships, people and progress.
-      <br />
-      The latest from Dipai and the maritime community.
-    </p>
-  </header>
+  <NeuralHeader>
+    <header class="news-intro wrap">
+      <h1>News &amp; perspectives</h1>
+      <p>
+        Partnerships, people and progress.
+        <br />
+        The latest from Dipai and the maritime community.
+      </p>
+    </header>
+  </NeuralHeader>
   <section class="news-archive wrap" aria-label="News articles">
     <div class="news-toolbar">
       <div class="news-filters" role="group" aria-label="Filter news by topic" hidden>

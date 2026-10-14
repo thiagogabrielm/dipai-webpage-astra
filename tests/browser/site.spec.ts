@@ -30,7 +30,7 @@ test('every page loads without missing media, overflow, or script errors', async
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.locator('.site-footer')).toHaveCount(1);
     await page.locator('.site-footer').scrollIntoViewIfNeeded();
-    await expect(page.locator('.footer-network')).toBeAttached();
+    await expect(page.locator('[data-footer-artwork] img')).toBeVisible();
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
       route + ' overflow',
@@ -298,9 +298,13 @@ test('globe transitions render intermediate frames while the footer mesh stays s
   expect(start).not.toEqual(middle);
   expect(middle).not.toEqual(end);
   await page.locator('.site-footer').scrollIntoViewIfNeeded();
-  const mesh = page.locator('.footer-network');
-  await page.waitForTimeout(200);
-  const fixed = await mesh.evaluate((c: HTMLCanvasElement) => c.toDataURL());
+  const mesh = page.locator('[data-footer-artwork] img');
+  await expect
+    .poll(() =>
+      mesh.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0),
+    )
+    .toBeTruthy();
+  const fixed = await mesh.screenshot();
   await page.waitForTimeout(300);
-  expect(await mesh.evaluate((c: HTMLCanvasElement) => c.toDataURL())).toEqual(fixed);
+  expect(await mesh.screenshot()).toEqual(fixed);
 });

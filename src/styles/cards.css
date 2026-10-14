@@ -102,7 +102,6 @@ html[data-theme='dark'] .news-meta > span,
   justify-content: space-between;
   gap: 20px;
   padding-block: 22px;
-  border-top: 1px solid var(--line);
 }
 .news-filters {
   display: flex;
@@ -405,7 +404,6 @@ html[data-theme='dark'] .article-carousel .carousel-marker > g > path:first-chil
   align-items: center;
   gap: 24px;
   padding-block: 24px;
-  border-top: 1px solid var(--line);
   margin-bottom: 16px;
 }
 .use-case-filters {

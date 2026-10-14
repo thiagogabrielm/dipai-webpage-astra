@@ -1,57 +1,169 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTA from '../components/CTA.astro';
+import Clients from '../components/Clients.astro';
+import testimonials from '../data/testimonials.json';
+import team from '../data/team.json';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
+import { Image } from 'astro:assets';
+import maritimeBackground from '../assets/backgrounds/about-maritime.webp';
+
+// Every fact here is confirmed in PRODUCT.md ("Evidence on Hand"); nothing on this page is estimated.
+const facts = [
+  { value: '250+', label: 'vessels supported by the platform worldwide' },
+  { value: '2021', label: 'founded in Ålesund, Norway' },
+  { value: '60', label: 'offshore vessels with EU/UK MRV delivered for 2025' },
+  { value: 'DNV', label: 'Veracity partner' },
+];
+
+const reasons = [
+  {
+    title: 'Independent of suppliers',
+    text: 'Dipai is not tied to an engine maker or equipment vendor, so one platform can cover a whole fleet with mixed equipment.',
+  },
+  {
+    title: 'AI with maritime knowledge',
+    text: 'Born from PhD research at NTNU in Ålesund, one of Norway’s leading maritime hubs: artificial intelligence combined with an understanding of how vessels operate.',
+  },
+  {
+    title: 'Works without sensors',
+    text: 'Report-based vessels get value from noon reports, AIS and weather data. Sensor integration unlocks more detailed analysis and further modules.',
+  },
+  {
+    title: 'Compliance on the same data',
+    text: 'One pipeline runs from vessel data to EU/UK MRV and IMO DCS reports, with automatic corrections and an audit trail. MRV has been delivered for wellboats since 2023.',
+  },
+];
+
+const routes = [
+  { href: '/faq/', label: 'Read the FAQs', text: 'Data, sensors, modules and reporting.' },
+  { href: '/products/', label: 'Explore the platform', text: 'The modules and how they connect.' },
+  { href: '/use-cases/', label: 'Read the use cases', text: 'How operators use Dipai today.' },
+];
+
+const quote = testimonials.find((item) => item.company === 'Solstad')!;
+// Leadership as listed on the team page (the people with direct contact details).
+const leaders = team.team.filter((member) => member.email);
 ---
 
 <BaseLayout
   title="About us"
-  description="Dipai grew out of PhD research at NTNU in Ålesund. We combine artificial intelligence with maritime domain knowledge to improve fuel efficiency, reduce emissions and support condition-based maintenance."
+  description="Independent fleet intelligence from Ålesund, founded in 2021 out of NTNU research. Supporting 250+ vessels, with or without sensors."
   bodyClass="about-page"
   active="about"
 >
-  <section class="about-body">
-    <article class="about-article wrap" aria-labelledby="about-page-title">
-      <header class="about-header">
-        <h1 id="about-page-title">Hello, we’re Dipai.</h1>
+  <div class="about-hero">
+    <Image
+      src={maritimeBackground}
+      alt=""
+      class="about-hero-image"
+      widths={[800, 1280, 1942]}
+      sizes="100vw"
+      format="webp"
+      quality={85}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <section aria-labelledby="about-page-title" class="about-intro wrap">
+      <h1 id="about-page-title">
+        Independent fleet intelligence. <span>Rooted in maritime research.</span>
+      </h1>
+      <div class="about-intro-copy">
         <p class="about-lead">
-          We turn vessel data into practical decisions on fuel, emissions and maintenance.
+          We turn vessel data into practical decisions on fuel, emissions and maintenance, for whole
+          fleets, whatever equipment they run.
         </p>
-      </header>
+      </div>
+    </section>
 
-      <section aria-labelledby="about-who">
-        <h2 id="about-who">Who we are</h2>
-        <p>
-          Founded in 2021, Dipai grew out of PhD research at the Norwegian University of Science and
-          Technology (NTNU) in Ålesund, one of Norway’s leading maritime hubs.
-        </p>
-      </section>
+    <section aria-label="Dipai in figures" class="about-facts wrap">
+      <dl class="about-facts-grid">
+        {facts.map((fact) => (
+          <div>
+            <dt>{fact.label}</dt>
+            <dd>{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  </div>
 
-      <section aria-labelledby="about-what">
-        <h2 id="about-what">What we do</h2>
-        <p>
-          We combine deep expertise in artificial intelligence with maritime domain knowledge to
-          improve fuel efficiency, reduce emissions and support condition-based maintenance.
-        </p>
-      </section>
-
-      <section aria-labelledby="about-why">
-        <h2 id="about-why">Why work with us</h2>
-        <p>
-          Our cloud-based Dipai Digital Fleet Platform supports 250+ vessels worldwide, analysing
-          data from multiple sources to identify the root causes of operational issues and provide
-          practical recommendations.
-        </p>
-        <p>
-          Our independence from service suppliers and integrators makes the platform well suited to
-          fleet-wide deployment.
-        </p>
-      </section>
-    </article>
+  <section aria-labelledby="about-why" class="about-why wrap">
+    <h2 id="about-why">Why work with Dipai</h2>
+    <ul class="about-reasons" role="list">
+      {reasons.map((reason) => (
+        <li>
+          <h3>{reason.title}</h3>
+          <p>{reason.text}</p>
+        </li>
+      ))}
+    </ul>
   </section>
 
-  <CTA title="Let’s talk about your fleet." description="Feel free to contact us below.">
+  <section aria-labelledby="about-people" class="about-people wrap">
+    <div class="about-people-heading">
+      <h2 id="about-people">The people behind Dipai</h2>
+      <a class="text-button" href="/team/">
+        Meet the whole team <span aria-hidden="true">›</span>
+      </a>
+    </div>
+    <ul role="list">
+      {leaders.map((person) => (
+        <li>
+          <ResponsiveImage
+            src={`/assets/team/${person.image}`}
+            alt=""
+            sizes="96px"
+            widths={[300]}
+          />
+          <div>
+            <h3>{person.name}</h3>
+            <p>{person.role}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section aria-labelledby="about-proof" class="about-proof">
+    <div class="wrap about-proof-layout">
+      <div class="about-proof-copy">
+        <h2 id="about-proof">Customers and partners</h2>
+        <p class="about-partner-note">Dipai is a DNV Veracity partner.</p>
+        <figure class="about-quote">
+          <blockquote>
+            <p>“{quote.quote.replace(/\s+/g, ' ').trim()}”</p>
+          </blockquote>
+          <figcaption>
+            <strong>{quote.name}</strong>
+            <span>{quote.role}</span>
+          </figcaption>
+        </figure>
+      </div>
+      <Clients exclude={['Innovation Norway']} linked={false} />
+    </div>
+  </section>
+
+  <section aria-labelledby="about-next" class="about-next wrap">
+    <h2 id="about-next">Keep exploring</h2>
+    <ul role="list">
+      {routes.map((route) => (
+        <li>
+          <a class="text-button" href={route.href}>
+            {route.label} <span aria-hidden="true">›</span>
+          </a>
+          <p>{route.text}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <CTA
+    title="Let’s talk about your fleet."
+    description="See the platform with your vessel types and the data you already collect."
+  >
     <a class="button button-outline" href="/contact/">
-      Contact us <span aria-hidden="true"> ›</span>
+      Contact us <span aria-hidden="true">›</span>
     </a>
   </CTA>
 </BaseLayout>
