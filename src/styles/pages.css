@@ -1569,10 +1569,6 @@ html body.faq-page .faq-page-layout {
   gap: 80px;
   margin-bottom: 48px;
 }
-.team-intro .eyebrow {
-  margin-bottom: 24px;
-  color: var(--slate);
-}
 .team-intro h1 {
   font-size: clamp(44px, 5vw, 70px);
 }
@@ -1584,6 +1580,11 @@ html body.faq-page .faq-page-layout {
   font-size: 18px;
   line-height: 1.75;
   color: var(--muted);
+}
+.team-intro-description > p.team-origin {
+  margin-top: 14px;
+  color: var(--ink);
+  font-size: 16px;
 }
 /* About us: a single, centred reading column. */
 .about-article {
@@ -1671,6 +1672,13 @@ html body.faq-page .faq-page-layout {
   padding-block: 96px 100px;
   scroll-margin-top: 20px;
 }
+/* Leadership and engineering read as one team: the second group follows without a new band. */
+.team-section:has(+ .team-section--follow) {
+  padding-bottom: 0;
+}
+.team-section--follow {
+  padding-top: 72px;
+}
 .team-section-heading {
   display: flex;
   align-items: end;
@@ -1694,9 +1702,29 @@ html body.faq-page .faq-page-layout {
   margin: 0;
   padding: 0;
 }
+.team-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+/* Cards are equal height with LinkedIn pinned to the bottom, so links line up across a row. */
 .team-person {
+  display: flex;
+  flex-direction: column;
   background: var(--paper);
   min-width: 0;
+}
+.team-person-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.team-person-copy > * {
+  align-self: stretch;
+}
+.team-person-copy > .team-person-linkedin {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 20px;
 }
 .team-person-photo {
   margin: 6px 6px 0;
@@ -1715,7 +1743,48 @@ html body.faq-page .faq-page-layout {
   font-size: clamp(21px, 1.75vw, 25px);
   line-height: 1.25;
   min-height: 2.5em;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.055em;
+}
+/* Team groups align their rows with subgrid (photo, name, role, contacts, LinkedIn), so a name
+   that wraps pushes the whole row down together instead of reserving empty space on every card. */
+@media (min-width: 801px) {
+  .team-grid--three {
+    row-gap: 32px;
+  }
+  .team-grid--three .team-person {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span var(--team-rows, 4);
+    row-gap: 0;
+  }
+  .team-grid--lead .team-person {
+    --team-rows: 5;
+  }
+  .team-grid--three .team-person-copy {
+    display: contents;
+  }
+  .team-grid--three .team-person-copy > * {
+    margin-inline: 20px;
+  }
+  .team-grid--three .team-person h3 {
+    min-height: 0;
+    padding-top: 22px;
+  }
+  .team-grid--three .team-person-copy > .team-person-linkedin {
+    align-self: end;
+    justify-self: start;
+    margin-bottom: 14px;
+    padding-top: 12px;
+  }
+  .team-grid--three .team-person-contact {
+    align-self: start;
+  }
+  /* Engineering photos use a shorter crop, so the group reads as a team rather than a wall of
+     portraits and the board comes into view sooner. */
+  .team-grid--eng .team-person-photo img {
+    aspect-ratio: 5 / 4;
+    object-position: 50% 28%;
+  }
 }
 .team-person-role {
   margin-top: 9px;
@@ -1729,7 +1798,7 @@ html body.faq-page .faq-page-layout {
   margin-top: 22px;
   padding-top: 17px;
   border-top: 1px solid var(--line);
-  font-size: 12px;
+  font-size: 13px;
 }
 .team-person-contact a {
   display: flex;
@@ -1738,7 +1807,11 @@ html body.faq-page .faq-page-layout {
   gap: 5px;
   overflow-wrap: anywhere;
 }
-.team-person-contact a:hover {
+/* Links with a chevron draw their own animated underline; only plain links (phone) get one here. */
+.closing-content .actions .button {
+  min-height: 44px;
+}
+.team-person-contact a:not(.link-motion):hover {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -1773,6 +1846,8 @@ html body.faq-page .faq-page-layout {
   margin-inline: auto;
   border-radius: 50%;
   mix-blend-mode: luminosity;
+  /* The source portraits carry a grey ring; a slight zoom crops it inside the circle. */
+  transform: scale(1.1);
 }
 .team-person--board .team-person-copy {
   padding-top: 28px;
@@ -1796,6 +1871,10 @@ html body.faq-page .faq-page-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px;
   }
+  .team-grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
   .team-person h3 {
     font-size: 25px;
     min-height: auto;
@@ -1808,6 +1887,80 @@ html body.faq-page .faq-page-layout {
   }
   .team-person--board .team-person-photo {
     padding-top: 30px;
+  }
+}
+/* Narrow screens: every group is a scannable list, a small portrait beside name and role, so
+   leadership and board carry the same weight. */
+@media (max-width: 800px) {
+  .team-board-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .team-board-grid .team-person {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    align-items: start;
+  }
+  .team-board-grid .team-person-photo,
+  .team-person--board .team-person-photo {
+    padding: 8px;
+  }
+  .team-board-grid .team-board-portrait,
+  .team-board-grid .team-person-photo img {
+    max-width: 96px;
+  }
+  .team-board-grid .team-person-copy {
+    padding: 14px 16px 12px 8px;
+  }
+  .team-board-grid .team-person h3 {
+    min-height: 0;
+    font-size: 20px;
+  }
+  .team-board-grid .team-person-role {
+    margin-top: 4px;
+  }
+  .team-board-grid .team-person-bio {
+    margin-top: 12px;
+    padding-top: 12px;
+    font-size: 14px;
+  }
+  .team-person-copy > .team-person-linkedin {
+    min-height: 44px;
+  }
+  .team-grid--three {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .team-grid--three .team-person {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    align-items: start;
+  }
+  body .team-grid--three .team-person-photo {
+    margin: 8px;
+    border-radius: 5px;
+  }
+  .team-grid--three .team-person-copy {
+    padding: 14px 16px 12px 8px;
+  }
+  .team-grid--three .team-person h3 {
+    min-height: 0;
+    font-size: 20px;
+  }
+  .team-grid--three .team-person-role {
+    margin-top: 4px;
+  }
+  .team-grid--three .team-person-contact {
+    gap: 0;
+    margin-top: 12px;
+    padding-top: 6px;
+    font-size: 14px;
+  }
+  .team-grid--three .team-person-contact a {
+    min-height: 44px;
+  }
+  .team-grid--three .team-person-copy > .team-person-linkedin {
+    padding-top: 0;
   }
 }
 @media (max-width: 700px) {

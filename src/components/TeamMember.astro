@@ -9,19 +9,26 @@ interface Props {
     phone?: string;
     linkedin?: string;
     bio?: string;
+    photoTone?: string;
   };
   board?: boolean;
+  eager?: boolean;
 }
-const { member, board = false } = Astro.props;
+const { member, board = false, eager = false } = Astro.props;
 ---
 
 <li class:list={['team-person', 'team-frame', { 'team-person--board': board }]}>
-  <div class="team-person-photo">
+  <div
+    class:list={[
+      'team-person-photo',
+      { 'team-person-photo--bright': member.photoTone === 'bright' },
+    ]}
+  >
     {board ? (
       <div class="team-board-portrait">
         <ResponsiveImage
           src={`/assets/team/${member.image}`}
-          alt={member.name}
+          alt=""
           sizes="(max-width: 600px) 60vw, (max-width: 900px) 32vw, 240px"
           widths={[240, 480, 720]}
         />
@@ -29,9 +36,10 @@ const { member, board = false } = Astro.props;
     ) : (
       <ResponsiveImage
         src={`/assets/team/${member.image}`}
-        alt={member.name}
-        sizes="(max-width: 600px) 90vw, (max-width: 900px) 44vw, (max-width: 1400px) 22vw, 300px"
+        alt=""
+        sizes="(max-width: 800px) 112px, (max-width: 1400px) 30vw, 400px"
         widths={[300, 600, 900]}
+        eager={eager}
       />
     )}
   </div>

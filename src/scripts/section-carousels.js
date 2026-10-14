@@ -4,8 +4,6 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 for (const [selector, label, itemName, breakpoint] of [
   ['#stories.use-case-home .use-case-grid', 'Use cases', 'use case'],
   ['#news[data-news-border-trial] .news-grid', 'News', 'news article'],
-  ['#team .team-grid', 'Team', 'team member', 1100],
-  ['#board .team-grid', 'Board', 'board member', 1100],
 ]) {
   const track = document.querySelector(selector);
   if (!track) continue;
@@ -63,8 +61,13 @@ for (const [selector, label, itemName, breakpoint] of [
   function paint(index, animate = true) {
     current = index;
     cards.forEach((card, i) => card.toggleAttribute('data-carousel-current', i === index));
-    previous.disabled = index === 0;
-    next.disabled = index === cards.length - 1;
+    // A disabled button drops keyboard focus to the page, so hand it to the other arrow first.
+    const atStart = index === 0;
+    const atEnd = index === cards.length - 1;
+    if (atStart && document.activeElement === previous) (atEnd ? track : next).focus();
+    if (atEnd && document.activeElement === next) (atStart ? track : previous).focus();
+    previous.disabled = atStart;
+    next.disabled = atEnd;
     dotButtons.forEach((button, i) => {
       if (i === index) button.setAttribute('aria-current', 'true');
       else button.removeAttribute('aria-current');

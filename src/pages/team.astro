@@ -3,10 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TeamMember from '../components/TeamMember.astro';
 import team from '../data/team.json';
 import CTA from '../components/CTA.astro';
+
+// Leadership are the people with direct contact details; everyone else is engineering.
+const leadership = team.team.filter((member) => member.email);
+const engineering = team.team.filter((member) => !member.email);
 ---
 
 <BaseLayout
-  title="Company / Team"
+  title="Team"
   description="Meet the people behind Dipai: our software engineering team, leadership and board."
   bodyClass="team-page"
   active="team"
@@ -22,12 +26,19 @@ import CTA from '../components/CTA.astro';
       </div>
       <div class="team-intro-description">
         <p>{team.introduction}</p>
+        <p class="team-origin">
+          Dipai grew out of PhD research at NTNU in Ålesund, one of Norway’s leading maritime hubs,
+          and was founded in 2021.
+        </p>
         <div class="team-jump-links">
           <a class="text-button" href="#team">
-            Meet the team <span aria-hidden="true">↓</span>
+            Leadership <span aria-hidden="true">↓</span>
+          </a>
+          <a class="text-button" href="#engineering">
+            Engineering <span aria-hidden="true">↓</span>
           </a>
           <a class="text-button" href="#board">
-            Our board <span aria-hidden="true">↓</span>
+            Board <span aria-hidden="true">↓</span>
           </a>
         </div>
       </div>
@@ -35,14 +46,29 @@ import CTA from '../components/CTA.astro';
   </section>
   <section aria-labelledby="team-heading" class="team-section wrap" id="team">
     <div class="team-section-heading">
-      <h2 id="team-heading">Meet the team</h2>
+      <h2 id="team-heading">Leadership</h2>
+      <p>Direct lines to the people running Dipai.</p>
+    </div>
+    <ul class="team-grid team-grid--three team-grid--lead" role="list">
+      {leadership.map((member) => (
+        <TeamMember member={member} eager />
+      ))}
+    </ul>
+  </section>
+  <section
+    aria-labelledby="engineering-heading"
+    class="team-section team-section--follow wrap"
+    id="engineering"
+  >
+    <div class="team-section-heading">
+      <h2 id="engineering-heading">Engineering &amp; data science</h2>
       <p>
         The people turning vessel data <br />
         into useful insights.
       </p>
     </div>
-    <ul class="team-grid" role="list">
-      {team.team.map((member) => (
+    <ul class="team-grid team-grid--three team-grid--eng" role="list">
+      {engineering.map((member) => (
         <TeamMember member={member} />
       ))}
     </ul>
@@ -65,11 +91,12 @@ import CTA from '../components/CTA.astro';
   </section>
   <CTA
     title="Let’s talk about your fleet."
-    description="Connect with the team to explore what Dipai could bring to your operations."
-    href="mailto:contact@dipai.no"
-    label="Contact the team"
-    secondary={true}
-  />
+    description="See the platform with your vessel types and the data you already collect."
+  >
+    <a class="button button-outline" href="/contact/">
+      Contact us <span aria-hidden="true">›</span>
+    </a>
+  </CTA>
 </BaseLayout>
 <script>
   import '../scripts/section-carousels.js';

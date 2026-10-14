@@ -300,6 +300,25 @@ html[data-theme='dark'] body .team-person-photo {
 html[data-theme='dark'] body .team-person--board .team-person-photo {
   background: transparent;
 }
+/* Shared portrait grade: slightly desaturated with a navy tint, so mixed backdrops (yellow walls,
+   offices, studio) sit together and only the actions carry Signal Yellow. */
+html[data-theme='dark'] body .team-person:not(.team-person--board) .team-person-photo {
+  position: relative;
+}
+html[data-theme='dark'] body .team-person:not(.team-person--board) .team-person-photo img {
+  filter: saturate(0.7);
+}
+html[data-theme='dark'] body .team-person:not(.team-person--board) .team-person-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--navy) 16%, transparent);
+  pointer-events: none;
+}
+/* One studio portrait has a white backdrop; bring it down to the navy page's brightness. */
+html[data-theme='dark'] body .team-person-photo--bright img {
+  filter: saturate(0.7) brightness(0.8) contrast(1.05);
+}
 html[data-theme='dark'] body :is(.demo-copy > p:not(.eyebrow), #demo-result p) {
   color: var(--muted);
 }
@@ -502,6 +521,10 @@ body.team-page main > .team-section::after {
   transform: translateX(-50%);
   border-bottom: 1px solid var(--line);
   pointer-events: none;
+}
+/* Leadership flows straight into engineering; only the last team group closes with a rule. */
+body.team-page main > .team-section:has(+ .team-section--follow)::after {
+  display: none;
 }
 body.news-page .news-archive,
 body.use-cases-page .use-case-library {

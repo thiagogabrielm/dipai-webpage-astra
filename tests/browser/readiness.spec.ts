@@ -122,7 +122,7 @@ test('moving content has pause controls and smaller screens get smaller photos',
   const photo = page.locator('.team-person-photo img').first();
   await photo.scrollIntoViewIfNeeded();
   await expect(photo).toHaveAttribute('srcset', /300w/);
-  await expect(photo).toHaveAttribute('sizes', /90vw/);
+  await expect(photo).toHaveAttribute('sizes', /112px/);
   expect(
     await photo.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0),
   ).toBeTruthy();

@@ -9,8 +9,7 @@ const svgElement = (tag, attributes) => {
   return element;
 };
 
-const selector =
-  '.case-card, .news-card, .news-featured, .quote-card, .team-frame, .vessel-kpi, .node-frame';
+const selector = '.case-card, .news-card, .news-featured, .quote-card, .vessel-kpi, .node-frame';
 const initialized = new WeakSet();
 let nextMaskId = 0;
 const seamOverlap = 0.75;
