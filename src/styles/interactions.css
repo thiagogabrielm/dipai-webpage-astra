@@ -1187,9 +1187,7 @@ html[data-theme='dark'] #platform .product-graphic {
   }
 }
 #stories .section-carousel-track[data-carousel-active],
-#news .section-carousel-track[data-carousel-active],
-#team .section-carousel-track[data-carousel-active],
-#board .section-carousel-track[data-carousel-active] {
+#news .section-carousel-track[data-carousel-active] {
   display: flex;
   position: relative;
   gap: 24px;
@@ -1209,9 +1207,7 @@ html[data-theme='dark'] #platform .product-graphic {
   user-select: none;
 }
 #stories .section-carousel-track[data-dragging],
-#news .section-carousel-track[data-dragging],
-#team .section-carousel-track[data-dragging],
-#board .section-carousel-track[data-dragging] {
+#news .section-carousel-track[data-dragging] {
   scroll-snap-type: none;
   cursor: grabbing;
 }
@@ -1404,20 +1400,6 @@ html[data-theme='dark'] #platform .product-graphic {
   .section-carousel-arrow,
   .section-carousel-dot::before {
     transition: none;
-  }
-}
-@media (max-width: 600px) {
-  .team-page .section-carousel-controls {
-    gap: 12px;
-  }
-  .team-page .section-carousel-arrow {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-  }
-  .team-page .section-carousel-dot {
-    width: 24px;
-    min-width: 24px;
   }
 }
 .faq--bands {

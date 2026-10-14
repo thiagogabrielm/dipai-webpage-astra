@@ -1,5 +1,5 @@
 import { mountCarouselMarker } from './carousel-marker.js';
-// Shared responsive carousels for editorial cards and the people directory.
+// Shared responsive carousels for the homepage's editorial cards (use cases and news).
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 for (const [selector, label, itemName, breakpoint] of [
   ['#stories.use-case-home .use-case-grid', 'Use cases', 'use case'],
